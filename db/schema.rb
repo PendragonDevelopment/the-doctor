@@ -36,4 +36,15 @@ ActiveRecord::Schema.define(version: 20150406151405) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "host_events", force: true do |t|
+    t.integer  "event_id"
+    t.integer  "host_id"
+    t.integer  "rate"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "host_events", ["event_id"], name: "index_host_events_on_event_id", using: :btree
+  add_index "host_events", ["host_id"], name: "index_host_events_on_host_id", using: :btree
+
 end
