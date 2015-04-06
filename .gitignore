@@ -78,5 +78,7 @@ pickle-email-*.html
 .env
 .powenv
 .vagrant
+/.vagrant
+
 # Ignore application configuration
 /config/application.yml
