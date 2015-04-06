@@ -1,17 +1,6 @@
 Rails.application.routes.draw do
-  get 'transactions/index'
 
-  get 'transactions/show'
-
-  get 'transactions/new'
-
-  get 'transactions/edit'
-
-  get 'transactions/create'
-
-  get 'transactions/update'
-
-  get 'transactions/destroy'
+  resource :transactions
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -8,10 +8,10 @@ class TransactionsController < ApplicationController
   def new
   end
 
-  def edit
+  def create
   end
 
-  def create
+  def edit
   end
 
   def update
