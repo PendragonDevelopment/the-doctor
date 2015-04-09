@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409153349) do
+ActiveRecord::Schema.define(version: 20150409153956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,17 @@ ActiveRecord::Schema.define(version: 20150409153349) do
   end
 
   add_index "events", ["category_id"], name: "index_events_on_category_id", using: :btree
+
+  create_table "host_events", force: :cascade do |t|
+    t.integer  "event_id"
+    t.integer  "host_id"
+    t.integer  "rate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "host_events", ["event_id"], name: "index_host_events_on_event_id", using: :btree
+  add_index "host_events", ["host_id"], name: "index_host_events_on_host_id", using: :btree
 
   create_table "hosts", force: :cascade do |t|
     t.integer  "rating"
@@ -83,6 +94,8 @@ ActiveRecord::Schema.define(version: 20150409153349) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "events", "categories"
+  add_foreign_key "host_events", "events"
+  add_foreign_key "host_events", "hosts"
   add_foreign_key "hosts", "users"
   add_foreign_key "transactions", "users"
 end
