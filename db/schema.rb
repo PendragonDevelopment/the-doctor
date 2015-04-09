@@ -11,15 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406182611) do
+ActiveRecord::Schema.define(version: 20150409152741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "hosts", force: :cascade do |t|
+    t.integer  "rating"
+    t.boolean  "active"
+    t.string   "bio"
+    t.integer  "user_id"
+    t.date     "birthdate"
+    t.integer  "status"
+    t.string   "resume"
+    t.string   "direct_deposit"
+    t.string   "voided_check"
+    t.string   "w9"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "hosts", ["user_id"], name: "index_hosts_on_user_id", using: :btree
+
   create_table "transactions", force: :cascade do |t|
     t.string   "title"
-    t.integer  "charge_amount"
-    t.date     "date"
+    t.integer  "payment_amount"
+    t.date     "payment_date"
     t.integer  "status"
     t.string   "transaction_record"
     t.integer  "user_id"
@@ -49,5 +66,6 @@ ActiveRecord::Schema.define(version: 20150406182611) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "hosts", "users"
   add_foreign_key "transactions", "users"
 end
