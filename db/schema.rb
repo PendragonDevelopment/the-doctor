@@ -11,17 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150409153956) do
+ActiveRecord::Schema.define(version: 20150412222036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "categories", force: :cascade do |t|
-    t.string   "title"
-    t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -62,8 +55,8 @@ ActiveRecord::Schema.define(version: 20150409153956) do
 
   create_table "transactions", force: :cascade do |t|
     t.string   "title"
-    t.integer  "payment_amount"
-    t.date     "payment_date"
+    t.integer  "charge_amount"
+    t.date     "date"
     t.integer  "status"
     t.string   "transaction_record"
     t.integer  "user_id"
@@ -93,7 +86,6 @@ ActiveRecord::Schema.define(version: 20150409153956) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "events", "categories"
   add_foreign_key "host_events", "events"
   add_foreign_key "host_events", "hosts"
   add_foreign_key "hosts", "users"
