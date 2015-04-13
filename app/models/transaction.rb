@@ -3,4 +3,49 @@ class Transaction < ActiveRecord::Base
   belongs_to :host_event
   enum status: [:payment_pending, :paid]
 
+  def get_customer_from_stripe
+    # Add customer id to User model
+    cus_id = self.customer_id
+    customer = Stripe::Customer.retrieve(cus_id)
+    return customer
+  end
+
+  def create_stripe_customer(params, token)
+    puts params[:stripeToken]
+    customer = Stripe::Customer.create(
+      description: "Hiker Meals Customer",
+      email: params[:email],
+      card: token.id
+    )
+    self.update_attributes(customer_id: customer.id)
+  end
+
+  def charge_stripe(amount, params)
+    token = self.create_stripe_token(params)
+
+    unless self.customer_id
+      self.create_stripe_customer(params, token)
+    end
+
+    charge = Stripe::Charge.create(
+      customer: self.customer_id,
+      amount: amount,
+      description: "Vestigo Trip charge",
+      currency: 'usd'
+    )
+    return charge
+  end
+
+  def create_stripe_token(params)
+    token = Stripe::Token.create(
+      card: {
+        number: params[:number],
+        exp_month: exp_month_year_to_month(params[:credit_card_expiry]),
+        exp_year: exp_month_year_to_year(params[:credit_card_expiry]),
+        cvc: params[:cvc]
+      }
+    )
+    return token
+  end
+
 end
