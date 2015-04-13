@@ -18,6 +18,7 @@ gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
 gem 'unicorn'
 gem 'unicorn-rails'
+gem 'acts-as-taggable-on'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
