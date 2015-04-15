@@ -29,12 +29,15 @@
 
 FactoryGirl.define do
   factory :user do
-    name "Test User"
+  	first_name "Bob"
+  	last_name "McUser"
+    username "bobmcuser"
     email "test@example.com"
     password "please123"
+    role 0
 
     trait :admin do
-      role 'admin'
+      role 2
     end
 
   end

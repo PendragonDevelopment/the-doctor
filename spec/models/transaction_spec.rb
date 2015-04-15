@@ -17,5 +17,23 @@
 require 'rails_helper'
 
 RSpec.describe Transaction, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  let(:transaction) {FactoryGirl.create(:transaction)}
+
+  describe "Model attributes set up" do
+  	subject {transaction}
+
+  	it {is_expected.to respond_to(:id)}
+  	it {is_expected.to respond_to(:title)}
+  	it {is_expected.to respond_to(:payment_amount)}
+  	it {is_expected.to respond_to(:payment_date)}
+  	it {is_expected.to respond_to(:status)}
+  	it {is_expected.to respond_to(:transaction_record)}
+  	it {is_expected.to respond_to(:user_id)}
+  	it {is_expected.to respond_to(:created_at)}
+  	it {is_expected.to respond_to(:updated_at)}
+  	it {is_expected.to respond_to(:appointment_id)}
+
+  	it {is_expected.to be_valid}
+  end
 end

@@ -12,9 +12,9 @@
 
 FactoryGirl.define do
   factory :host_event do
-    event nil
-host nil
-rate 1
+    event
+		host
+		rate 500
   end
 
 end

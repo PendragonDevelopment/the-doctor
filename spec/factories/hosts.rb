@@ -19,16 +19,17 @@
 
 FactoryGirl.define do
   factory :host do
-    rating 1
-active false
-bio "MyString"
-user nil
-birthdate "2015-04-09"
-status 1
-resume "MyString"
-direct_deposit "MyString"
-voided_check "MyString"
-w9 "MyString"
+    rating 4
+		active false
+		user
+		birthdate "1990-04-09"
+		status 1
+		resume "resume"
+		direct_deposit "direct_depost"
+		voided_check "voided_check"
+		w9 "w9"
+
+		bio "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate"
   end
 
 end

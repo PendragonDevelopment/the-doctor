@@ -27,16 +27,30 @@
 #  profile_pic_updated_at   :datetime
 #
 
+require 'rails_helper'
+
 describe User do
 
-  before(:each) { @user = User.new(email: 'user@example.com') }
+  let(:user) {FactoryGirl.create(:user)}
 
-  subject { @user }
+  describe "Model attributes set up" do
+  	subject { user }
 
-  it { should respond_to(:email) }
+  	it {is_expected.to respond_to(:first_name) }
+    it {is_expected.to respond_to(:last_name) }
+    it {is_expected.to respond_to(:role) }
+    it {is_expected.to respond_to(:username) }
+    it {is_expected.to respond_to(:email) }
+    it {is_expected.to respond_to(:stripe_customer_id) }
+    it {is_expected.to respond_to(:host_id) }
 
-  it "#email returns a string" do
-    expect(@user.email).to match 'user@example.com'
+  	it {is_expected.to be_valid}
   end
+
+	describe "Attribute Formatting" do
+	  it "#email returns a string" do
+	    expect(user.email).to match 'test@example.com'
+	  end
+	end
 
 end

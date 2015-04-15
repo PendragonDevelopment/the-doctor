@@ -16,13 +16,13 @@
 
 FactoryGirl.define do
   factory :transaction do
-    title "MyString"
-charge_amount 1
-date "2015-04-06"
-status 1
-transaction_record "MyString"
-user nil
-host_event nil
+    title "The Doctor charge"
+    payment_amount 520
+		payment_date "2015-04-06"
+		status 1
+		transaction_record "MyString"
+		association :user, factory: :user
+		host_event
   end
 
 end

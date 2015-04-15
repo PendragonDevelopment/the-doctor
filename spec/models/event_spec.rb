@@ -11,5 +11,13 @@
 require 'rails_helper'
 
 RSpec.describe Event, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:event) {FactoryGirl.create(:event)}
+
+  describe "Model attributes set up" do
+  	subject {event}
+
+  	it {is_expected.to respond_to(:title)}
+
+  	it {is_expected.to be_valid}
+  end
 end
