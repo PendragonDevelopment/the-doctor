@@ -12,6 +12,7 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  appointment_id     :integer
+#  event_id           :integer
 #
 
 class Transaction < ActiveRecord::Base
@@ -64,6 +65,6 @@ class Transaction < ActiveRecord::Base
     )
     return token
   end
-
-end
 =end
+end
+
