@@ -19,6 +19,7 @@ class Transaction < ActiveRecord::Base
   belongs_to :host_event
   enum status: [:payment_pending, :paid]
 
+=begin
   def get_customer_from_stripe
     # Add customer id to User model
     cus_id = self.customer_id
@@ -29,7 +30,7 @@ class Transaction < ActiveRecord::Base
   def create_stripe_customer(params, token)
     puts params[:stripeToken]
     customer = Stripe::Customer.create(
-      description: "The Doctor's Fee",
+      description: "The Doctor's Companion",
       email: params[:email],
       card: token.id
     )
@@ -46,7 +47,7 @@ class Transaction < ActiveRecord::Base
     charge = Stripe::Charge.create(
       customer: self.customer_id,
       amount: amount,
-      description: "Vestigo Trip charge",
+      description: "The Doctor's Fee",
       currency: 'usd'
     )
     return charge
@@ -65,3 +66,4 @@ class Transaction < ActiveRecord::Base
   end
 
 end
+=end
