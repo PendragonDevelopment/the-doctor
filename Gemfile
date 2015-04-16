@@ -20,6 +20,7 @@ gem 'unicorn'
 gem 'unicorn-rails'
 gem "paperclip", "~> 4.2"
 gem 'acts-as-taggable-on'
+gem 'annotate', '~> 2.6.6'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
