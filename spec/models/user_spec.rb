@@ -79,4 +79,8 @@ describe User do
     end
 	end
 
+  describe "Stripe Methods" do
+    
+  end
+
 end

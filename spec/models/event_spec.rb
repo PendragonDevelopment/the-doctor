@@ -23,7 +23,13 @@ RSpec.describe Event, type: :model do
   end
 
   describe "Event validations" do
-  	it "is invalid without a title" do
+  	
+    it "is valid with a title" do
+      event = Event.new(title: "New Event")
+      expect(event).to be_valid
+    end
+
+    it "is invalid without a title" do
       expect(FactoryGirl.build(:event, title: nil)).not_to be_valid
     end
   end

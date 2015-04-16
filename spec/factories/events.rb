@@ -11,6 +11,10 @@
 FactoryGirl.define do
   factory :event do
     title "Juggling Competition"
+
+    factory :invalid_event do
+    	title nil
+    end
   end
 
 end
