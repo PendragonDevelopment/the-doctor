@@ -11,27 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150413175938) do
+ActiveRecord::Schema.define(version: 20150416161940) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "events", force: :cascade do |t|
+  create_table "activities", force: :cascade do |t|
     t.string   "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "host_events", force: :cascade do |t|
-    t.integer  "event_id"
+  create_table "events", force: :cascade do |t|
+    t.integer  "activity_id"
     t.integer  "host_id"
+    t.integer  "location_id"
     t.integer  "rate"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  add_index "host_events", ["event_id"], name: "index_host_events_on_event_id", using: :btree
-  add_index "host_events", ["host_id"], name: "index_host_events_on_host_id", using: :btree
+  add_index "events", ["activity_id"], name: "index_events_on_activity_id", using: :btree
+  add_index "events", ["host_id"], name: "index_events_on_host_id", using: :btree
+  add_index "events", ["location_id"], name: "index_events_on_location_id", using: :btree
 
   create_table "hosts", force: :cascade do |t|
     t.integer  "rating"
@@ -49,6 +51,15 @@ ActiveRecord::Schema.define(version: 20150413175938) do
   end
 
   add_index "hosts", ["user_id"], name: "index_hosts_on_user_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "latitude"
+    t.string   "longitude"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
@@ -80,8 +91,10 @@ ActiveRecord::Schema.define(version: 20150413175938) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.integer  "appointment_id"
+    t.integer  "event_id"
   end
 
+  add_index "transactions", ["event_id"], name: "index_transactions_on_event_id", using: :btree
   add_index "transactions", ["user_id"], name: "index_transactions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -113,9 +126,11 @@ ActiveRecord::Schema.define(version: 20150413175938) do
   add_index "users", ["host_id"], name: "index_users_on_host_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-  add_foreign_key "host_events", "events"
-  add_foreign_key "host_events", "hosts"
+  add_foreign_key "events", "activities"
+  add_foreign_key "events", "hosts"
+  add_foreign_key "events", "locations"
   add_foreign_key "hosts", "users"
+  add_foreign_key "transactions", "events"
   add_foreign_key "transactions", "users"
   add_foreign_key "users", "hosts"
 end
