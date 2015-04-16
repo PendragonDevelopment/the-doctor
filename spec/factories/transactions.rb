@@ -22,7 +22,6 @@ FactoryGirl.define do
 		status 1
 		transaction_record "MyString"
 		association :user, factory: :user
-		host_event
   end
 
 end

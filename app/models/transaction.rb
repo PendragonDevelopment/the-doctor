@@ -29,7 +29,7 @@ class Transaction < ActiveRecord::Base
   def create_stripe_customer(params, token)
     puts params[:stripeToken]
     customer = Stripe::Customer.create(
-      description: "Hiker Meals Customer",
+      description: "The Doctor's Fee",
       email: params[:email],
       card: token.id
     )

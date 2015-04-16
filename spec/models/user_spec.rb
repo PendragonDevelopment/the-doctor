@@ -47,10 +47,36 @@ describe User do
   	it {is_expected.to be_valid}
   end
 
+  describe "User validations" do
+    it "is invalid without a username" do
+      expect(FactoryGirl.build(:user, username: nil)).not_to be_valid
+    end
+
+    it "is invalid without an email" do
+      expect(FactoryGirl.build(:user, email: nil)).not_to be_valid
+    end
+
+    it "requires a unique email" do
+      user1=FactoryGirl.create(:user)
+      user2=user1.dup
+
+      expect(user2).not_to be_valid
+    end
+
+  end
+
 	describe "Attribute Formatting" do
 	  it "#email returns a string" do
-	    expect(user.email).to match 'test@example.com'
+	    expect(user.email).to be_a(String)
 	  end
+
+    it "#username returns a string" do
+      expect(user.username).to be_a(String)
+    end
+
+    it "#role defaults to user" do
+      expect(user.role).to eq("user")
+    end
 	end
 
 end

@@ -36,4 +36,19 @@ RSpec.describe Transaction, type: :model do
 
   	it {is_expected.to be_valid}
   end
+
+  describe "Transaction Validations" do
+    it "is invalid without a title" do
+      expect(FactoryGirl.build(:transaction, title: nil)).not_to be_valid
+    end
+
+    it "is invalid without a payment_amount" do
+      expect(FactoryGirl.build(:transaction, payment_amount: nil)).not_to be_valid
+    end
+
+    it "is invalid without a payment date" do
+      expect(FactoryGirl.build(:transaction, payment_date: nil)).not_to be_valid
+    end
+
+  end
 end
