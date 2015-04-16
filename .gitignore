@@ -80,3 +80,6 @@ pickle-email-*.html
 .vagrant
 # Ignore application configuration
 /config/application.yml
+
+#Personal stuff
+Z-Notes.rb

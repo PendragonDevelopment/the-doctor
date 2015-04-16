@@ -1,4 +1,6 @@
 class Event < ActiveRecord::Base
-  belongs_to :category
-  has_many :host_events
+	has_many :transactions
+	belongs_to :location
+	belongs_to :activity
+	belongs_to :host
 end
