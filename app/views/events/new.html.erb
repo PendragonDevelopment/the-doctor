@@ -1,1 +1,39 @@
-<h1>Events#new</h1>
+<h1>New Event</h1>
+
+<% if current_user.host %>
+
+  <%= form_for @event do |f| %>
+
+    <%= f.label :activity %>
+    <%= f.collection_select :activity_id, Activity.all, :id, :title %><br/>
+    
+    <%= f.label :location %>
+    <%= f.collection_select :location_id, Location.all, :id, :title %><br/>
+
+    <!--
+    <%= f.label :start_time %>
+    <%= f.datetime_field :start_time %><br/>
+
+    <%= f.label :end_time %>
+    <%= f.datetime_field :end_time %><br/>
+
+    <%= f.label :reservation_min %>
+    <%= f.number_field :reservation_min %><br/>
+
+    <%= f.label :reservation_max %>
+    <%= f.number_field :reservation_max %><br/>
+    -->
+
+    <%= f.label :rate %>
+    <%= f.number_field :rate %><br/>
+
+    <%= hidden_field_tag :host %>
+
+    <%= f.submit 'Create Event' %>
+  <% end %>
+
+<% else %>
+
+  <h2>You cannot create an event, you are not a host!</h2>
+
+<% end %>

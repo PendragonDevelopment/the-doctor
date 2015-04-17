@@ -1,1 +1,8 @@
-<h1>Activities#index</h1>
+<h1>All Activities</h1>
+
+<% @activities.each do |activity| %>
+  <p>Title: <%= activity.title %></p><br>
+<% end %>
+
+<%= link_to 'All Activities', activities_path %>
+<%= link_to 'New Activity', new_activity_path %>

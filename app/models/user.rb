@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :transactions
-  has_one :host
+  has_one :host, dependent: :destroy
   
 
 

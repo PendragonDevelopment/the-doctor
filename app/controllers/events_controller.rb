@@ -1,50 +1,50 @@
 class EventsController < ApplicationController
-	before_action :set_event, only: [:show, :edit, :update, :destroy]
-	
-	def index
-		@events = Event.all
-	end
+  before_action :set_event, :only => [:edit, :show, :update, :destroy]
 
-	def show
-	end
+  def index
+    @events = Event.all
+  end
 
-	def new
-		@event = Event.new
-	end
+  def create
+    @event = current_user.host.events.build(event_params)
+    #@event.build_activity(event_params[:activity_attributes])
+    #@event.host(event_params[:host_attributes])
 
-	def edit
-	end
+    if @event.save
+      redirect_to @event
+    else
+      redirect_to new_event_path
+    end
+  end
 
-	def create
-		@event = Event.create(event_params)
+  def new
+    @event = Event.new
+    @activity_options = Activity.all.map{|x| [x.title]}
+    @activity = @event.build_activity
+    @host = @event.build_host
+    @location_options = Location.all.map{|x| [x.title]}
+    @location = @event.build_location
+  end
 
-		if @event.save
-			redirect_to event_path(@event)
-		else
-			render :new
-		end
-	end
+  def edit
+  end
 
-	def update
-		if @event.update(event_params)
-			redirect_to event_path(@event)
-		else
-			render :edit
-		end
-	end
+  def show
+  end
 
-	def destroy
-		@event.destroy
-		redirect_to root_url
-	end
+  def update
+  end
 
-	private
+  def destroy
+  end
 
-		def set_event
-			@event = Event.find(params[:id])
-		end
+  private
 
-		def event_params
-			params.require(:event).permit(:rate, :activity_id, :host_id, :location_id)
-		end
+    def set_event
+      @event = Event.find(params[:id])
+    end
+
+    def event_params
+      params.require(:event).permit(:rate, :location_id, :activity_id)
+    end
 end

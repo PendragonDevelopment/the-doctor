@@ -1,1 +1,16 @@
+<<<<<<< HEAD
 <h1>Locations#index</h1>
+=======
+<h1>Locations</h1>
+
+<% @locations.each do |location| %>
+  <p>Title: <%= location.title %></p>
+  <p>Description: <%= location.description %></p>
+  <p>Latitude: <%= location.latitude %></p>
+  <p>Longitude: <%= location.longitude %></p>
+  <br>
+<% end %>
+
+<%= link_to 'All Locations', locations_path %>
+<%= link_to 'New Location', new_location_path %>
+>>>>>>> Start of Event form...pushing now to start new branch for Friday night code-athon

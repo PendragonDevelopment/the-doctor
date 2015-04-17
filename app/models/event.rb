@@ -16,6 +16,18 @@ class Event < ActiveRecord::Base
 	belongs_to :location
 	belongs_to :activity
 	belongs_to :host
-
 	validates :rate, presence: true
+  
+  def start_time
+  end
+
+  def end_time
+  end
+
+  def reservation_min
+  end
+
+  def reservation_max
+  end
+
 end
