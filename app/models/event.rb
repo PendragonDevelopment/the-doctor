@@ -30,4 +30,7 @@ class Event < ActiveRecord::Base
   def reservation_max
   end
 
+  def new_location
+  end
+
 end

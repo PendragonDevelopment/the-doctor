@@ -7,6 +7,7 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.host.events.build(event_params)
+    #@event.build_host(event_params[:host])
     #@event.build_activity(event_params[:activity_attributes])
     #@event.host(event_params[:host_attributes])
 
@@ -45,6 +46,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:rate, :location_id, :activity_id)
+      params.require(:event).permit(:rate, :location_id, :new_location, :activity_id, :host_id)
     end
 end
