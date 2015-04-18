@@ -27,8 +27,8 @@ RSpec.describe Event, type: :model do
 
   describe "Event validations" do
   	it "is invalid without a rate" do
-      event = FactoryGirl.build(:invalid_event)
-      expect(event).not_to be_valid
+      invalid_event = FactoryGirl.build(:invalid_event)
+      expect(invalid_event).not_to be_valid
     end
   end
 end
