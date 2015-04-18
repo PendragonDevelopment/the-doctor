@@ -21,6 +21,7 @@ gem 'unicorn-rails'
 gem "paperclip", "~> 4.2"
 gem 'acts-as-taggable-on'
 gem 'annotate', '~> 2.6.6'
+gem 'oauth2'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
@@ -34,6 +35,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-rescue'
   gem 'rspec-rails'
+  gem 'vcr'
   gem 'rubocop'
 end
 group :production do

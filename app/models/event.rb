@@ -12,10 +12,14 @@
 #
 
 class Event < ActiveRecord::Base
+	
+	include Tardis
+
 	has_many :transactions
 	belongs_to :location
 	belongs_to :activity
 	belongs_to :host
 
 	validates :rate, presence: true
+
 end
