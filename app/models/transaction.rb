@@ -20,6 +20,10 @@ class Transaction < ActiveRecord::Base
   belongs_to :host_event
   enum status: [:payment_pending, :paid]
 
+  validates :title, presence: true
+  validates :payment_amount, presence: true
+  validates :payment_date, presence: true
+
 =begin
   def get_customer_from_stripe
     # Add customer id to User model

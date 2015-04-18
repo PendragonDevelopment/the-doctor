@@ -19,6 +19,10 @@ FactoryGirl.define do
     host
     location
     rate 500
+
+    factory :invalid_event do
+    	rate nil
+    end
   end
 
 end
