@@ -36,7 +36,7 @@ describe ActivitiesController, type: :controller do
 		
 		it "assigns a new activity to @activity" do
 			get :new
-			expect(assigns(:activity)).to be_a_new(activity)
+			expect(assigns(:activity)).to be_a_new(Activity)
 		end
 
 		it "renders the :new template" do
@@ -67,12 +67,12 @@ describe ActivitiesController, type: :controller do
 			it "saves the new activity in the database" do
 				expect{
 					post :create, activity: attributes_for(:activity)
-				}.to change(activity, :count).by(1)
+				}.to change(Activity, :count).by(1)
 			end
 
 			it "redirects to activities#show" do
 				post :create, activity: attributes_for(:activity)
-				expect(response).to redirect_to contact_path(assigns[:activity])
+				expect(response).to redirect_to activity_path(assigns[:activity])
 			end
 		end
 
@@ -81,7 +81,7 @@ describe ActivitiesController, type: :controller do
 			it "does not save the new activity in the database" do
 				expect {
 					post :create, activity: attributes_for(:invalid_activity)
-				}.not_to change(activity, :count)
+				}.not_to change(Activity, :count)
 			end
 
 			it "re-renders the :new template" do

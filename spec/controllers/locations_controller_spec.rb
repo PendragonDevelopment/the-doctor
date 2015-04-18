@@ -36,7 +36,7 @@ describe LocationsController, type: :controller do
 		
 		it "assigns a new location to @location" do
 			get :new
-			expect(assigns(:location)).to be_a_new(location)
+			expect(assigns(:location)).to be_a_new(Location)
 		end
 
 		it "renders the :new template" do
@@ -67,12 +67,12 @@ describe LocationsController, type: :controller do
 			it "saves the new location in the database" do
 				expect{
 					post :create, location: attributes_for(:location)
-				}.to change(location, :count).by(1)
+				}.to change(Location, :count).by(1)
 			end
 
 			it "redirects to locations#show" do
 				post :create, location: attributes_for(:location)
-				expect(response).to redirect_to contact_path(assigns[:location])
+				expect(response).to redirect_to location_path(assigns[:location])
 			end
 		end
 
@@ -81,7 +81,7 @@ describe LocationsController, type: :controller do
 			it "does not save the new location in the database" do
 				expect {
 					post :create, location: attributes_for(:invalid_location)
-				}.not_to change(location, :count)
+				}.not_to change(Location, :count)
 			end
 
 			it "re-renders the :new template" do
