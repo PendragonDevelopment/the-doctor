@@ -72,7 +72,7 @@ describe EventsController, type: :controller do
 
 			it "redirects to events#show" do
 				post :create, event: attributes_for(:event)
-				expect(response).to redirect_to contact_path(assigns[:event])
+				expect(response).to redirect_to event_path(assigns[:event])
 			end
 		end
 
