@@ -1,8 +1,30 @@
+# == Schema Information
+#
+# Table name: transactions
+#
+#  id                 :integer          not null, primary key
+#  title              :string
+#  payment_amount     :integer
+#  payment_date       :date
+#  status             :integer
+#  transaction_record :string
+#  user_id            :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  appointment_id     :integer
+#  event_id           :integer
+#
+
 class Transaction < ActiveRecord::Base
   belongs_to :user
   belongs_to :host_event
   enum status: [:payment_pending, :paid]
 
+  validates :title, presence: true
+  validates :payment_amount, presence: true
+  validates :payment_date, presence: true
+
+=begin
   def get_customer_from_stripe
     # Add customer id to User model
     cus_id = self.customer_id
@@ -13,7 +35,7 @@ class Transaction < ActiveRecord::Base
   def create_stripe_customer(params, token)
     puts params[:stripeToken]
     customer = Stripe::Customer.create(
-      description: "Hiker Meals Customer",
+      description: "The Doctor's Companion",
       email: params[:email],
       card: token.id
     )
@@ -30,7 +52,7 @@ class Transaction < ActiveRecord::Base
     charge = Stripe::Charge.create(
       customer: self.customer_id,
       amount: amount,
-      description: "Vestigo Trip charge",
+      description: "The Doctor's Fee",
       currency: 'usd'
     )
     return charge
@@ -47,5 +69,6 @@ class Transaction < ActiveRecord::Base
     )
     return token
   end
-
+=end
 end
+
