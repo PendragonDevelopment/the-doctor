@@ -11,17 +11,24 @@ module Tardis
 	def get_schedule_blocks
 		JSON.parse(@token.get('/api/v1/schedule_blocks').body)
 	end
+	
+	def get_schedule_block(schedule_block)
+	end
 
-	#get /schedule_blocks
-	#get /schedule_blocks/:id
-	#get /schedule_blocks/:id/appointments
-	#get /schedule_blocks/:id/appointments/:apt_id
+	def get_appointments_on_schedule_block(schedule_block)
+	end
 
-	#post /schedule_blocks
+	def get_appointment_on_schedule_block(schedule_block, appointment)
+	end
 
-	#put /schedule_blocks/:id
+	def create_schedule_block(schedule_block_params)
+	end
 
-	#delete /schedule_blocks/:id
+	def update_schedule_block(schedule_block, schedule_block_params)
+	end
+
+	def delete_schedule_block(schedule_block)
+	end
 
 	private
 
