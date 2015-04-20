@@ -31,4 +31,29 @@ RSpec.describe Event, type: :model do
       expect(event).not_to be_valid
     end
   end
+
+  describe "Tardis methods" do
+    context "responds to its methods" do
+      subject {event}
+
+      it {is_expected.to respond_to(:get_schedule_blocks)}
+      it {is_expected.to respond_to(:get_schedule_block)}
+      it {is_expected.to respond_to(:get_appointments_on_schedule_block)}
+      it {is_expected.to respond_to(:get_appointment_on_schedule_block)}
+      it {is_expected.to respond_to(:create_schedule_block)}
+      it {is_expected.to respond_to(:update_schedule_block)}
+      it {is_expected.to respond_to(:delete_schedule_block)}
+      it {is_expected.to respond_to(:token_check)}
+    end
+
+    context "schedule_block methods" do
+      
+    end
+
+    context "appointment methods" do
+    end
+
+  end
+
+  
 end
