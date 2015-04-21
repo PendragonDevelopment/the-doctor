@@ -43,11 +43,19 @@ RSpec.describe Event, type: :model do
       it {is_expected.to respond_to(:create_schedule_block)}
       it {is_expected.to respond_to(:update_schedule_block)}
       it {is_expected.to respond_to(:delete_schedule_block)}
-      it {is_expected.to respond_to(:token_check)}
     end
 
     context "schedule_block methods" do
-      
+      before(:each) do
+        @event = FactoryGirl.build_stubbed(:event)
+      end
+
+      it "renders a response" do
+        VCR.use_cassette("get_schedule_blocks") do
+          response = event.get_schedule_blocks
+          expect(response).to be_success
+        end
+      end
     end
 
     context "appointment methods" do
