@@ -1,5 +1,6 @@
 class RemoveCategoryColumnAndIndex < ActiveRecord::Migration
   def change
-    remove_column :events, :category_id
+  #   Removed in order to run migrations after re-building Vagrant box
+  #   remove_column :events, :category_id
   end
 end
