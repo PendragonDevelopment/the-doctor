@@ -5,15 +5,7 @@ class ActivitiesController < ApplicationController
     @activities = Activity.all
   end
 
-  def create
-    @activity = Activity.create(activity_params)
-
-    if @activity.save
-      redirect_to @activity
-    else
-      redirect_to new_activity_path
-    end
-    
+  def show
   end
 
   def new
@@ -23,13 +15,28 @@ class ActivitiesController < ApplicationController
   def edit
   end
 
-  def show
-  end
+  def create
+    @activity = Activity.create(activity_params)
 
+    if @activity.save
+      redirect_to @activity
+    else
+      render :new
+    end
+
+  end
+  
   def update
+    if @activity.update(activity_params)
+      redirect_to activity_path(@activity)
+    else
+      render :edit
+    end
   end
 
   def destroy
+    @activity.destroy
+    redirect_to root_url
   end
 
   private
