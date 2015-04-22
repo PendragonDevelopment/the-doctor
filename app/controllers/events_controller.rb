@@ -53,6 +53,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:rate, :location_id, :new_location, :activity_id, :host_id, :start_time, :end_time, :reservation_min, :reservation_max)
+      params.require(:event).permit(:rate, :location_id, :new_location, :activity_id, :host_id)
     end
 end
