@@ -1,57 +1,6 @@
 ---
 http_interactions:
 - request:
-    method: post
-    uri: https://tardis-scheduler.herokuapp.com/oauth/token
-    body:
-      encoding: UTF-8
-      string: grant_type=client_credentials
-    headers:
-      User-Agent:
-      - Faraday v0.8.9
-      Content-Type:
-      - application/x-www-form-urlencoded
-      Authorization:
-      - Basic Y2UxZmRkMmFiYzllZmRiYTc4NDIyY2ZjYzk0NGIxMjA2MTM0NmZlZWViNWJmNzJjZjNiZTc0ZmI5OGYwNGVmODowMmEzZTU3MzU1NDc1MmVmMGIwOTYxYzgwMTZhNzExNzFkYjE3ODUzZGQ4NTRkMmRjZTkzY2VjMGU1Yzk0Njg3
-  response:
-    status:
-      code: 200
-      message: 
-    headers:
-      server:
-      - Cowboy
-      connection:
-      - close
-      date:
-      - Tue, 21 Apr 2015 04:07:39 GMT
-      status:
-      - 200 OK
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      x-content-type-options:
-      - nosniff
-      cache-control:
-      - no-store
-      pragma:
-      - no-cache
-      content-type:
-      - application/json; charset=utf-8
-      etag:
-      - W/"d06a6033aa31a2fcafa09900ca91d2ef"
-      x-request-id:
-      - 29e5a3d0-4819-410e-98f5-843af62bbf15
-      x-runtime:
-      - '0.097573'
-      via:
-      - 1.1 vegur
-    body:
-      encoding: UTF-8
-      string: '{"access_token":"cc1697c16e0b2ab824f7dd0b11eb394a958f724cd5d851c826dfc849388ffbf7","token_type":"bearer","created_at":1429589259}'
-    http_version: 
-  recorded_at: Tue, 21 Apr 2015 04:07:39 GMT
-- request:
     method: get
     uri: https://tardis-scheduler.herokuapp.com/api/v1/schedule_blocks
     body:
@@ -61,7 +10,7 @@ http_interactions:
       User-Agent:
       - Faraday v0.8.9
       Authorization:
-      - Bearer cc1697c16e0b2ab824f7dd0b11eb394a958f724cd5d851c826dfc849388ffbf7
+      - Bearer 1e4b389bcfee65c65240e4714dc5d73911150b2a4ea3d5d502ec9cb39cc589cc
   response:
     status:
       code: 200
@@ -72,7 +21,7 @@ http_interactions:
       connection:
       - close
       date:
-      - Tue, 21 Apr 2015 04:07:39 GMT
+      - Tue, 21 Apr 2015 15:26:19 GMT
       status:
       - 200 OK
       content-type:
@@ -84,14 +33,14 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 372176f7-ce99-4a7f-bc34-56df24be8a5a
+      - c38cd990-2787-4444-9fc4-1b72e025e93f
       x-runtime:
-      - '0.008545'
+      - '0.021154'
       via:
       - 1.1 vegur
     body:
       encoding: UTF-8
       string: '[{"id":2,"host_id":1,"event_id":1,"location_id":1,"start_time":"2016-02-03T10:00:00.000Z","end_time":"2016-02-03T11:00:00.000Z","reservation_min":1,"reservation_max":4,"status":"full","created_at":"2015-04-10T00:41:59.188Z","updated_at":"2015-04-10T00:41:59.188Z","user_id":null},{"id":3,"host_id":1,"event_id":1,"location_id":1,"start_time":"2016-02-03T10:00:00.000Z","end_time":"2016-02-03T11:00:00.000Z","reservation_min":1,"reservation_max":4,"status":"full","created_at":"2015-04-10T01:09:38.778Z","updated_at":"2015-04-10T01:09:38.778Z","user_id":null},{"id":4,"host_id":1,"event_id":1,"location_id":1,"start_time":"2016-02-03T10:00:00.000Z","end_time":"2016-02-03T11:00:00.000Z","reservation_min":1,"reservation_max":4,"status":"full","created_at":"2015-04-10T01:09:55.766Z","updated_at":"2015-04-10T01:09:55.766Z","user_id":null}]'
     http_version: 
-  recorded_at: Tue, 21 Apr 2015 04:07:39 GMT
+  recorded_at: Tue, 21 Apr 2015 15:26:19 GMT
 recorded_with: VCR 2.9.3
