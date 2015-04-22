@@ -33,4 +33,7 @@ class Event < ActiveRecord::Base
   def new_location
   end
 
+  def new_activity
+  end
+
 end

@@ -6,12 +6,18 @@
 
     <%= f.label :activity %>
     <%= f.collection_select :activity_id, Activity.all, :id, :title %><br/>
+
+    <!--<%= f.label :new_activity, "or create a new activity:" %>
+    <%= f.text_field :new_activity %><br/>-->
     
     <%= f.label :location %>
     <%= f.collection_select :location_id, Location.all, :id, :title %><br/>
 
     <!--<%= f.label :new_location, "or create a new location:" %>
     <%= f.text_field :new_location %><br/>-->
+
+    <%= f.label :rate %>
+    <%= f.number_field :rate %><br/>
 
     <%= f.label :start_time %>
     <%= f.datetime_field :start_time %><br/>
@@ -24,9 +30,6 @@
 
     <%= f.label :reservation_max %>
     <%= f.number_field :reservation_max %><br/>
-
-    <%= f.label :rate %>
-    <%= f.number_field :rate %><br/>
 
     <%= hidden_field_tag :host, value = current_user.host %>
 
