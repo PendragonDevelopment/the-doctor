@@ -1,12 +1,26 @@
 <h1>Events</h1>
 
-<% @events.each do |event| %>
-  <p>Activity: <%= event.activity.title %></p>
-  <p>Location: <%= event.location.title %></p>
-  <p>Rate: <%= event.rate %></p>
-  <p>Host: <%= event.host.user.first_name %></p>
-  <br>
-<% end %>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Location</th>
+			<th>Price</th>
+      <th>Host</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<% @events.each do |event| %>
+			<tr>
+				<td><%= event.activity.title %></td>
+				<td><%= event.location.title %></td>
+				<td><%= event.rate %></td>
+        <td><%= event.host.user.first_name %></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
 
 <%= link_to 'All Events', events_path %>
 <%= link_to 'New Event', new_event_path %>
