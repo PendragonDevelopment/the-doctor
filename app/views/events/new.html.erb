@@ -5,7 +5,7 @@
   <%= form_for @event do |f| %>
 
     <%= f.label :activity %>
-    <%= f.collection_select :activity_id, Activity.all, :id, :title %>
+    <%= f.collection_select :activity_id, Activity.all, :id, :title, prompt: "Select Activity" %>
 
     <%= f.fields_for :new_activity do |new_activity| %>
         <%= new_activity.label :new_activity, "or create a new activity: " %>
@@ -13,7 +13,7 @@
     <% end %>
     
     <%= f.label :location %>
-    <%= f.collection_select :location_id, Location.all, :id, :title %>
+    <%= f.collection_select :location_id, Location.all, :id, :title, prompt: "Select Location" %>
 
     <%= f.fields_for :new_location do |new_location| %>
         <%= new_location.label :new_location, "or create a new location: " %>
