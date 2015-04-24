@@ -28,6 +28,7 @@
 #
 
 require 'rails_helper'
+require 'stripe_mock'
 
 describe User do
 
@@ -80,6 +81,51 @@ describe User do
 	end
 
   describe "Stripe Methods" do
+
+    let(:stripe_helper) { StripeMock.create_test_helper }
+    before { StripeMock.start }
+    after { StripeMock.stop }
+
+    let(:card_params) { {email: user.email, number: "4242424242424242", credit_card_expiry_month: "10", credit_card_expiry_year: "16", cvv: "123"} }
+
+    describe "create_stripe_customer" do
+
+      it "creates the stripe customer" do
+        user.create_stripe_customer( {email: user.email}, user.create_stripe_token(card_params) )
+        expect(user.stripe_customer_id).not_to eq(nil)
+      end
+
+    end
+
+    describe "get_customer_from_stripe" do
+
+      let (:customer) { user.create_stripe_customer( {email: user.email}, user.create_stripe_token(card_params) ); user.get_customer_from_stripe }
+
+      it "returns the stripe customer" do
+        expect(customer.id).to eq(user.stripe_customer_id)
+      end
+
+    end
+
+    describe "create_stripe_token" do
+
+      let (:token) { user.create_stripe_token(card_params) }
+
+      it "creates a valid token" do
+        expect(token).not_to eq(nil)
+      end
+
+    end
+
+    describe "charge_stripe" do
+
+      let (:charge) { user.charge_stripe(199, card_params) }
+
+      it "creates the charge" do
+        expect(charge.amount).to eq(199)
+      end
+
+    end
     
   end
 

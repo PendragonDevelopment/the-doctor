@@ -42,6 +42,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'vcr'
   gem 'rubocop'
+  gem 'stripe-ruby-mock', '~> 2.1.1', :require => 'stripe_mock'
 end
 
 group :production do
