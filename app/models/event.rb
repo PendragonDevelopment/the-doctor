@@ -19,12 +19,6 @@ class Event < ActiveRecord::Base
 	belongs_to :host
 	validates :rate, presence: true
 
-  def new_location
-  end
-
-  def new_activity
-  end
-
 	@@token ||= nil
 
 	def self.generate_token

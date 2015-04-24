@@ -6,24 +6,33 @@ class EventsController < ApplicationController
   end
 
   def create
-    only_event_params = event_params.select {|k,v| ['rate', 'location_id', 'new_location', 'activity_id', 'host_id'].include?(k)}
+    event_model_params = event_params.select {|k,v| ['rate', 'location_id', 'activity_id', 'host_id'].include?(k)}
+
+    @event = current_user.host.events.create(event_model_params)
+    
+    new_location = event_params[:new_location][:new_location]
+    unless new_location.empty?
+      new_location_record = @event.create_location(title: new_location)
+      @event.update_attributes(location_id: new_location_record.id )
+    end
+    
+    new_activity = event_params[:new_activity][:new_activity]
+    unless new_activity.empty?
+      new_activity_record = @event.create_activity(title: new_activity)
+      @event.update_attributes(activity_id: new_activity_record.id)
+    end
+
     #schedule_block_params_hash = event_params.select {|k,v| ['schedule_block_params'].include?(k)}
     #schedule_block_params = schedule_block_params_hash['schedule_block_params']
 
-    @event = current_user.host.events.build(only_event_params)
-
-# quote_params = {'host_id' => 1,'event_id' => 1, 'location_id' => 1,'start_time' => "2015-04-23T17:35:08-04:00", 'end_time' => "2015-04-23T19:35:08-04:00",'reservation_min' => 1, 'reservation_max' => 1000, 'status' => 1, 'user_id' => 1}
-
-# colon_params = {host_id: 1, event_id: 1, location_id: 1, start_time: "2015-04-23T17:35:08-04:00", end_time: "2015-04-23T19:35:08-04:00", reservation_min: 1, reservation_max: 1000, status: 1, user_id: 1}
+    hard_coded_params = {'host_id' => 1,'event_id' => 1, 'location_id' => 1,'start_time' => "2015-04-23T17:35:08-04:00", 'end_time' => "2015-04-23T19:35:08-04:00",'reservation_min' => 1, 'reservation_max' => 1000, 'status' => 1, 'user_id' => 1}
 
     if @event.save
-      @event.create_schedule_block(copied_params)
-      if @event.create_schedule_block(copied_params)
-        #({schedule_block_params:{host_id:1, event_id:2, location_id:2, start_time:'2016-02-03 5:00:00', end_time:'2016-02-03 6:00:00', reservation_min:2, reservation_max:10, status:'full'}})
+      if @event.create_schedule_block(hard_coded_params)
         redirect_to @event
         flash[:notice] = "Event & Schedule Block succesfully created!"
-        flash[:debug] = "#{copied_params}"
-        flash[:extra] = "#{only_event_params}"
+        flash[:debug] = "#{hard_coded_params}"
+        flash[:extra] = "#{event_model_params}"
       else
         redirect_to @event
         flash[:notice] = "Event created, but Schedule Block was NOT!"
@@ -71,6 +80,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:rate, :location_id, :new_location, :activity_id, :host_id, { schedule_block_params: [:start_time, :end_time, :reservation_min, :reservation_max] })
+      params.require(:event).permit(:rate, :location_id, {new_location: [:new_location]}, :activity_id, {new_activity: [:new_activity]},:host_id, { schedule_block_params: [:start_time, :end_time, :reservation_min, :reservation_max] })
     end
 end
