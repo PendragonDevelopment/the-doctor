@@ -19,6 +19,9 @@ gem 'simple_form'
 gem 'therubyracer', :platform=>:ruby
 gem 'unicorn'
 gem 'unicorn-rails'
+gem "paperclip", "~> 4.2"
+gem 'acts-as-taggable-on'
+gem 'annotate', '~> 2.6.6'
 
 group :development do
   gem 'better_errors'
