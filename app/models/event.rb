@@ -12,7 +12,6 @@
 #
 
 class Event < ActiveRecord::Base
-
 	has_many :transactions
 	belongs_to :location
 	belongs_to :activity
@@ -92,5 +91,4 @@ class Event < ActiveRecord::Base
 				Event.generate_token
 			end
 		end
-
 end
