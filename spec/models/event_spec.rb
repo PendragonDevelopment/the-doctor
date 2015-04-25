@@ -183,11 +183,12 @@ RSpec.describe Event, type: :model do
 
         before(:each) do
           VCR.use_cassette("update_schedule_block") do
+            @response = event.update_schedule_block(schedule_block_id, updated_schedule_block_params)
           end
         end
 
         it "updates the schedule_block" do
-          pending 
+          expect(@response.status).to eq 200 
         end
       end
 
@@ -195,16 +196,68 @@ RSpec.describe Event, type: :model do
 
         before(:each) do
           VCR.use_cassette("delete_schedule_block") do
+            #not quite sure how to do this without deleting blocks on the tardis.  
+            #This is probably going to require mocks and stubs to be done well
           end
         end
 
         it "deletes the schedule block" do
-          pending
+          pending "Should figure out how to do this"
         end
       end
     end
 
     describe "Appointment methods" do
+
+      describe "#get_appointments" do
+
+        before(:each) do
+          VCR.use_cassette("get_appointments") do
+            @response = event.get_appointments
+          end
+        end
+
+        it "retrieves all the appointments" do
+          expect(@response).not_to be_nil
+        end
+      end
+
+      describe "#update_appointment" do
+        let(:user) {create(:user)}
+        let(:appointment) { 2 }
+
+        let(:updated_appointment_params) do
+          {
+            :schedule_block_id => 2,
+            :attendee => user.id,
+            :status => 2
+          }
+        end
+
+        before(:each) do
+          VCR.use_cassette("update_appointment") do
+            @response = event.update_appointment(appointment, updated_appointment_params)
+          end
+        end
+
+        it "updates the appointment" do
+          expect(@response.status).to eq 200
+        end
+      end
+
+      describe "#delete_appointment" do
+
+        before(:each) do
+          VCR.use_cassette("delete_appointment") do
+            #again, not sure how to work this well
+          end
+        end
+
+        it "deletes the appointment" do
+          pending "Need to do mocks and stubs here"
+        end
+      end
+
     end
 
   end

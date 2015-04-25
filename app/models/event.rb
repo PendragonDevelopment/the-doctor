@@ -69,7 +69,21 @@ class Event < ActiveRecord::Base
 	end
 
 	# Appointment Methods
-	# More To Come Later
+
+	def get_appointments
+		token_check
+		JSON.parse(@@token.get('/api/v1/appointments').body)
+	end
+
+	def update_appointment(appointment_id, appointment_params)
+		token_check
+		@@token.put("/api/v1/appointments/#{appointment_id}", appointment_params)
+	end
+
+	def delete_appointment(appointment_id)
+		token_check
+		@@token.delete("/api/v1/appointments/#{appointment_id}")
+	end
 
 	private
 
