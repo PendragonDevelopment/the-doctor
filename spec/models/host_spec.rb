@@ -88,5 +88,4 @@ RSpec.describe Host, type: :model do
       end
     end
   end
-
 end
