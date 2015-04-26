@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://tardis-scheduler.herokuapp.com/api/v1/schedule_blocks/1/appointments
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.8.9
+      Authorization:
+      - Bearer 8b72f98c4b838abeeb3bedd5f06db3e2486cc0e0506fb9f588c6b97fec1d0514
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      server:
+      - Cowboy
+      connection:
+      - close
+      date:
+      - Sun, 26 Apr 2015 22:22:45 GMT
+      status:
+      - 200 OK
+      content-type:
+      - application/json
+      content-length:
+      - '573'
+      etag:
+      - W/"4327b9e8196cd3e52eba4628326f159d"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - f6c2de6d-8474-447f-8005-5db1024dffa7
+      x-runtime:
+      - '0.009680'
+      via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '[{"schedule_block_id":1,"id":1,"attendee":1,"status":"pending","created_at":"2015-04-26T21:34:14.593Z","updated_at":"2015-04-26T21:34:14.593Z"},{"schedule_block_id":1,"id":2,"attendee":2,"status":"pending","created_at":"2015-04-26T21:34:14.614Z","updated_at":"2015-04-26T21:34:14.614Z"},{"schedule_block_id":1,"id":3,"attendee":3,"status":"pending","created_at":"2015-04-26T21:34:14.630Z","updated_at":"2015-04-26T21:34:14.630Z"},{"schedule_block_id":1,"id":4,"attendee":1,"status":"pending","created_at":"2015-04-26T21:34:14.644Z","updated_at":"2015-04-26T21:34:14.644Z"}]'
+    http_version: 
+  recorded_at: Sun, 26 Apr 2015 22:22:50 GMT
+recorded_with: VCR 2.9.3
