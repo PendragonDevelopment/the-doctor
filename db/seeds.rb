@@ -8,19 +8,36 @@
 # Environment variables (ENV['...']) can be set in the file config/application.yml.
 # See http://railsapps.github.io/rails-environment-variables.html
 
-#create an activity
-activity = Activity.create(title: "Juggling Competition")
-
-#create a location
-location = Location.create(title: "Georgia Theater")
-
 #create one user
 u = User.create(first_name: "John", last_name: "Johnson", password: 'password1234', username: "johnjohnson")
 
 #set that user as a host
 u.host = Host.create
 
+#create an activity
+activity = Activity.create(title: "Juggling Competition")
+
+#create a location
+location = Location.create(title: "Georgia Theater")
+juggling = Activity.create(title: "Juggling Competition")
+mouserat = Activity.create(title: "Mouserat Show")
+ratmouse = Activity.create(title: "Ratmouse Show")
+
+#create a location
+gatheater = Location.create(title: "Georgia Theater")
+nucis = Location.create(title: "Nuci's Space")
+fortywatt = Location.create(title: "40 Watt")
+
+
 event = u.host.events.create(activity_id: activity.id, location_id: location.id, rate: 500)
 
+u.host.events.create(activity_id: juggling.id, location_id: gatheater.id, rate: 3000)
+u.host.events.create(activity_id: mouserat.id, location_id: gatheater.id, rate: 5000)
+u.host.events.create(activity_id: mouserat.id, location_id: nucis.id, rate: 4000)
+u.host.events.create(activity_id: ratmouse.id, location_id: nucis.id, rate: 500)
+u.host.events.create(activity_id: ratmouse.id, location_id: fortywatt.id, rate: 4000)
+u.host.events.create(activity_id: juggling.id, location_id: fortywatt.id, rate: 6000)
+u.host.events.create(activity_id: mouserat.id, location_id: fortywatt.id, rate: 1000)
+u.host.events.create(activity_id: mouserat.id, location_id: fortywatt.id, rate: 1000)
 
 
