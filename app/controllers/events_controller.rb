@@ -25,18 +25,18 @@ class EventsController < ApplicationController
     #schedule_block_params_hash = event_params.select {|k,v| ['schedule_block_params'].include?(k)}
     #schedule_block_params = schedule_block_params_hash['schedule_block_params']
 
-    hard_coded_params = {host_id: 1, event_id: 1, location_id: 1, start_time: "2015-04-23T17:35:08-04:00", end_time: "2015-04-23T19:35:08-04:00", reservation_min: 1, reservation_max: 1000, status: "open"}
+    hard_coded_params = {params: {host_id: 1, event_id: 1, location_id: 1, start_time: "2015-04-23T17:35:08-04:00", end_time: "2015-04-23T19:35:08-04:00", reservation_min: 1, reservation_max: 1000, status: "open"}}
 
     if @event.save
-      if @event.create_schedule_block(schedule_block_params)
+      if @event.create_schedule_block(hard_coded_params)
         redirect_to @event
         flash[:notice] = "Event & Schedule Block succesfully created!"
-        flash[:debug] = "Schedule Block params: #{schedule_block_params}"
+        flash[:debug] = "Schedule Block params: #{hard_coded_params}"
         flash[:extra] = "#{event_model_params}"
       else
         redirect_to @event
         flash[:notice] = "Event created, but Schedule Block was NOT!"
-        flash[:debug] = "#{schedule_block_params}"
+        flash[:debug] = "#{hard_coded_params}"
       end
     else
       render :new
