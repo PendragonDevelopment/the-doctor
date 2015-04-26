@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://tardis-scheduler.herokuapp.com/api/v1/schedule_blocks
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.8.9
+      Authorization:
+      - Bearer 1d1a5842da691849fde401ab2cd8d03bdb37c9db0254ad26a5ed830dd0b8ab5c
+  response:
+    status:
+      code: 201
+      message: 
+    headers:
+      server:
+      - Cowboy
+      connection:
+      - close
+      date:
+      - Sun, 26 Apr 2015 21:45:30 GMT
+      status:
+      - 201 Created
+      content-type:
+      - application/json
+      content-length:
+      - '35'
+      etag:
+      - W/"aab4b4173efde85521e531e7f494a6e8"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 611d2f88-9ab9-4091-b66b-45745735e1d0
+      x-runtime:
+      - '0.031683'
+      via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '"Schedule Block could not be saved"'
+    http_version: 
+  recorded_at: Sun, 26 Apr 2015 21:45:29 GMT
+recorded_with: VCR 2.9.3
