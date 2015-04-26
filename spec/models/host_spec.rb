@@ -20,7 +20,8 @@
 require 'rails_helper'
 
 RSpec.describe Host, type: :model do
-  let(:host) {FactoryGirl.create(:host)}
+  let(:user) {FactoryGirl.create(:user)}
+  let(:host) {user.host = FactoryGirl.create(:host)}
 
   describe "Model attributes set up" do
   	subject {host}
@@ -40,5 +41,52 @@ RSpec.describe Host, type: :model do
   	it {is_expected.to respond_to(:updated_at)}
 
   	it {is_expected.to be_valid}
+
+    it "active defaults to false" do
+      #my guess is that we are going to also need a db migration to ensure this default
+      expect(host.active).to eq(false)
+    end
   end
+
+  describe "Attribute validations" do
+
+    context "presence validations" do
+      let(:other_user) {create(:user)}
+      let(:invalid_host) {other_user.host = create(:invalid_host)}
+
+      
+      #why would this be a validation?
+      #it "is invalid without a rating" do
+      #  expect(invalid_host).not_to be_valid
+      #end
+    end
+
+    context "format validations" do
+
+      it "#bio returns a string" do
+        expect(host.bio).to be_a(String)
+      end
+
+      it "#resume returns a string" do
+        expect(host.resume).to be_a(String)
+      end
+
+      it "#direct_deposit returns a string" do
+        expect(host.direct_deposit).to be_a(String)
+      end
+
+      it "#voided_check returns a string" do
+        expect(host.voided_check).to be_a(String)
+      end
+
+      it "#w9 returns a string" do
+        expect(host.w9).to be_a(String)
+      end
+
+      it "#birthdate returns a date" do
+        expect(host.birthdate).to be_a(Date)
+      end
+    end
+  end
+
 end
