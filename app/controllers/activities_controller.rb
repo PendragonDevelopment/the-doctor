@@ -1,50 +1,51 @@
 class ActivitiesController < ApplicationController
-	before_action :set_activity, only: [:show, :edit, :update, :destroy]
-	
-	def index
-		@activities = Activity.all
-	end
+  before_action :set_activity, :only => [:edit, :show, :update, :destroy]
 
-	def show
-	end
+  def index
+    @activities = Activity.all
+  end
 
-	def new
-		@activity = Activity.new
-	end
+  def show
+  end
 
-	def edit
-	end
+  def new
+    @activity = Activity.new
+  end
 
-	def create
-		@activity = Activity.create(activity_params)
+  def edit
+  end
 
-		if @activity.save
-			redirect_to activity_path(@activity)
-		else
-			render :new
-		end
-	end
+  def create
+    @activity = Activity.create(activity_params)
 
-	def update
-		if @activity.update(activity_params)
-			redirect_to activity_path(@activity)
-		else
-			render :edit
-		end
-	end
+    if @activity.save
+      redirect_to @activity
+    else
+      render :new
+    end
 
-	def destroy
-		@activity.destroy
-		redirect_to root_url
-	end
+  end
+  
+  def update
+    if @activity.update(activity_params)
+      redirect_to activity_path(@activity)
+    else
+      render :edit
+    end
+  end
 
-	private
+  def destroy
+    @activity.destroy
+    redirect_to root_url
+  end
 
-		def set_activity
-			@activity = Activity.find(params[:id])
-		end
+  private
 
-		def activity_params
-			params.require(:activity).permit(:title)
-		end
+    def set_activity
+      @activity = Activity.find(params[:id])
+    end
+
+    def activity_params
+      params.require(:activity).permit(:title)
+    end
 end

@@ -5,7 +5,23 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-user = CreateAdminService.new.call
-puts 'CREATED ADMIN USER: ' << user.email
+# user = CreateAdminService.new.call
+# puts 'CREATED ADMIN USER: ' << user.email
 # Environment variables (ENV['...']) can be set in the file config/application.yml.
 # See http://railsapps.github.io/rails-environment-variables.html
+
+# Create locations
+locations = Location.create([{title: "Georgia Theatre", description: "A large, newly re-built concert venue with a large indoor auditorium and a rooftop bar.", latitude: "78978967876", longitude: "7987896868"}, {title: "40 Watt Club", description: "A smaller live music venue with a long history and a charming dive-bar feel.", latitude: "78978546546", longitude: "675456587798"}, {title: "Hendershot's", description: "A coffee shop by day and bar at night featuring open mics and small live acts.", latitude: "7756545646", longitude: "4565675878"}])
+
+# Create activities
+activities = Activity.create([{title: "Black Keys Concert"}, {title: "Alabama Shakes Concert"}, {title: "Open Mic Night"}, {title: "Chief Keef Autograph Signing"}])
+
+# Create one user
+user = User.create(first_name: "John", last_name: "Johnson", password: 'password1234', username: "johnjohnson")
+
+# Set user as a host
+user.host = Host.create
+
+# Create an event
+event = user.host.events.create(activity_id: 1, location_id: 1, rate: 500)
+

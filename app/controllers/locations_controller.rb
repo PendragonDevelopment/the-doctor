@@ -1,51 +1,52 @@
 class LocationsController < ApplicationController
-	before_action :set_location, only: [:show, :edit, :update, :destroy]
-	
-	def index
-		@locations = Location.all
-	end
+  before_action :set_location, :only => [:edit, :show, :update, :destroy]
 
-	def show
-	end
+  def index
+    @locations = Location.all
+  end
 
-	def new
-		@location = Location.new
-	end
+  def create
+    @location = Location.create(location_params)
 
-	def edit
-	end
+    if @location.save
+      redirect_to @location
+    else
+      render :new
+    end
+  end
 
-	def create
-		@location = Location.create(location_params)
+  def new
+    @location = Location.new
+  end
 
-		if @location.save
-			redirect_to location_path(@location)
-		else
-			render :new
-		end
-	end
+  def edit
+  end
 
-	def update
-		if @location.update(location_params)
-			redirect_to location_path(@location)
-		else
-			render :edit
-		end
-	end
+  def show
+  end
 
-	def destroy
-		@location.destroy
-		redirect_to root_url
-	end
+  def update
+    if @location.update(location_params)
+      redirect_to location_path(@location)
+    else
+      render :edit
+    end
+  end
 
-	private
+  def destroy
+    @location.destroy
+    redirect_to root_url
+  end
 
-		def set_location
-			@location = Location.find(params[:id])
-		end
+  private
 
-		def location_params
-			params.require(:location).permit(:title)
-		end
+    def set_location
+      @location = Location.find(params[:id])
+    end
+
+    def location_params
+      params.require(:location).permit(:title, :description, :latitude, :longitude)
+    end
+
 end
 

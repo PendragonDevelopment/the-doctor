@@ -1,1 +1,12 @@
-<h1>Activities#new</h1>
+
+<h1>New Activity</h1>
+
+<%= form_for @activity do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.submit 'Create Activity' %>
+<% end %>
+
+<%= link_to 'All Activities', activities_path %>
+<%= link_to 'New Activity', new_activity_path %>

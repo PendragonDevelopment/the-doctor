@@ -1,1 +1,8 @@
-<h1>Events#show</h1>
+<h1>Event</h1>
+
+<p>Event Title: <%= @event.activity.title %> </p>
+<p>Event Rate: <%= @event.rate %> </p>
+<p>Event Host: <%= @event.host.user.first_name %></p>
+<p>Event Location: <%= @event.location.title %></p>
+
+<p>Schedule Blocks: <%= @schedule_blocks %></p>

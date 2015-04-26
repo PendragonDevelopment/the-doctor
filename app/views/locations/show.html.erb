@@ -1,1 +1,9 @@
-<h1>Locations#show</h1>
+<h1>Location</h1>
+
+<p>Title: <%= @location.title %></p>
+<p>Description: <%= @location.description %></p>
+<p>Latitude: <%= @location.latitude %></p>
+<p>Longitude: <%= @location.longitude %></p>
+
+<%= link_to 'All Locations', locations_path %>
+<%= link_to 'New Location', new_location_path %>

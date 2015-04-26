@@ -1,0 +1,3 @@
+CLIENT_ID='ce1fdd2abc9efdba78422cfcc944b12061346feeeb5bf72cf3be74fb98f04ef8'
+CLIENT_SECRET='02a3e573554752ef0b0961c8016a71171db17853dd854d2dce93cec0e5c94687'
+SITE_URL='https://tardis-scheduler.herokuapp.com'
