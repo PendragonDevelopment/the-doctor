@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://tardis-scheduler.herokuapp.com/api/v1/schedule_blocks/2
+    uri: https://tardis-scheduler.herokuapp.com/api/v1/schedule_blocks/1
     body:
       encoding: US-ASCII
       string: ''
@@ -10,7 +10,7 @@ http_interactions:
       User-Agent:
       - Faraday v0.8.9
       Authorization:
-      - Bearer 1e4b389bcfee65c65240e4714dc5d73911150b2a4ea3d5d502ec9cb39cc589cc
+      - Bearer 1d1a5842da691849fde401ab2cd8d03bdb37c9db0254ad26a5ed830dd0b8ab5c
   response:
     status:
       code: 200
@@ -21,26 +21,26 @@ http_interactions:
       connection:
       - close
       date:
-      - Tue, 21 Apr 2015 21:19:29 GMT
+      - Sun, 26 Apr 2015 21:45:29 GMT
       status:
       - 200 OK
       content-type:
       - application/json
       content-length:
-      - '278'
+      - '279'
       etag:
-      - W/"1e8a96b6e202bc71d65515d115a7708e"
+      - W/"865feee91ce910b7ca54d47639e9ccb8"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c012e22d-561c-4e8d-9b79-b654081a5335
+      - de2381ad-15b4-4f8c-a13e-0654630d219f
       x-runtime:
-      - '0.148966'
+      - '0.015810'
       via:
       - 1.1 vegur
     body:
       encoding: UTF-8
-      string: '{"id":2,"host_id":1,"event_id":1,"location_id":1,"start_time":"2016-02-03T10:00:00.000Z","end_time":"2016-02-03T11:00:00.000Z","reservation_min":1,"reservation_max":4,"status":"full","created_at":"2015-04-10T00:41:59.188Z","updated_at":"2015-04-10T00:41:59.188Z","user_id":null}'
+      string: '{"id":1,"host_id":1,"event_id":1,"location_id":1,"start_time":"2015-04-23T17:35:08.000Z","end_time":"2015-04-23T19:35:08.000Z","reservation_min":1,"reservation_max":10,"status":"open","created_at":"2015-04-26T21:06:29.045Z","updated_at":"2015-04-26T21:06:29.045Z","user_id":null}'
     http_version: 
-  recorded_at: Tue, 21 Apr 2015 21:19:29 GMT
+  recorded_at: Sun, 26 Apr 2015 21:45:28 GMT
 recorded_with: VCR 2.9.3

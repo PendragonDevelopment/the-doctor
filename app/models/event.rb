@@ -36,7 +36,7 @@ class Event < ActiveRecord::Base
 		token_check
 		JSON.parse(@@token.get('/api/v1/schedule_blocks').body)
 	end
-	
+
 	def get_schedule_block(schedule_block_id)
 		token_check
 		JSON.parse(@@token.get("/api/v1/schedule_blocks/#{schedule_block_id}").body)

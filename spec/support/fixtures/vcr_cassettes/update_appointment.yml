@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: put
-    uri: https://tardis-scheduler.herokuapp.com/api/v1/appointments/2
+    uri: https://tardis-scheduler.herokuapp.com/api/v1/appointments/1
     body:
       encoding: US-ASCII
       string: ''
@@ -10,10 +10,10 @@ http_interactions:
       User-Agent:
       - Faraday v0.8.9
       Authorization:
-      - Bearer 1e4b389bcfee65c65240e4714dc5d73911150b2a4ea3d5d502ec9cb39cc589cc
+      - Bearer 1d1a5842da691849fde401ab2cd8d03bdb37c9db0254ad26a5ed830dd0b8ab5c
   response:
     status:
-      code: 500
+      code: 200
       message: 
     headers:
       server:
@@ -21,88 +21,26 @@ http_interactions:
       connection:
       - close
       date:
-      - Sat, 25 Apr 2015 19:23:09 GMT
+      - Sun, 26 Apr 2015 21:45:31 GMT
       status:
-      - 500 Internal Server Error
+      - 200 OK
       content-type:
-      - text/html; charset=utf-8
+      - application/json
       content-length:
-      - '1477'
+      - '142'
+      etag:
+      - W/"8bc736dd82e8b859c962aadc05b8dbde"
+      cache-control:
+      - max-age=0, private, must-revalidate
       x-request-id:
-      - bab760dd-64b4-41db-a77c-89c2bb99e677
+      - 8a81ad7f-e70f-4818-acc0-4cddac493935
       x-runtime:
-      - '0.033178'
+      - '0.013717'
       via:
       - 1.1 vegur
     body:
       encoding: UTF-8
-      string: |
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <title>We're sorry, but something went wrong (500)</title>
-          <meta name="viewport" content="width=device-width,initial-scale=1">
-          <style>
-          body {
-            background-color: #EFEFEF;
-            color: #2E2F30;
-            text-align: center;
-            font-family: arial, sans-serif;
-            margin: 0;
-          }
-
-          div.dialog {
-            width: 95%;
-            max-width: 33em;
-            margin: 4em auto 0;
-          }
-
-          div.dialog > div {
-            border: 1px solid #CCC;
-            border-right-color: #999;
-            border-left-color: #999;
-            border-bottom-color: #BBB;
-            border-top: #B00100 solid 4px;
-            border-top-left-radius: 9px;
-            border-top-right-radius: 9px;
-            background-color: white;
-            padding: 7px 12% 0;
-            box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-          }
-
-          h1 {
-            font-size: 100%;
-            color: #730E15;
-            line-height: 1.5em;
-          }
-
-          div.dialog > p {
-            margin: 0 0 1em;
-            padding: 1em;
-            background-color: #F7F7F7;
-            border: 1px solid #CCC;
-            border-right-color: #999;
-            border-left-color: #999;
-            border-bottom-color: #999;
-            border-bottom-left-radius: 4px;
-            border-bottom-right-radius: 4px;
-            border-top-color: #DADADA;
-            color: #666;
-            box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-          }
-          </style>
-        </head>
-
-        <body>
-          <!-- This file lives in public/500.html -->
-          <div class="dialog">
-            <div>
-              <h1>We're sorry, but something went wrong.</h1>
-            </div>
-            <p>If you are the application owner check the logs for more information.</p>
-          </div>
-        </body>
-        </html>
+      string: '{"id":1,"schedule_block_id":1,"attendee":1,"status":"pending","created_at":"2015-04-26T21:34:14.593Z","updated_at":"2015-04-26T21:34:14.593Z"}'
     http_version: 
-  recorded_at: Sat, 25 Apr 2015 19:23:09 GMT
+  recorded_at: Sun, 26 Apr 2015 21:45:30 GMT
 recorded_with: VCR 2.9.3

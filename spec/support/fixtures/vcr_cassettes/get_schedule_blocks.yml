@@ -10,7 +10,7 @@ http_interactions:
       User-Agent:
       - Faraday v0.8.9
       Authorization:
-      - Bearer 1e4b389bcfee65c65240e4714dc5d73911150b2a4ea3d5d502ec9cb39cc589cc
+      - Bearer 1d1a5842da691849fde401ab2cd8d03bdb37c9db0254ad26a5ed830dd0b8ab5c
   response:
     status:
       code: 200
@@ -21,26 +21,26 @@ http_interactions:
       connection:
       - close
       date:
-      - Tue, 21 Apr 2015 15:26:19 GMT
+      - Sun, 26 Apr 2015 21:45:29 GMT
       status:
       - 200 OK
       content-type:
       - application/json
       content-length:
-      - '838'
+      - '1671'
       etag:
-      - W/"855d1d071d811fe78cb14ab755b3e485"
+      - W/"2afd50b9a0d54b1d4fb7618fa1e31463"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - c38cd990-2787-4444-9fc4-1b72e025e93f
+      - 9e287a8b-3976-4cbb-a740-92770f35db84
       x-runtime:
-      - '0.021154'
+      - '0.217998'
       via:
       - 1.1 vegur
     body:
       encoding: UTF-8
-      string: '[{"id":2,"host_id":1,"event_id":1,"location_id":1,"start_time":"2016-02-03T10:00:00.000Z","end_time":"2016-02-03T11:00:00.000Z","reservation_min":1,"reservation_max":4,"status":"full","created_at":"2015-04-10T00:41:59.188Z","updated_at":"2015-04-10T00:41:59.188Z","user_id":null},{"id":3,"host_id":1,"event_id":1,"location_id":1,"start_time":"2016-02-03T10:00:00.000Z","end_time":"2016-02-03T11:00:00.000Z","reservation_min":1,"reservation_max":4,"status":"full","created_at":"2015-04-10T01:09:38.778Z","updated_at":"2015-04-10T01:09:38.778Z","user_id":null},{"id":4,"host_id":1,"event_id":1,"location_id":1,"start_time":"2016-02-03T10:00:00.000Z","end_time":"2016-02-03T11:00:00.000Z","reservation_min":1,"reservation_max":4,"status":"full","created_at":"2015-04-10T01:09:55.766Z","updated_at":"2015-04-10T01:09:55.766Z","user_id":null}]'
+      string: '[{"id":1,"host_id":1,"event_id":1,"location_id":1,"start_time":"2015-04-23T17:35:08.000Z","end_time":"2015-04-23T19:35:08.000Z","reservation_min":1,"reservation_max":10,"status":"open","created_at":"2015-04-26T21:06:29.045Z","updated_at":"2015-04-26T21:06:29.045Z","user_id":null},{"id":2,"host_id":1,"event_id":1,"location_id":1,"start_time":"2015-04-26T21:34:14.414Z","end_time":"2015-04-27T21:34:14.414Z","reservation_min":3,"reservation_max":10,"status":"open","created_at":"2015-04-26T21:34:14.459Z","updated_at":"2015-04-26T21:34:14.459Z","user_id":3},{"id":3,"host_id":1,"event_id":1,"location_id":1,"start_time":"2015-04-26T21:34:14.414Z","end_time":"2015-04-27T21:34:14.414Z","reservation_min":3,"reservation_max":10,"status":"open","created_at":"2015-04-26T21:34:14.487Z","updated_at":"2015-04-26T21:34:14.487Z","user_id":3},{"id":4,"host_id":1,"event_id":1,"location_id":1,"start_time":"2015-04-26T21:34:14.414Z","end_time":"2015-04-27T21:34:14.414Z","reservation_min":3,"reservation_max":10,"status":"open","created_at":"2015-04-26T21:34:14.513Z","updated_at":"2015-04-26T21:34:14.513Z","user_id":3},{"id":5,"host_id":1,"event_id":1,"location_id":1,"start_time":"2015-04-26T21:34:14.414Z","end_time":"2015-04-27T21:34:14.414Z","reservation_min":3,"reservation_max":10,"status":"open","created_at":"2015-04-26T21:34:14.534Z","updated_at":"2015-04-26T21:34:14.534Z","user_id":3},{"id":6,"host_id":1,"event_id":1,"location_id":1,"start_time":"2015-04-23T21:35:08.000Z","end_time":"2015-04-23T23:35:08.000Z","reservation_min":1,"reservation_max":2222,"status":"open","created_at":"2015-04-26T21:40:55.213Z","updated_at":"2015-04-26T21:40:55.213Z","user_id":null}]'
     http_version: 
-  recorded_at: Tue, 21 Apr 2015 15:26:19 GMT
+  recorded_at: Sun, 26 Apr 2015 21:45:28 GMT
 recorded_with: VCR 2.9.3
