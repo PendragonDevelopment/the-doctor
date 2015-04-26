@@ -23,7 +23,7 @@ http_interactions:
       connection:
       - close
       date:
-      - Tue, 21 Apr 2015 15:26:17 GMT
+      - Sun, 26 Apr 2015 20:30:56 GMT
       status:
       - 200 OK
       x-frame-options:
@@ -39,16 +39,16 @@ http_interactions:
       content-type:
       - application/json; charset=utf-8
       etag:
-      - W/"660cbfbaf6e89f249d0381635e45e3d8"
+      - W/"d848a9ab2039dd6c7bb5f92f924aaeb0"
       x-request-id:
-      - 413b2271-3d3e-48f5-be4e-eb2b08f4d12f
+      - a6ce2fc0-e3cc-4f34-a982-5e62881355a9
       x-runtime:
-      - '0.095666'
+      - '0.091549'
       via:
       - 1.1 vegur
     body:
       encoding: UTF-8
-      string: '{"access_token":"1e4b389bcfee65c65240e4714dc5d73911150b2a4ea3d5d502ec9cb39cc589cc","token_type":"bearer","created_at":1429629977}'
+      string: '{"access_token":"eb4debab00736f3d3c7f0da7a33f55984b35d80e410ab5e6503da9a6eda209c3","token_type":"bearer","created_at":1430080256}'
     http_version: 
-  recorded_at: Tue, 21 Apr 2015 15:26:18 GMT
+  recorded_at: Sun, 26 Apr 2015 20:30:56 GMT
 recorded_with: VCR 2.9.3
