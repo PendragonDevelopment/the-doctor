@@ -23,14 +23,12 @@
 				<td><%= event.location.title %></td>
 				<td><%= event.rate %></td>
         <td><%= event.host.user.first_name %></td>
-        <td><%= schedule_block['start_time'] %></td>
-        <td><%= schedule_block['end_time'] %></td>
+        <td><%= DateTime.parse(schedule_block['start_time']).strftime("%l:%M %p, %A, %B %e, %Y")%></td>
+        <td><%= DateTime.parse(schedule_block['end_time']).strftime("%l:%M %p, %A, %B %e, %Y") %></td>
         <td><%= schedule_block['reservation_min'] %></td>
         <td><%= schedule_block['reservation_max'] %></td>
         <td><%= link_to 'Edit', edit_event_path(event.id) %></td>
-        <td>Destroy</td>
-
-
+        <td><%= link_to 'Delete', delete_event_path(event.id, schedule_block_ID: schedule_block['id']) %></td>
 			</tr>
 		<% end %>
 	</tbody>

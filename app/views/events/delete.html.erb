@@ -1,8 +1,6 @@
-<h1>Your Event</h1>
+<h1>Delete Event</h1>
 
-<h3>Confirmation</h3>
-
-<h4>You have succesfully saved an event! Please review the following information confirming the details of the event.</h4>
+<h3>Are you sure you want to delete the following event?</h3>
 
 <p>Title: <%= @event.activity.title %> </p>
 <p>Rate: $<%= @event.rate %> </p>
@@ -14,6 +12,10 @@
 <p>Reservation Maximum: <%= @schedule_block['reservation_max'] %></p>
 <p>Status: <%= @schedule_block['status'] %></p>
 
+<%= link_to 'Delete', event_path(schedule_block_ID: @schedule_block['id']), method: :delete %>
+
+<br/>
+<br/>
 <%= link_to "Edit Event", edit_event_path(@event.id) %>
 <%= link_to "New Event", new_event_path %>
 <%= link_to "All Events", events_path %>

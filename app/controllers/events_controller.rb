@@ -1,12 +1,14 @@
 class EventsController < ApplicationController
-  before_action :set_event, :only => [:edit, :show, :update, :destroy]
+  before_action :set_event, :only => [:edit, :show, :update, :delete, :destroy]
 
   def index
     @events = Event.all
 
     # Only set @event to be able to call get_schedule_blocks below
-    @event = @events.first
-    @schedule_blocks = @event.get_schedule_blocks
+    if @events.count >= 1 
+      @event = @events.first
+      @schedule_blocks = @event.get_schedule_blocks
+    end
   end
 
   def create
@@ -71,7 +73,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    schedule_block_ID = params['schedule_block_ID']
+    sb_ID = params['schedule_block_ID']
 
     # Select ONLY Event model attributes from form params
     event_model_params = event_params.select {|k,v| ['rate', 'location_id', 'activity_id', 'host_id'].include?(k)}
@@ -86,7 +88,7 @@ class EventsController < ApplicationController
       schedule_block_params[:params][:location_id] = @event.location_id
       schedule_block_params[:params][:status] = 'open'
 
-      if @event.update_schedule_block(schedule_block_ID, schedule_block_params)
+      if @event.update_schedule_block(sb_ID, schedule_block_params)
         redirect_to events_path
       else
         render :edit
@@ -96,9 +98,16 @@ class EventsController < ApplicationController
     end
   end
 
+  def delete
+    sb_ID = params['schedule_block_ID']
+    @schedule_block = @event.get_schedule_block(sb_ID)
+  end
+
   def destroy
     @event.destroy
-    redirect_to root_url
+    sb_ID = params['schedule_block_ID']
+    @event.delete_schedule_block(sb_ID)
+    redirect_to events_path
   end
 
   private
