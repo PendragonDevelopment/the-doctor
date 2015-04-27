@@ -1,8 +1,8 @@
-<h1>Your New Event</h1>
+<h1>Your Event</h1>
 
 <h3>Confirmation</h3>
 
-<h4>You have succesfully created a new event! Please review the following information confirming the details of your new event.</h4>
+<h4>You have succesfully saved an event! Please review the following information confirming the details of the event.</h4>
 
 <p>Title: <%= @event.activity.title %> </p>
 <p>Rate: $<%= @event.rate %> </p>
@@ -15,3 +15,5 @@
 <p>Status: <%= @schedule_block['status'] %></p>
 
 <%= link_to "Edit Event", edit_event_path(@event.id) %>
+<%= link_to "New Event", new_event_path %>
+<%= link_to "All Events", events_path %>

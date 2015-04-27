@@ -3,10 +3,18 @@ class EventsController < ApplicationController
 
   def index
     @events = Event.all
+
+    # Only set @event to be able to call get_schedule_blocks below
+    @event = @events.first
+    @schedule_blocks = @event.get_schedule_blocks
   end
 
   def create
+    # Select ONLY Event model attributes from form params
     event_model_params = event_params.select {|k,v| ['rate', 'location_id', 'activity_id', 'host_id'].include?(k)}
+
+    # Selects ONLY Schedule Block params from form params
+    schedule_block_params = event_params.select {|k,v| ['params'].include?(k)}
 
     @event = current_user.host.events.create(event_model_params)
     
@@ -24,24 +32,18 @@ class EventsController < ApplicationController
       @event.update_attributes(activity_id: new_activity_record.id)
     end
 
-    # Selects
-    schedule_block_params = event_params.select {|k,v| ['params'].include?(k)}
-
     if @event.save
       # Adds neccessary attributes to params for Schedule Block creation from newly created Event
       schedule_block_params[:params][:host_id] = @event.host.id
       schedule_block_params[:params][:event_id] = @event.id
       schedule_block_params[:params][:location_id] = @event.location_id
       schedule_block_params[:params][:status] = 'open'
-
       if @event.create_schedule_block(schedule_block_params)
         redirect_to @event
-        flash[:notice] = "Event & Schedule Block succesfully created!"
       else
         redirect_to @event
         flash[:notice] = "Event created, but Schedule Block was NOT!"
       end
-
     else
       render :new
       flash[:notice] = "Event could not be created. Please try again."
@@ -58,10 +60,10 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @schedule_blocks = @event.get_schedule_blocks
-    @sb_event_id = (params[:id]).to_i
-    @schedule_block_array = @schedule_blocks.select{|sb| sb['event_id'] == @sb_event_id }
-    @schedule_block = @schedule_block_array.first
+    schedule_blocks = @event.get_schedule_blocks
+    sb_event_id = (params[:id]).to_i
+    schedule_block_array = schedule_blocks.select{|sb| sb['event_id'] == sb_event_id }
+    @schedule_block = schedule_block_array.first
   end
 
   def show
@@ -69,8 +71,26 @@ class EventsController < ApplicationController
   end
 
   def update
-    if @event.update(event_params)
-      redirect_to event_path(@event)
+    schedule_block_ID = params['schedule_block_ID']
+
+    # Select ONLY Event model attributes from form params
+    event_model_params = event_params.select {|k,v| ['rate', 'location_id', 'activity_id', 'host_id'].include?(k)}
+
+    # Selects ONLY Schedule Block params from form params
+    schedule_block_params = event_params.select {|k,v| ['params'].include?(k)}
+
+    if @event.update(event_model_params)
+      # Adds neccessary attributes to params for Schedule Block creation from newly created Event
+      schedule_block_params[:params][:host_id] = @event.host.id
+      schedule_block_params[:params][:event_id] = @event.id
+      schedule_block_params[:params][:location_id] = @event.location_id
+      schedule_block_params[:params][:status] = 'open'
+
+      if @event.update_schedule_block(schedule_block_ID, schedule_block_params)
+        redirect_to events_path
+      else
+        render :edit
+      end
     else
       render :edit
     end

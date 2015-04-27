@@ -40,11 +40,19 @@
 
     <%= hidden_field_tag :host, value = current_user.host %>
 
-    <%= f.submit 'Create Event' %>
+    <%= hidden_field_tag :schedule_block_ID, value = @schedule_block['id'] %>
+
+    <%= f.submit 'Update Event' %>
   <% end %>
+
+  <%= link_to "New Event", new_event_path %>
+  <%= link_to "All Events", events_path %>
 
 <% else %>
 
   <h2>You cannot create an event, you are not a host!</h2>
+
+  <%= link_to "New Event", new_event_path %>
+  <%= link_to "All Events", events_path %>
 
 <% end %>

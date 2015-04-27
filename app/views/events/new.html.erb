@@ -42,8 +42,13 @@
     <%= f.submit 'Create Event' %>
   <% end %>
 
+  <%= link_to "New Event", new_event_path %>
+  <%= link_to "All Events", events_path %>
+
 <% else %>
 
   <h2>You cannot create an event, you are not a host!</h2>
+
+  <%= link_to "All Events", events_path %>
 
 <% end %>
