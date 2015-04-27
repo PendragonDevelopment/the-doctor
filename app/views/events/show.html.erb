@@ -1,8 +1,11 @@
 <h1>Event</h1>
 
-<p>Event Title: <%= @event.activity.title %> </p>
-<p>Event Rate: <%= @event.rate %> </p>
-<p>Event Host: <%= @event.host.user.first_name %></p>
-<p>Event Location: <%= @event.location.title %></p>
-
-<p>Schedule Blocks: <%= @schedule_blocks %></p>
+<p>Title: <%= @event.activity.title %> </p>
+<p>Rate: $<%= @event.rate %> </p>
+<p>Host: <%= @event.host.user.first_name %></p>
+<p>Location: <%= @event.location.title %></p>
+<p>Start Time: <%= DateTime.parse(@schedule_block['start_time']).strftime("%I:%M %p, %A, %B %e, %Y") %></p>
+<p>End Time: <%= DateTime.parse(@schedule_block['end_time']).strftime("%I:%M %p, %A, %B %e, %Y") %></p>
+<p>Reservation Minimum: <%= @schedule_block['reservation_min'] %></p>
+<p>Reservation Maximum: <%= @schedule_block['reservation_max'] %></p>
+<p>Status: <%= @schedule_block['status'] %></p>

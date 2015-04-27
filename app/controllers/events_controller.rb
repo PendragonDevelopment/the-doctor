@@ -10,34 +10,38 @@ class EventsController < ApplicationController
 
     @event = current_user.host.events.create(event_model_params)
     
+    # Allows for creation and selection of a new Location through form
     new_location = event_params[:new_location][:new_location]
     unless new_location.empty?
       new_location_record = @event.create_location(title: new_location)
       @event.update_attributes(location_id: new_location_record.id )
     end
     
+    # Allows for creation and selection of a new Activity through form
     new_activity = event_params[:new_activity][:new_activity]
     unless new_activity.empty?
       new_activity_record = @event.create_activity(title: new_activity)
       @event.update_attributes(activity_id: new_activity_record.id)
     end
 
-    #schedule_block_params_hash = event_params.select {|k,v| ['schedule_block_params'].include?(k)}
-    #schedule_block_params = schedule_block_params_hash['schedule_block_params']
-
-    hard_coded_params = {params: {host_id: 1, event_id: 1, location_id: 1, start_time: "2015-04-23T17:35:08-04:00", end_time: "2015-04-23T19:35:08-04:00", reservation_min: 1, reservation_max: 1000, status: "open"}}
+    # Selects
+    schedule_block_params = event_params.select {|k,v| ['params'].include?(k)}
 
     if @event.save
-      if @event.create_schedule_block(hard_coded_params)
+      # Adds neccessary attributes to params for Schedule Block creation from newly created Event
+      schedule_block_params[:params][:host_id] = @event.host.id
+      schedule_block_params[:params][:event_id] = @event.id
+      schedule_block_params[:params][:location_id] = @event.location_id
+      schedule_block_params[:params][:status] = 'open'
+
+      if @event.create_schedule_block(schedule_block_params)
         redirect_to @event
         flash[:notice] = "Event & Schedule Block succesfully created!"
-        flash[:debug] = "Schedule Block params: #{hard_coded_params}"
-        flash[:extra] = "#{event_model_params}"
       else
         redirect_to @event
         flash[:notice] = "Event created, but Schedule Block was NOT!"
-        flash[:debug] = "#{hard_coded_params}"
       end
+      
     else
       render :new
       flash[:notice] = "Event could not be created. Please try again."
@@ -57,7 +61,7 @@ class EventsController < ApplicationController
   end
 
   def show
-    @schedule_blocks = @event.get_schedule_blocks
+    @schedule_block = @event.get_schedule_block(15)
   end
 
   def update
@@ -80,6 +84,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:rate, :location_id, {new_location: [:new_location]}, :activity_id, {new_activity: [:new_activity]},:host_id, { schedule_block_params: [:start_time, :end_time, :reservation_min, :reservation_max] })
+      params.require(:event).permit(:rate, :location_id, {new_location: [:new_location]}, :activity_id, {new_activity: [:new_activity]},:host_id, { params: [:host_id, :event_id, :location_id, :start_time, :end_time, :reservation_min, :reservation_max, :status] })
     end
 end
