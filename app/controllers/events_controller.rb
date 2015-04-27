@@ -58,7 +58,10 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @schedule_block = @event.get_schedule_block(15)
+    @schedule_blocks = @event.get_schedule_blocks
+    @sb_event_id = (params[:id]).to_i
+    @schedule_block_array = @schedule_blocks.select{|sb| sb['event_id'] == @sb_event_id }
+    @schedule_block = @schedule_block_array.first
   end
 
   def show
