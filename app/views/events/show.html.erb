@@ -1,4 +1,8 @@
-<h1>Event</h1>
+<h1>Your New Event</h1>
+
+<h3>Confirmation</h3>
+
+<h4>You have succesfully created a new event! Please review the following information confirming the details of your new event.</h4>
 
 <p>Title: <%= @event.activity.title %> </p>
 <p>Rate: $<%= @event.rate %> </p>
@@ -9,3 +13,5 @@
 <p>Reservation Minimum: <%= @schedule_block['reservation_min'] %></p>
 <p>Reservation Maximum: <%= @schedule_block['reservation_max'] %></p>
 <p>Status: <%= @schedule_block['status'] %></p>
+
+<%= link_to "Edit Event", edit_event_path(@event.id) %>

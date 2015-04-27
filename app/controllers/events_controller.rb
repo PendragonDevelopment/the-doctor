@@ -41,7 +41,7 @@ class EventsController < ApplicationController
         redirect_to @event
         flash[:notice] = "Event created, but Schedule Block was NOT!"
       end
-      
+
     else
       render :new
       flash[:notice] = "Event could not be created. Please try again."
@@ -58,6 +58,7 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @schedule_block = @event.get_schedule_block(15)
   end
 
   def show

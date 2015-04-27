@@ -1,1 +1,50 @@
 <h1>Edit Event</h1>
+
+<% if current_user.host %>
+
+  <%= form_for @event do |f| %>
+
+    <%= f.label :activity %>
+    <%= f.collection_select :activity_id, Activity.all, :id, :title, prompt: "Select Activity" %>
+
+    <%= f.fields_for :new_activity do |new_activity| %>
+        <%= new_activity.label :new_activity, "or create a new activity: " %>
+        <%= new_activity.text_field :new_activity %><br/>
+    <% end %>
+    
+    <%= f.label :location %>
+    <%= f.collection_select :location_id, Location.all, :id, :title, prompt: "Select Location" %>
+
+    <%= f.fields_for :new_location do |new_location| %>
+        <%= new_location.label :new_location, "or create a new location: " %>
+        <%= new_location.text_field :new_location %><br/>
+    <% end %>
+
+    <%= f.label :rate %>
+    <%= f.number_field :rate %><br/>
+
+    <%= f.fields_for :params do |sb| %>
+        <%= sb.label :start_time %>
+        <%= sb.datetime_field :start_time, value: @schedule_block['start_time'] %>
+        <br/>
+
+        <%= sb.label :end_time %>
+        <%= sb.datetime_field :end_time, value: @schedule_block['end_time'] %><br/>
+
+        <%= sb.label :reservation_min %>
+        <%= sb.number_field :reservation_min, value: @schedule_block['reservation_min'] %><br/>
+
+        <%= sb.label :reservation_max %>
+        <%= sb.number_field :reservation_max, value: @schedule_block['reservation_max'] %><br/>
+    <% end %>
+
+    <%= hidden_field_tag :host, value = current_user.host %>
+
+    <%= f.submit 'Create Event' %>
+  <% end %>
+
+<% else %>
+
+  <h2>You cannot create an event, you are not a host!</h2>
+
+<% end %>
