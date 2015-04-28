@@ -73,7 +73,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    sb_ID = params['schedule_block_ID']
+    sb_event_id = params['schedule_block_ID']
 
     # Select ONLY Event model attributes from form params
     event_model_params = event_params.select {|k,v| ['rate', 'location_id', 'activity_id', 'host_id'].include?(k)}
@@ -88,7 +88,7 @@ class EventsController < ApplicationController
       schedule_block_params[:params][:location_id] = @event.location_id
       schedule_block_params[:params][:status] = 'open'
 
-      if @event.update_schedule_block(sb_ID, schedule_block_params)
+      if @event.update_schedule_block(@sb_ID, schedule_block_params)
         redirect_to events_path
       else
         render :edit

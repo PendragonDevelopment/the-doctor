@@ -36,7 +36,7 @@
 	        <td><%= DateTime.parse(schedule_block['end_time']).strftime("%l:%M %p, %A, %B %e, %Y") %></td>
 	        <td><%= schedule_block['reservation_min'] %></td>
 	        <td><%= schedule_block['reservation_max'] %></td>
-	        <td><%= link_to 'Edit', edit_event_path(event.id) %></td>
+	        <td><%= link_to 'Edit', edit_event_path(event.id, schedule_block_ID: schedule_block['id']) %></td>
 	        <td><%= link_to 'Delete', delete_event_path(event.id, schedule_block_ID: schedule_block['id']) %></td>
 				</tr>
 			<% end %>
