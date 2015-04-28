@@ -16,7 +16,9 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    @activity = Activity.create(activity_params)
+    activity_model_params = activity_params.select{|k,v| ['title'].include?(k)}
+    @activity = Activity.create(activity_model_params)
+    @activity.tag_list.add(activity_params[:tags][:tags], parse: true)
 
     if @activity.save
       redirect_to @activity
@@ -46,6 +48,6 @@ class ActivitiesController < ApplicationController
     end
 
     def activity_params
-      params.require(:activity).permit(:title)
+      params.require(:activity).permit(:title, tags: [:tags])
     end
 end

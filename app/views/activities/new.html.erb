@@ -7,6 +7,9 @@
   <div class="col-md-6 col-md-offset-3">
     <%= bootstrap_form_for @activity do |f| %>
       <%= f.text_field :title %>
+      <%= f.fields_for :tags do |tag| %>
+        <%= tag.text_field :tags %>
+      <% end %>
       <%= f.submit 'Create Activity' %>
     <% end %>
   </div>

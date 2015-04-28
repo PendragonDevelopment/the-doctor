@@ -14,4 +14,7 @@ class Activity < ActiveRecord::Base
 	has_many :locations, through: :events
 
 	validates :title, presence: true
+
+  acts_as_taggable # Alias for acts_as_taggable_on :tags
+  acts_as_taggable_on :tags, :genres, :subjects, :trip_type
 end
