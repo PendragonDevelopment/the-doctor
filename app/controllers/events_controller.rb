@@ -74,6 +74,7 @@ class EventsController < ApplicationController
 
   def update
     sb_event_id = params['schedule_block_ID']
+    @sb_ID = sb_event_id.to_i
 
     # Select ONLY Event model attributes from form params
     event_model_params = event_params.select {|k,v| ['rate', 'location_id', 'activity_id', 'host_id'].include?(k)}
