@@ -18,12 +18,23 @@
       </tr>
     </thead>
 
+    users.each_with_index do |u, index|
+  # some code
+  if index == users.size - 1
+    # code for the last user
+  end
+end
+
     <tbody>
       <% @activities.each do |activity| %>
       <tr>
           <td><%= activity.title %></td>
-          <td><% activity.tags.each do |tag| %>
-                <%= tag.name %>
+          <td><% activity.tags.each_with_index do |tag, index| %>
+                <% if index == activity.tags.size - 1 %>
+                  <%= "#{tag.name}" %>
+                <% else %>
+                  <%= "#{tag.name}, " %>
+                <% end %>
               <% end %>
           </td>
           <td><%= link_to 'Edit', edit_activity_path(activity.id) %></td>
