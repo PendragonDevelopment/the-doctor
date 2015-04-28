@@ -12,7 +12,14 @@
       <tbody>
         <tr>
           <td><%= @activity.title %></td>
-          <td><%= "#{@activity.tags}" %></td>
+          <td><% @activity.tags.each_with_index do |tag, index| %>
+                <% if index == @activity.tags.size - 1 %>
+                  <%= "#{tag.name}" %>
+                <% else %>
+                  <%= "#{tag.name}, " %>
+                <% end %>
+              <% end %>
+          </td>
         </tr>
       </tbody>
     </table>
