@@ -35,7 +35,7 @@ class LocationsController < ApplicationController
 
   def destroy
     @location.destroy
-    redirect_to root_url
+    redirect_to locations_path
   end
 
   private

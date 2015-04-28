@@ -11,4 +11,9 @@
   <% if current_user.admin? %>
     <li><%= link_to 'Users', users_path %></li>
   <% end %>
+  <% unless current_user.host_id.nil? %>
+    <li><%= link_to 'Activities', activities_path %></li>
+    <li><%= link_to 'Locations', locations_path %></li>
+    <li><%= link_to 'Events', events_path %></li>
+  <% end %>
 <% end %>

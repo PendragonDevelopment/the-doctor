@@ -1,6 +1,26 @@
 <h1>Activity</h1>
 
-<p>Title: <%= @activity.title %></p>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @activity.title %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<%= link_to 'All Activities', activities_path %>
-<%= link_to 'New Activity', new_activity_path %>
+<div class="row">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-default"><%= link_to 'Edit Activity', edit_activity_path(@activity.id) %></button>
+    <button type="button" class="btn btn-default"><%= link_to 'Create New Activity', new_activity_path %></button>
+    <button type="button" class="btn btn-default"><%= link_to 'All Activities', activities_path %></button>
+  </div>
+</div>

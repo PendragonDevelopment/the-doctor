@@ -36,7 +36,7 @@ class ActivitiesController < ApplicationController
 
   def destroy
     @activity.destroy
-    redirect_to root_url
+    redirect_to activities_path
   end
 
   private

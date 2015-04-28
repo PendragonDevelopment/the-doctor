@@ -12,10 +12,14 @@
 <p>Reservation Maximum: <%= @schedule_block['reservation_max'] %></p>
 <p>Status: <%= @schedule_block['status'] %></p>
 
-<%= link_to 'Delete', event_path(schedule_block_ID: @schedule_block['id']), method: :delete %>
+<button type="button" class="btn btn-warning"><%= link_to 'Delete Event', event_path(schedule_block_ID: @schedule_block['id']), method: :delete %></button>
+
+
 
 <br/>
 <br/>
-<%= link_to "Edit Event", edit_event_path(@event.id) %>
-<%= link_to "New Event", new_event_path %>
-<%= link_to "All Events", events_path %>
+
+<button type="button" class="btn btn-default"><%= link_to "Edit Event", edit_event_path(@event.id) %></button>
+<button type="button" class="btn btn-default"><%= link_to "Create New Event", new_event_path %>
+</button>
+<button type="button" class="btn btn-default"><%= link_to "All Events", events_path %></button>

@@ -1,19 +1,50 @@
 <h1>Your Event</h1>
 
-<h3>Confirmation</h3>
+<div class="row">
+  <div class="col-md-12">
+  <h3>Confirmation</h3>
+  <h4>You have succesfully saved an event! Please review the following information confirming the details of the event.</h4>
+  <br/>
+</div>
+</div>
 
-<h4>You have succesfully saved an event! Please review the following information confirming the details of the event.</h4>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Rate</th>
+          <th>Host</th>
+          <th>Location</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Reservation Min</th>
+          <th>Reservation Max</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @event.activity.title %></td>
+          <td>$<%= @event.rate %></td>
+          <td><%= @event.host.user.first_name %></td>
+          <td><%= @event.location.title %></td>
+          <td><%= DateTime.parse(@schedule_block['start_time']).strftime("%l:%M %p, %A, %B %e, %Y") %></td>
+          <td><%= DateTime.parse(@schedule_block['end_time']).strftime("%l:%M %p, %A, %B %e, %Y") %></td>
+          <td><%= @schedule_block['reservation_min'] %></td>
+          <td><%= @schedule_block['reservation_max'] %></td>
+          <td><%= @schedule_block['status'] %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<p>Title: <%= @event.activity.title %> </p>
-<p>Rate: $<%= @event.rate %> </p>
-<p>Host: <%= @event.host.user.first_name %></p>
-<p>Location: <%= @event.location.title %></p>
-<p>Start Time: <%= DateTime.parse(@schedule_block['start_time']).strftime("%l:%M %p, %A, %B %e, %Y") %></p>
-<p>End Time: <%= DateTime.parse(@schedule_block['end_time']).strftime("%l:%M %p, %A, %B %e, %Y") %></p>
-<p>Reservation Minimum: <%= @schedule_block['reservation_min'] %></p>
-<p>Reservation Maximum: <%= @schedule_block['reservation_max'] %></p>
-<p>Status: <%= @schedule_block['status'] %></p>
-
-<%= link_to "Edit Event", edit_event_path(@event.id) %>
-<%= link_to "New Event", new_event_path %>
-<%= link_to "All Events", events_path %>
+<div class="row">
+  <div class="col-md-12">
+    <button type="button" class="btn btn-default"><%= link_to "Edit Event", edit_event_path(@event.id) %></button>
+    <button type="button" class="btn btn-default"><%= link_to "Create New Event", new_event_path %></button>
+    <button type="button" class="btn btn-default"><%= link_to "All Events", events_path %></button>
+  </div>
+</div>

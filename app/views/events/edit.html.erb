@@ -1,58 +1,42 @@
-<h1>Edit Event</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Update Event</h1>
+  </div>
+</div>
 
-<% if current_user.host %>
-
-  <%= form_for @event do |f| %>
-
-    <%= f.label :activity %>
-    <%= f.collection_select :activity_id, Activity.all, :id, :title, prompt: "Select Activity" %>
-
-    <%= f.fields_for :new_activity do |new_activity| %>
-        <%= new_activity.label :new_activity, "or create a new activity: " %>
-        <%= new_activity.text_field :new_activity %><br/>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <% if current_user.host %>
+      <%= bootstrap_form_for @event do |f| %>
+        <%= f.collection_select :activity_id, Activity.all, :id, :title, prompt: "Select Activity" %>
+        <%= f.fields_for :new_activity do |new_activity| %>
+            <%= new_activity.text_field :new_activity, label: 'or create a new activity: ', placeholder: 'Only use to create a new activity that is not listed above' %>
+        <% end %>
+        <%= f.collection_select :location_id, Location.all, :id, :title, prompt: "Select Location" %>
+        <%= f.fields_for :new_location do |new_location| %>
+            <%= new_location.text_field :new_location, label: 'or create a new location: ', placeholder: 'Only use to create a new location that is not listed above' %>
+        <% end %>
+        <%= f.number_field :rate, placeholder: 'Price in US dollars' %>
+        <%= f.fields_for :params do |sb| %>
+            <%= sb.datetime_select :start_time, ampm:true, value: @schedule_block['start_time'] %>
+            <%= sb.datetime_select :end_time, ampm:true, value: @schedule_block['end_time'] %>
+            <%= sb.number_field :reservation_min, value: @schedule_block['reservation_min']%>
+            <%= sb.number_field :reservation_max, value: @schedule_block['reservation_max'] %>
+        <% end %>
+        <%= hidden_field_tag :host, value = current_user.host %>
+        <%= f.submit 'Update Event' %>
+      <% end %>
+    <% else %>
+      <h2>You cannot create an event, you are not a host!</h2>
     <% end %>
-    
-    <%= f.label :location %>
-    <%= f.collection_select :location_id, Location.all, :id, :title, prompt: "Select Location" %>
-
-    <%= f.fields_for :new_location do |new_location| %>
-        <%= new_location.label :new_location, "or create a new location: " %>
-        <%= new_location.text_field :new_location %><br/>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <% unless current_user.host.nil? %>
+      <button type="button" class="btn btn-default"><%= link_to 'All Events', events_path %></button>
     <% end %>
-
-    <%= f.label :rate %>
-    <%= f.number_field :rate %><br/>
-
-    <%= f.fields_for :params do |sb| %>
-        <%= sb.label :start_time %>
-        <%= sb.datetime_field :start_time, value: @schedule_block['start_time'] %>
-        <br/>
-
-        <%= sb.label :end_time %>
-        <%= sb.datetime_field :end_time, value: @schedule_block['end_time'] %><br/>
-
-        <%= sb.label :reservation_min %>
-        <%= sb.number_field :reservation_min, value: @schedule_block['reservation_min'] %><br/>
-
-        <%= sb.label :reservation_max %>
-        <%= sb.number_field :reservation_max, value: @schedule_block['reservation_max'] %><br/>
-    <% end %>
-
-    <%= hidden_field_tag :host, value = current_user.host %>
-
-    <%= hidden_field_tag :schedule_block_ID, value = @schedule_block['id'] %>
-
-    <%= f.submit 'Update Event' %>
-  <% end %>
-
-  <%= link_to "New Event", new_event_path %>
-  <%= link_to "All Events", events_path %>
-
-<% else %>
-
-  <h2>You cannot create an event, you are not a host!</h2>
-
-  <%= link_to "New Event", new_event_path %>
-  <%= link_to "All Events", events_path %>
-
-<% end %>
+    <button type="button" class="btn btn-default"><%= link_to 'Create New Event', new_event_path %></button>
+  </div>
+</div>
