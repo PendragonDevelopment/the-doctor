@@ -34,9 +34,9 @@
 <br/>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-     <button type="button" class="btn btn-default"><%= link_to 'All Events', events_path %></button>
+     <%= link_to 'All Events', events_path, class: 'btn btn-default' %>
     <% unless current_user.host.nil? %>
-     <button type="button" class="btn btn-default"><%= link_to 'Create New Event', new_event_path %></button>
+     <%= link_to 'Create New Event', new_event_path, class: 'btn btn-default' %>
     <% end %>
   </div>
 </div>

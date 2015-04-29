@@ -4,7 +4,7 @@
   </div>
   <div class="col-md-3 col-md-offset-6">
     <br/>
-    <button type="button" class="btn btn-default pull-right"><%= link_to 'Create New Event', new_event_path %></button>
+    <%= link_to 'Create New Event', new_event_path, class: 'btn btn-default pull-right' %>
   </div>
 </div>
 
@@ -43,10 +43,10 @@
 	        <td><%= DateTime.parse(schedule_block['start_time']).strftime("%l:%M")%>-<%= DateTime.parse(schedule_block['end_time']).strftime("%l:%M %p") %></td>
 	        <td><%= schedule_block['reservation_min'] %></td>
 	        <td><%= schedule_block['reservation_max'] %></td>
-	        <td><%= link_to 'Edit', edit_event_path(event.id, schedule_block_ID: schedule_block['id']) %></td>
-	        <td><%= link_to 'Delete', delete_event_path(event.id, schedule_block_ID: schedule_block['id']) %></td>
           <td><%= event.host.user.first_name %></td>
           <td><%= "$#{event.rate}" %></td>
+	        <td><%= link_to 'Edit', edit_event_path(event.id, schedule_block_ID: schedule_block['id']) %></td>
+	        <td><%= link_to 'Delete', delete_event_path(event.id, schedule_block_ID: schedule_block['id']) %></td>
 				</tr>
 			<% end %>
 		</tbody>
@@ -55,6 +55,6 @@
 
 <div class="row">
   <div class="col-md-12">
-    <button type="button" class="btn btn-default"><%= link_to 'Create New Event', new_event_path %></button>
+    <%= link_to 'Create New Event', new_event_path, class: 'btn btn-default' %>
   </div>
 </div>
