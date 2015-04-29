@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: put
+    uri: https://tardis-scheduler.herokuapp.com/api/v1/schedule_blocks/1?start_time=2015-04-30T10%3A52%3A10-04%3A00&end_time=2015-05-02T10%3A52%3A10-04%3A00&reservation_min=2&reservation_max=10&status=open&host_id=23&event_id=23&location_id=23
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.8.9
+      Authorization:
+      - Bearer 1f28387ec172e8f799427fca68778f5af1384aa2e9f23374180a185fdd7be509
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      server:
+      - Cowboy
+      connection:
+      - close
+      date:
+      - Wed, 29 Apr 2015 14:52:11 GMT
+      status:
+      - 200 OK
+      content-type:
+      - application/json
+      content-length:
+      - '282'
+      etag:
+      - W/"c60eeef3e0d7a474e48b4174ac4dc3f8"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 6d22d2b0-ab26-4f9f-8284-6752365e1323
+      x-runtime:
+      - '0.124100'
+      via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"id":1,"host_id":23,"event_id":23,"location_id":23,"start_time":"2015-04-30T14:52:10.000Z","end_time":"2015-05-02T14:52:10.000Z","reservation_min":2,"reservation_max":10,"status":"open","created_at":"2015-04-26T21:06:29.045Z","updated_at":"2015-04-29T14:52:10.978Z","user_id":null}'
+    http_version: 
+  recorded_at: Wed, 29 Apr 2015 14:52:10 GMT
+recorded_with: VCR 2.9.3
