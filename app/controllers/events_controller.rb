@@ -2,6 +2,10 @@ class EventsController < ApplicationController
   before_action :set_event, :only => [:edit, :show, :update, :delete, :destroy]
 
   def index
+    # from DEM branch
+    @q = Event.ransack(params[:q])
+    @events = @q.result
+
     @events = Event.all
 
     # Only set @event to be able to call get_schedule_blocks below
@@ -120,4 +124,5 @@ class EventsController < ApplicationController
     def event_params
       params.require(:event).permit(:rate, :location_id, {new_location: [:new_location]}, :activity_id, {new_activity: [:new_activity]},:host_id, { params: [:host_id, :event_id, :location_id, :start_time, :end_time, :reservation_min, :reservation_max, :status] })
     end
+  end
 end

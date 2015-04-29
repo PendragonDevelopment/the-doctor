@@ -26,6 +26,7 @@ gem 'faraday', '0.8.9' # need to specify this version because more recent versio
 gem 'bootstrap_form'
 gem 'momentjs-rails', '>= 2.8.1'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
+gem 'ransack'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

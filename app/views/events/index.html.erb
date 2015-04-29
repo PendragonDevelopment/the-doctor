@@ -8,6 +8,25 @@
   </div>
 </div>
 
+<div class="row">
+  <%= search_form_for @q do |f| %>
+    <%= f.label :activity_title_cont %>
+    <%= f.search_field :activity_title_cont %>
+
+    <%= f.submit %>
+
+  <% end %>
+</div>
+
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Location</th>
+			<th>Price</th>
+		</tr>
+	</thead>
 
 <div class="row">
 	<table class="table table-hover table-bordered table-striped">
