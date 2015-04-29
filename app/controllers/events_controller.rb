@@ -20,7 +20,8 @@ class EventsController < ApplicationController
     event_model_params = event_params.select {|k,v| ['rate', 'location_id', 'activity_id', 'host_id'].include?(k)}
 
     # Selects ONLY Schedule Block params from form params
-    schedule_block_params = event_params.select {|k,v| ['params'].include?(k)}
+    sb_wrapped_params = event_params.select {|k,v| ['params'].include?(k)}
+    schedule_block_params = sb_wrapped_params[:params]
 
     @event = current_user.host.events.create(event_model_params)
     
@@ -40,10 +41,11 @@ class EventsController < ApplicationController
 
     if @event.save
       # Adds neccessary attributes to params for Schedule Block creation from newly created Event
-      schedule_block_params[:params][:host_id] = @event.host.id
-      schedule_block_params[:params][:event_id] = @event.id
-      schedule_block_params[:params][:location_id] = @event.location_id
-      schedule_block_params[:params][:status] = 'open'
+      # REMOVED [:PARAMS] FROM EACH OF THE FOUR FOLLOWING LINES
+      schedule_block_params[:host_id] = @event.host.id
+      schedule_block_params[:event_id] = @event.id
+      schedule_block_params[:location_id] = @event.location_id
+      schedule_block_params[:status] = 'open'
       if @event.create_schedule_block(schedule_block_params)
         redirect_to @event
       else
@@ -125,4 +127,3 @@ class EventsController < ApplicationController
       params.require(:event).permit(:rate, :location_id, {new_location: [:new_location]}, :activity_id, {new_activity: [:new_activity]},:host_id, { params: [:host_id, :event_id, :location_id, :start_time, :end_time, :reservation_min, :reservation_max, :status] })
     end
   end
-end
