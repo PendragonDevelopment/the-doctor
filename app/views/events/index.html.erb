@@ -28,7 +28,7 @@
 				<% schedule_block_array = @schedule_blocks.select{|sb| sb['event_id'] == event.id} %>
 				<% schedule_block = schedule_block_array.first %>
 				<tr>
-					<td><%= event.activity.title %></td>
+					<td><%= link_to "#{event.activity.title}", event_path(event.id) %></td>
 					<td><%= event.location.title %></td>
 					<td><%= event.rate %></td>
 	        <td><%= event.host.user.first_name %></td>
