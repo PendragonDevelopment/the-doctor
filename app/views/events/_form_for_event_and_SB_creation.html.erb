@@ -17,6 +17,12 @@
             <%= new_location.text_field :new_location, label: 'or create a new location: ', placeholder: 'Only use to create a new location that is not listed above' %>
         <% end %>
         <%= f.number_field :rate, placeholder: 'Price in US dollars' %>
+        <%= f.fields_for :params do |sb| %>
+            <%= sb.datetime_select :start_time, ampm:true %>
+            <%= sb.datetime_select :end_time, ampm:true %>
+            <%= sb.number_field :reservation_min %>
+            <%= sb.number_field :reservation_max %>
+        <% end %>
         <%= hidden_field_tag :host, value = current_user.host %>
         <%= f.submit 'Create Event' %>
       <% end %>
@@ -34,5 +40,3 @@
     <% end %>
   </div>
 </div>
-
-

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, :only => [:edit, :show, :update, :delete, :destroy]
+  before_action :set_event, :only => [:edit, :show, :update, :delete, :destroy, :new_schedule_block]
 
   def index
     # from DEM branch
@@ -16,12 +16,8 @@ class EventsController < ApplicationController
   end
 
   def create
-    # Select ONLY Event model attributes from form params
+    # To exclude new_location and new_activity params
     event_model_params = event_params.select {|k,v| ['rate', 'location_id', 'activity_id', 'host_id'].include?(k)}
-
-    # Selects ONLY Schedule Block params from form params
-    sb_wrapped_params = event_params.select {|k,v| ['params'].include?(k)}
-    schedule_block_params = sb_wrapped_params[:params]
 
     @event = current_user.host.events.create(event_model_params)
     
@@ -40,21 +36,38 @@ class EventsController < ApplicationController
     end
 
     if @event.save
-      # Adds neccessary attributes to params for Schedule Block creation from newly created Event
-      # REMOVED [:PARAMS] FROM EACH OF THE FOUR FOLLOWING LINES
-      schedule_block_params[:host_id] = @event.host.id
-      schedule_block_params[:event_id] = @event.id
-      schedule_block_params[:location_id] = @event.location_id
-      schedule_block_params[:status] = 'open'
-      if @event.create_schedule_block(schedule_block_params)
-        redirect_to @event
-      else
-        redirect_to @event
-        flash[:notice] = "Event created, but Schedule Block was NOT!"
-      end
+      redirect_to new_schedule_block_event_path(@event.id)
     else
       render :new
       flash[:notice] = "Event could not be created. Please try again."
+    end
+  end
+
+  def new_schedule_block
+    if request.post?
+      @event = Event.find(params[:id])
+      schedule_block_wrapped_params = params.select{|k,v| ['schedule_block'].include?(k)}
+
+      schedule_block_params = Hash.new
+      schedule_block_params[:reservation_max] = schedule_block_wrapped_params[:schedule_block][:reservation_max]
+      schedule_block_params[:reservation_min] = schedule_block_wrapped_params[:schedule_block][:reservation_min]
+      schedule_block_params[:start_time] = '2015-04-29T17:28:02-04:00'
+      schedule_block_params[:end_time] = '2015-04-29T17:28:02-04:00'
+      schedule_block_params[:host_id] = @event.host_id
+      schedule_block_params[:event_id] = @event.id
+      schedule_block_params[:location_id] = @event.location_id
+      schedule_block_params[:status] = 'open'
+
+      # For debugging only, delete after use 
+      puts "SB PARAMS: #{schedule_block_params}"
+      
+      if @event.create_schedule_block(schedule_block_params)
+        redirect_to events_path
+      else
+        redirect_to new_schedule_block_event_path
+      end
+    else
+      # GET REQUEST
     end
   end
 
@@ -124,6 +137,10 @@ class EventsController < ApplicationController
     end
 
     def event_params
+      params.require(:event).permit(:rate, :location_id, {new_location: [:new_location]}, :activity_id, {new_activity: [:new_activity]},:host_id, {params: [:host_id, :event_id, :location_id, :start_time, :end_time, :reservation_min, :reservation_max, :status]})
+    end
+
+    def schedule_block_params
       params.require(:event).permit(:rate, :location_id, {new_location: [:new_location]}, :activity_id, {new_activity: [:new_activity]},:host_id, {params: [:host_id, :event_id, :location_id, :start_time, :end_time, :reservation_min, :reservation_max, :status]})
     end
   end

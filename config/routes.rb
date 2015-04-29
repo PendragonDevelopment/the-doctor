@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, :hosts, :activities, :locations
   resources :events do 
-    get :delete, :on => :member
+    member do
+      get 'delete'
+      get 'new_schedule_block'
+      post 'new_schedule_block'
+    end
   end
 end

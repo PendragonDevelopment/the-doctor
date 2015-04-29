@@ -29,10 +29,10 @@
           <td>$<%= @event.rate %></td>
           <td><%= @event.host.user.first_name %></td>
           <td><%= @event.location.title %></td>
-          <td><%= DateTime.parse(@schedule_block['start_time']).strftime("%l:%M %p, %A, %B %e, %Y") %></td>
-          <td><%= DateTime.parse(@schedule_block['end_time']).strftime("%l:%M %p, %A, %B %e, %Y") %></td>
-          <td><%= @schedule_block['reservation_min'] %></td>
-          <td><%= @schedule_block['reservation_max'] %></td>
+          <td><%= DateTime.parse(schedule_block['start_time']).strftime("%a, %B %e, %Y") %></td>
+          <td><%= DateTime.parse(schedule_block['start_time']).strftime("%l:%M")%>-<%= DateTime.parse(schedule_block['end_time']).strftime("%l:%M %p") %></td>
+          <td><%= schedule_block['reservation_min'] %></td>
+          <td><%= schedule_block['reservation_max'] %></td>
           <td><%= @schedule_block['status'] %></td>
         </tr>
       </tbody>
