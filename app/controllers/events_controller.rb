@@ -7,6 +7,8 @@ class EventsController < ApplicationController
     @events = @q.result
 
     @events = Event.all
+    @event = Event.first
+    @schedule_blocks = @event.get_schedule_blocks
   end
 
   def create
@@ -113,6 +115,8 @@ class EventsController < ApplicationController
   end
 
   def delete
+    all_schedule_blocks = @event.get_schedule_blocks
+    @schedule_blocks = all_schedule_blocks.select{|sb| sb['event_id'] == @event.id}
   end
 
   def destroy

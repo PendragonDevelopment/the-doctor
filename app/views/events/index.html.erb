@@ -39,10 +39,12 @@
           <td><%= "$#{event.rate}" %></td>
           <td><% unless schedule_block_array.empty? %>
                 <% schedule_block_array.each do |sb| %>
-                  <%= link_to "#{DateTime.parse(sb['start_time']).strftime("%a, %B %e, %Y")}  |  #{DateTime.parse(sb['start_time']).strftime("%l:%M %p")} - #{DateTime.parse(sb['end_time']).strftime("%l:%M %p")}",  edit_event_path(event.id, schedule_block_ID: sb['id']) %>
+                  <%= sb['start_time'] %>
+                  <br/>
                 <% end %>
               <% end %>
           </td>
+          <td><%= link_to 'Create New Event Instance', new_schedule_block_event_path(event.id) %></td>
           <td><%= link_to 'Edit Event', edit_event_path(event.id) %></td>
           <td><%= link_to 'Delete Event', delete_event_path(event.id) %></td>
 				</tr>

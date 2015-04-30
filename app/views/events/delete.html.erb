@@ -44,11 +44,7 @@
       </tr>
     </thead>
     <tbody>
-      <!-- This logic probably shouldn't go here, but I was spending too much time trying to figure out how to make it work -->
-      <% all_schedule_blocks = @event.get_schedule_blocks %>
-      <% schedule_blocks = all_schedule_blocks.select{|sb| sb['event_id'] == @event.id} %>
-      <% schedule_blocks.each do |sb| %>
-
+      <% @schedule_blocks.each do |sb| %>
       <td><%= "#{DateTime.parse(sb['start_time']).strftime("%a, %B %e, %Y")}" %></td>
       <td><%= "#{DateTime.parse(sb['start_time']).strftime("%l:%M %p")} - #{DateTime.parse(sb['end_time']).strftime("%l:%M %p")}" %></td>
       <td><%= sb['reservation_min'] %></td>
