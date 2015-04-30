@@ -1,1 +1,40 @@
-<h1>Activities#index</h1>
+<div class="row">
+  <div class="col-md-3">
+    <h1>Activities</h1>
+  </div>
+  <div class="col-md-3 col-md-offset-6">
+    <br/>
+    <%= link_to 'Create New Activity', new_activity_path, class: 'btn btn-default pull-right' %>
+  </div>
+</div>
+
+
+<div class="row">
+  <table class="table table-hover table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Tags</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @activities.each do |activity| %>
+      <tr>
+          <td><%= activity.title %></td>
+          <td><% activity.tags.each_with_index do |tag, index| %>
+                <% if index == activity.tags.size - 1 %>
+                  <%= "#{tag.name}" %>
+                <% else %>
+                  <%= "#{tag.name}, " %>
+                <% end %>
+              <% end %>
+          </td>
+          <td><%= link_to 'Edit', edit_activity_path(activity.id) %></td>
+          <td><%= link_to 'Delete', activity_path(activity.id), method: :delete %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<%= link_to 'Create New Activity', new_activity_path, class: 'btn btn-default' %>

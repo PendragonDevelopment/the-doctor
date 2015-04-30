@@ -1,1 +1,48 @@
-<h1>Events#edit</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Update Event</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <% if current_user.host %>
+      <%= bootstrap_form_for @event do |f| %>
+        <%= f.collection_select :activity_id, Activity.all, :id, :title, prompt: "Select Activity" %>
+        <%= f.fields_for :new_activity do |new_activity| %>
+            <%= new_activity.text_field :new_activity, label: 'or create a new activity: ', placeholder: 'Only use to create a new activity that is not listed above' %>
+        <% end %>
+        <%= f.collection_select :location_id, Location.all, :id, :title, prompt: "Select Location" %>
+        <%= f.fields_for :new_location do |new_location| %>
+            <%= new_location.text_field :new_location, label: 'or create a new location: ', placeholder: 'Only use to create a new location that is not listed above' %>
+        <% end %>
+        <%= f.number_field :rate, placeholder: 'Price in US dollars' %>
+        <%= f.fields_for :params do |sb| %>
+        <!--
+        
+        Need to figure out how to pre-populate the DateTime select fields here. They are reset here and are the exact same. Trying to update the Event without changing these will fail because the End Time has to be after the Start Time and they are idential on page load.
+
+        -->
+            <%= sb.datetime_select :start_time, ampm:true, value: @schedule_block['start_time'] %>
+            <%= sb.datetime_select :end_time, ampm:true, value: @schedule_block['end_time'] %>
+            <%= sb.number_field :reservation_min, value: @schedule_block['reservation_min']%>
+            <%= sb.number_field :reservation_max, value: @schedule_block['reservation_max'] %>
+        <% end %>
+        <%= hidden_field_tag :host, value = current_user.host %>
+        <%= hidden_field_tag :schedule_block_ID, value = @schedule_block['id'] %>
+        <%= f.submit 'Update Event' %>
+      <% end %>
+    <% else %>
+      <h2>You cannot create an event, you are not a host!</h2>
+    <% end %>
+  </div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <% unless current_user.host.nil? %>
+      <%= link_to 'All Events', events_path, class: 'btn btn-default' %>
+    <% end %>
+    <%= link_to 'Create New Event', new_event_path, class: 'btn btn-default' %>
+  </div>
+</div>

@@ -5,6 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+# user = CreateAdminService.new.call
+# puts 'CREATED ADMIN USER: ' << user.email
 # Environment variables (ENV['...']) can be set in the file config/application.yml.
 # See http://railsapps.github.io/rails-environment-variables.html
 
@@ -39,5 +41,4 @@ u.host.events.create(activity_id: ratmouse.id, location_id: fortywatt.id, rate: 
 u.host.events.create(activity_id: juggling.id, location_id: fortywatt.id, rate: 6000)
 u.host.events.create(activity_id: mouserat.id, location_id: fortywatt.id, rate: 1000)
 u.host.events.create(activity_id: mouserat.id, location_id: fortywatt.id, rate: 1000)
-
 

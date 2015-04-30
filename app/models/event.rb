@@ -17,7 +17,6 @@ class Event < ActiveRecord::Base
 	belongs_to :location
 	belongs_to :activity
 	belongs_to :host
-
 	validates :rate, presence: true
 
 	@@token ||= nil
@@ -99,7 +98,5 @@ class Event < ActiveRecord::Base
 				:params => basic_params
 			}
 		end
-
-
 
 end

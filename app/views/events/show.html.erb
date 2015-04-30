@@ -1,1 +1,49 @@
-<h1>Events#show</h1>
+<h1>Your Event</h1>
+
+<div class="row">
+  <div class="col-md-12">
+  <h3>Confirmation Page</h3>
+  <br/>
+</div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Rate</th>
+          <th>Host</th>
+          <th>Location</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Reservation Min</th>
+          <th>Reservation Max</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @event.activity.title %></td>
+          <td>$<%= @event.rate %></td>
+          <td><%= @event.host.user.first_name %></td>
+          <td><%= @event.location.title %></td>
+          <td><%= DateTime.parse(schedule_block['start_time']).strftime("%a, %B %e, %Y") %></td>
+          <td><%= DateTime.parse(schedule_block['start_time']).strftime("%l:%M")%>-<%= DateTime.parse(schedule_block['end_time']).strftime("%l:%M %p") %></td>
+          <td><%= schedule_block['reservation_min'] %></td>
+          <td><%= schedule_block['reservation_max'] %></td>
+          <td><%= @schedule_block['status'] %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to "Edit Event", edit_event_path(@event.id), class: 'btn btn-default' %>
+    <%= link_to "Create New Event", new_event_path, class: 'btn btn-default' %>
+    <%= link_to "All Events", events_path, class: 'btn btn-default' %>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<h3>Please review the event details below.</h3>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Location</th>
+          <th>Time</th>
+          <th>Host</th>
+          <th>Status</th>
+          <th>Price</th>
+          <th>Reservation Min</th>
+          <th>Reservation Max</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @event.activity.title %></td>
+          <td><%= @event.location.title %></td>
+          <td><%= DateTime.parse(@schedule_block['start_time']).strftime("%l:%M %p, %A, %B %e, %Y")%>-<%= DateTime.parse(@schedule_block['end_time']).strftime("%l:%M %p, %A, %B %e, %Y") %></td>
+          <td><%= @event.host.user.first_name %></td>
+          <td><%= @schedule_block['status'] %></td>
+          <td><%= "$#{@event.rate}" %></td>
+          <td><%= @schedule_block['reservation_min'] %></td>
+          <td><%= @schedule_block['reservation_max'] %></td>
+          <td><%= link_to 'Edit', edit_event_path(@event.id, schedule_block_ID: @schedule_block['id']) %></td>
+          <td><%= link_to 'Delete', delete_event_path(@event.id, schedule_block_ID: @schedule_block['id']) %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+<div class="row">
+  <div class="col-md-12">
+    <%= link_to "Edit Event", edit_event_path(@event.id), class: 'btn btn-default'  %>
+    <%= link_to "Create New Event", new_event_path, class: 'btn btn-default' %>
+    <%= link_to "All Events", events_path, class: 'btn btn-default'  %>
+  </div>
+</div>
