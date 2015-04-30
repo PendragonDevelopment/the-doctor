@@ -7,12 +7,6 @@ class EventsController < ApplicationController
     @events = @q.result
 
     @events = Event.all
-
-    # Only set @event to be able to call get_schedule_blocks below
-    if @events.count >= 1 
-      @event = @events.first
-      @schedule_blocks = @event.get_schedule_blocks
-    end
   end
 
   def create
@@ -52,7 +46,7 @@ class EventsController < ApplicationController
       schedule_block_params['reservation_max'] = schedule_block_wrapped_params[:schedule_block][:reservation_max]
       schedule_block_params['reservation_min'] = schedule_block_wrapped_params[:schedule_block][:reservation_min]
       schedule_block_params['start_time'] = '2015-04-29T17:28:02-04:00'
-      schedule_block_params['end_time'] = '2015-04-29T17:28:02-04:00'
+      schedule_block_params['end_time'] = '2015-04-29T18:28:02-04:00'
       schedule_block_params['host_id'] = "#{@event.host_id}"
       schedule_block_params['event_id'] = "#{@event.id}"
       schedule_block_params['location_id'] = "#{@event.location_id}"
@@ -119,8 +113,6 @@ class EventsController < ApplicationController
   end
 
   def delete
-    sb_ID = params['schedule_block_ID']
-    @schedule_block = @event.get_schedule_block(sb_ID)
   end
 
   def destroy

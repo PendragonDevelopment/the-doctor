@@ -1,24 +1,69 @@
-<h1>Delete Event</h1>
+<div class="col-md-8 col-md-offset-2">
+<div class="row">
+  <h1>Delete Event</h1>
+</div>
 
-<h3>Are you sure you want to delete the following event?</h3>
+<div class="row">
+  <h3>Are you sure you want to delete the following event?</h3>
+</div>
 
-<p>Title: <%= @event.activity.title %> </p>
-<p>Rate: $<%= @event.rate %> </p>
-<p>Host: <%= @event.host.user.first_name %></p>
-<p>Location: <%= @event.location.title %></p>
-<p>Start Time: <%= DateTime.parse(@schedule_block['start_time']).strftime("%l:%M %p, %A, %B %e, %Y") %></p>
-<p>End Time: <%= DateTime.parse(@schedule_block['end_time']).strftime("%l:%M %p, %A, %B %e, %Y") %></p>
-<p>Reservation Minimum: <%= @schedule_block['reservation_min'] %></p>
-<p>Reservation Maximum: <%= @schedule_block['reservation_max'] %></p>
-<p>Status: <%= @schedule_block['status'] %></p>
+<div class="row">
+  <table class="table table-hover table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Location</th>
+        <th>Host</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @event.activity.title %></td>
+        <td><%= @event.location.title %></td>
+        <td><%= @event.host_id %></td>
+        <td><%= @event.rate %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-<%= link_to 'Delete Event', event_path(schedule_block_ID: @schedule_block['id']), method: :delete, , class: 'btn btn-warning' %>
+<div class="row">
+  <h3>This will delete all the following event instances:</h3>
+</div>
 
+<div class="row">
+  <table class="table table-hover table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Reservation Min</th>
+        <th>Reservation Max</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- This logic probably shouldn't go here, but I was spending too much time trying to figure out how to make it work -->
+      <% all_schedule_blocks = @event.get_schedule_blocks %>
+      <% schedule_blocks = all_schedule_blocks.select{|sb| sb['event_id'] == @event.id} %>
+      <% schedule_blocks.each do |sb| %>
 
+      <td><%= "#{DateTime.parse(sb['start_time']).strftime("%a, %B %e, %Y")}" %></td>
+      <td><%= "#{DateTime.parse(sb['start_time']).strftime("%l:%M %p")} - #{DateTime.parse(sb['end_time']).strftime("%l:%M %p")}" %></td>
+      <td><%= sb['reservation_min'] %></td>
+      <td><%= sb['reservation_max'] %></td>
+      <td><%= sb['status'] %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<br/>
-<br/>
-
-<%= link_to "Edit Event", edit_event_path(@event.id), class: 'btn btn-default' %>
-<%= link_to "Create New Event", new_event_path, class: 'btn btn-default' %>
-<%= link_to "All Events", events_path, class: 'btn btn-default' %>
+<div class="row">
+  <%= link_to 'Delete Event', event_path(@event.id), method: :delete, class: 'btn btn-danger' %>
+  <br/>
+  <br/>
+  <%= link_to "Edit Event", edit_event_path(@event.id), class: 'btn btn-default' %>
+  <%= link_to "Create New Event", new_event_path, class: 'btn btn-default' %>
+  <%= link_to "All Events", events_path, class: 'btn btn-default' %>
+</div>
