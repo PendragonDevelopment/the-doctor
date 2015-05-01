@@ -45,11 +45,13 @@
     </thead>
     <tbody>
       <% @schedule_blocks.each do |sb| %>
-      <td><%= "#{DateTime.parse(sb['start_time']).strftime("%a, %B %e, %Y")}" %></td>
-      <td><%= "#{DateTime.parse(sb['start_time']).strftime("%l:%M %p")} - #{DateTime.parse(sb['end_time']).strftime("%l:%M %p")}" %></td>
-      <td><%= sb['reservation_min'] %></td>
-      <td><%= sb['reservation_max'] %></td>
-      <td><%= sb['status'] %></td>
+      <tr>
+        <td><%= "#{DateTime.parse(sb['start_time']).strftime("%a, %B %e, %Y")}" %></td>
+        <td><%= "#{DateTime.parse(sb['start_time']).strftime("%l:%M %p")} - #{DateTime.parse(sb['end_time']).strftime("%l:%M %p")}" %></td>
+        <td><%= sb['reservation_min'] %></td>
+        <td><%= sb['reservation_max'] %></td>
+        <td><%= sb['status'] %></td>
+      </tr>
       <% end %>
     </tbody>
   </table>

@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
-  before_action :set_event, :only => [:edit, :show, :update, :delete, :destroy, :new_schedule_block]
+  before_action :set_event, :only => [:edit, :show, :update, :confirm_delete, :destroy, :new_schedule_block]
+  before_action :set_schedule_blocks, :only => [:edit, :update, :confirm_delete, :destroy]
 
   def index
     # from DEM branch
@@ -13,9 +14,9 @@ class EventsController < ApplicationController
 
   def create
     # To exclude new_location and new_activity params
-    event_model_params = event_params.select {|k,v| ['rate', 'location_id', 'activity_id', 'host_id'].include?(k)}
+    stripped_params = event_params.except(:new_location, :new_activity)
 
-    @event = current_user.host.events.create(event_model_params)
+    @event = current_user.host.events.create(stripped_params)
     
     # Allows for creation and selection of a new Location through form
     new_location = event_params[:new_location][:new_location]
@@ -32,7 +33,7 @@ class EventsController < ApplicationController
     end
 
     if @event.save
-      redirect_to new_schedule_block_event_path(@event.id)
+      redirect_to events_path
     else
       render :new
       flash[:notice] = "Event could not be created. Please try again."
@@ -49,52 +50,55 @@ class EventsController < ApplicationController
   end
 
   def edit
-    schedule_blocks = @event.get_schedule_blocks
-    sb_event_id = (params[:id]).to_i
-    schedule_block_array = schedule_blocks.select{|sb| sb['event_id'] == sb_event_id }
-    @schedule_block = schedule_block_array.first
   end
 
   def show
-    @schedule_block = @event.get_schedule_block(15)
   end
 
   def update
-    sb_event_id = params['schedule_block_ID']
-    @sb_ID = sb_event_id.to_i
+    stripped_params = event_params.except(:new_location, :new_activity)
+    # The location_id is the only attribute that needs to be updated on a Schedule Block, everything else regarding the Event is only on the Event model
+    loc
 
-    # Select ONLY Event model attributes from form params
-    event_model_params = event_params.select {|k,v| ['rate', 'location_id', 'activity_id', 'host_id'].include?(k)}
+    puts "Stripped event params = #{stripped_params}"
 
-    # Selects ONLY Schedule Block params from form params
-    schedule_block_params = event_params.select {|k,v| ['params'].include?(k)}
+    # Allows for creation and selection of a new Location through form
+    new_location = event_params[:new_location][:new_location]
+    unless new_location.empty?
+      new_location_record = @event.create_location(title: new_location)
+      @event.update_attributes(location_id: new_location_record.id )
+    end
+    
+    # Allows for creation and selection of a new Activity through form
+    new_activity = event_params[:new_activity][:new_activity]
+    unless new_activity.empty?
+      new_activity_record = @event.create_activity(title: new_activity)
+      @event.update_attributes(activity_id: new_activity_record.id)
+    end
 
-    if @event.update(event_model_params)
-      # Adds neccessary attributes to params for Schedule Block creation from newly created Event
-      schedule_block_params[:params][:host_id] = @event.host.id
-      schedule_block_params[:params][:event_id] = @event.id
-      schedule_block_params[:params][:location_id] = @event.location_id
-      schedule_block_params[:params][:status] = 'open'
-
-      if @event.update_schedule_block(@sb_ID, schedule_block_params)
-        redirect_to events_path
+    if @event.update(stripped_params)
+      # Update associated Schedule Blocks
+      if @schedule_blocks.each do |sb|
+          @event.update_schedule_block(sb['id'], schedule_block_params)
+        end
       else
         render :edit
+        flash[:notice] = "Event was updated, but associated Schedule Blocks were not."
       end
+      redirect_to @events
+      flash[:notice] = "Event succesfully updated."
     else
       render :edit
+      flash[:notice] = "Event was not updated."
     end
   end
 
-  def delete
-    all_schedule_blocks = @event.get_schedule_blocks
-    @schedule_blocks = all_schedule_blocks.select{|sb| sb['event_id'] == @event.id}
+  def confirm_delete
   end
 
   def destroy
-    @event.destroy
-    sb_ID = params['schedule_block_ID']
-    @event.delete_schedule_block(sb_ID)
+    @event.destroy    
+    @schedule_blocks.each {|sb| @event.delete_schedule_block(sb['id']) }
     redirect_to events_path
   end
 
@@ -111,4 +115,9 @@ class EventsController < ApplicationController
     def schedule_block_params
       params.require(:event).permit(:rate, :location_id, {new_location: [:new_location]}, :activity_id, {new_activity: [:new_activity]},:host_id, {params: [:host_id, :event_id, :location_id, :start_time, :end_time, :reservation_min, :reservation_max, :status]})
     end
+
+    def set_schedule_blocks
+      @schedule_blocks = @event.get_schedule_blocks.select{|sb| sb['event_id'] == @event.id}
+    end
+
   end
