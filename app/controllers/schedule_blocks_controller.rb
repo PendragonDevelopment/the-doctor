@@ -9,7 +9,7 @@ class ScheduleBlocksController < ApplicationController
     stripped_params = params.except(:utf8, :authenticity_token, :commit, :controller, :action)
 
     if @event.create_schedule_block(stripped_params)
-      render :index
+      redirect_to event_schedule_blocks_path
     else
       render :new
       flash[:notice] = "Schedule Block create method was not called."
@@ -44,6 +44,8 @@ class ScheduleBlocksController < ApplicationController
   end
 
   def destroy
+    @event.delete_schedule_block(@sb_id)
+    redirect_to event_schedule_blocks_path
   end
 
   private
