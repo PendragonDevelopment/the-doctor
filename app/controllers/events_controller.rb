@@ -39,34 +39,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def new_schedule_block
-    if request.post?
-      @event = Event.find(params[:id])
-      schedule_block_wrapped_params = params.select{|k,v| ['schedule_block'].include?(k)}
-
-      schedule_block_params = Hash.new
-      schedule_block_params['reservation_max'] = schedule_block_wrapped_params[:schedule_block][:reservation_max]
-      schedule_block_params['reservation_min'] = schedule_block_wrapped_params[:schedule_block][:reservation_min]
-      schedule_block_params['start_time'] = '2015-04-29T17:28:02-04:00'
-      schedule_block_params['end_time'] = '2015-04-29T18:28:02-04:00'
-      schedule_block_params['host_id'] = "#{@event.host_id}"
-      schedule_block_params['event_id'] = "#{@event.id}"
-      schedule_block_params['location_id'] = "#{@event.location_id}"
-      schedule_block_params['status'] = 'open'
-
-      # For debugging purposes, delete after use
-      puts "schedule_block_params = #{schedule_block_params}"
-      
-      if @event.create_schedule_block(schedule_block_params)
-        redirect_to events_path
-      else
-        redirect_to new_schedule_block_event_path
-      end
-    else
-      # GET REQUEST
-    end
-  end
-
   def new
     @event = Event.new
     @activity_options = Activity.all.map{|x| [x.title]}
