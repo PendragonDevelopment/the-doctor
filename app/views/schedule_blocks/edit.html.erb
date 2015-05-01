@@ -1,1 +1,29 @@
-edit.html.erb
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h1>Edit Event Instance</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h3><%= "#{@event.activity.title} at #{@event.location.title}" %></h3>
+    <br/>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= bootstrap_form_tag url: "/events/#{@event.id}/schedule_blocks/#{@sb_id}", method: :put do |f| %>
+      <%= f.datetime_select :start_time, ampm:true %>
+      <%= f.datetime_select :end_time, ampm:true %>
+      <%= f.number_field :reservation_min, value: @schedule_block['reservation_min'] %>
+      <%= f.number_field :reservation_max, value: @schedule_block['reservation_max'] %>
+      <%= hidden_field_tag :host_id, value = current_user.host.id %>
+      <%= hidden_field_tag :event_id, value = @event.id %>
+      <%= hidden_field_tag :location_id, value = @event.location.id %>
+      <%= hidden_field_tag :status, value = 'open' %>
+      
+      <%= f.submit 'Update Event Instance' %>
+    <% end %>
+  </div>
+</div>

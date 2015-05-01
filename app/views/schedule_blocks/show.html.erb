@@ -1,3 +1,30 @@
 <h1>Event Instance</h1>
 
-<p><%= @schedule_block %></p> 
+<div class="row">
+  <table class="table table-hover table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Reservation Min</th>
+        <th>Reservation Max</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= DateTime.parse(@schedule_block['start_time']).strftime("%A, %B %-d, %Y") %></td>
+        <td><%= DateTime.parse(@schedule_block['start_time']).strftime("%l:%M %P") %></td>
+        <td><%= DateTime.parse(@schedule_block['end_time']).strftime("%l:%M %P") %></td>
+        <td><%= @schedule_block['reservation_min'] %></td>
+        <td><%= @schedule_block['reservation_max'] %></td>
+        <td><%= @schedule_block['status'] %></td>
+        <td><%= link_to 'Edit', edit_event_schedule_block_path(event_id: @schedule_block['event_id'], id: @schedule_block['id']) %></td>
+        <td><%= link_to 'Delete', confirm_delete_event_schedule_block_path(event_id: @schedule_block['event_id'], id: @schedule_block['id']) %></td>
+      </tr>
+    </tbody>
+  </table>
+</end>
+
+<%= link_to 'All Event Instances', event_schedule_blocks_path(@event_id), class: 'btn btn-default' %>

@@ -26,6 +26,18 @@ class ScheduleBlocksController < ApplicationController
   end
 
   def update
+    stripped_params = params.except(:utf8, :authenticity_token, :commit, :controller, :action, :_method)
+
+    puts "@sb_id = #{@sb_id}"
+    puts "Stripped params = #{stripped_params}"
+
+    if @event.update_schedule_block(@sb_id, stripped_params)
+      flash[:notice] = "Schedule Block update method was called."
+      redirect_to @schedule_block
+    else
+      flash[:notice] = "Schedule Block update method was not called."
+      render :new
+    end
   end
 
   def confirm_delete
