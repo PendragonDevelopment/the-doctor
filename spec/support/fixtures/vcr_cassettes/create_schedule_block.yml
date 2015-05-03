@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://tardis-scheduler.herokuapp.com/api/v1/schedule_blocks
+    uri: https://tardis-scheduler.herokuapp.com/api/v1/schedule_blocks?start_time=2015-04-29T10%3A52%3A10-04%3A00&end_time=2015-04-30T10%3A52%3A10-04%3A00&reservation_min=2&reservation_max=10&status=open&host_id=22&event_id=22&location_id=22
     body:
       encoding: US-ASCII
       string: ''
@@ -10,7 +10,7 @@ http_interactions:
       User-Agent:
       - Faraday v0.8.9
       Authorization:
-      - Bearer 1d1a5842da691849fde401ab2cd8d03bdb37c9db0254ad26a5ed830dd0b8ab5c
+      - Bearer 1f28387ec172e8f799427fca68778f5af1384aa2e9f23374180a185fdd7be509
   response:
     status:
       code: 201
@@ -21,26 +21,26 @@ http_interactions:
       connection:
       - close
       date:
-      - Sun, 26 Apr 2015 21:45:30 GMT
+      - Wed, 29 Apr 2015 14:52:10 GMT
       status:
       - 201 Created
       content-type:
       - application/json
       content-length:
-      - '35'
+      - '283'
       etag:
-      - W/"aab4b4173efde85521e531e7f494a6e8"
+      - W/"a99f9430e34966b7c204d37d848321ba"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 611d2f88-9ab9-4091-b66b-45745735e1d0
+      - 06140521-41d9-4d6f-a5af-11bd5c136cf1
       x-runtime:
-      - '0.031683'
+      - '0.040800'
       via:
       - 1.1 vegur
     body:
       encoding: UTF-8
-      string: '"Schedule Block could not be saved"'
+      string: '{"id":35,"host_id":22,"event_id":22,"location_id":22,"start_time":"2015-04-29T14:52:10.000Z","end_time":"2015-04-30T14:52:10.000Z","reservation_min":2,"reservation_max":10,"status":"open","created_at":"2015-04-29T14:52:10.751Z","updated_at":"2015-04-29T14:52:10.751Z","user_id":null}'
     http_version: 
-  recorded_at: Sun, 26 Apr 2015 21:45:29 GMT
+  recorded_at: Wed, 29 Apr 2015 14:52:10 GMT
 recorded_with: VCR 2.9.3

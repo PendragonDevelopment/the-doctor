@@ -10,7 +10,7 @@ http_interactions:
       User-Agent:
       - Faraday v0.8.9
       Authorization:
-      - Bearer 1d1a5842da691849fde401ab2cd8d03bdb37c9db0254ad26a5ed830dd0b8ab5c
+      - Bearer 946059b808ecca8cd154093393b7deb1b4a80ac0fc153c971e1b3c0504645260
   response:
     status:
       code: 200
@@ -21,7 +21,7 @@ http_interactions:
       connection:
       - close
       date:
-      - Sun, 26 Apr 2015 21:45:30 GMT
+      - Wed, 29 Apr 2015 14:28:41 GMT
       status:
       - 200 OK
       content-type:
@@ -33,14 +33,14 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 7212fb15-dee0-47c7-bcab-0bd20dfb0bd3
+      - dc0355ed-da41-4c16-8807-fe4de9bae3ba
       x-runtime:
-      - '0.013161'
+      - '0.022223'
       via:
       - 1.1 vegur
     body:
       encoding: UTF-8
       string: '{"schedule_block_id":1,"id":1,"attendee":1,"status":"pending","created_at":"2015-04-26T21:34:14.593Z","updated_at":"2015-04-26T21:34:14.593Z"}'
     http_version: 
-  recorded_at: Sun, 26 Apr 2015 21:45:29 GMT
+  recorded_at: Wed, 29 Apr 2015 14:28:41 GMT
 recorded_with: VCR 2.9.3
