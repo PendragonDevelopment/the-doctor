@@ -21,4 +21,5 @@ class Host < ActiveRecord::Base
   belongs_to :user, dependent: :destroy
   has_many :events
   has_many :activites, through: :events
+  ratyrate_rateable "quality"
 end

@@ -27,6 +27,7 @@ gem 'bootstrap_form'
 gem 'momentjs-rails', '>= 2.8.1'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 gem 'ransack'
+gem 'ratyrate'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

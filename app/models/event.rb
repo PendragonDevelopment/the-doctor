@@ -17,7 +17,7 @@ class Event < ActiveRecord::Base
 	belongs_to :location
 	belongs_to :activity
 	belongs_to :host
-	validates :rate, presence: true
+	validates :event_rate, presence: true
 
 	@@token ||= nil
 

@@ -17,3 +17,5 @@
 //= require moment
 //= require bootstrap-datetimepicker
 //= require_tree .
+//= require jquery.raty
+//= require ratyrate
