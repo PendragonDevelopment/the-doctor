@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :profile_pic, :content_type => /\Aimage\/.*\Z/
 
   validates :username, presence: true
+  ratyrate_rater
   
   def set_default_role
     self.role ||= :user
