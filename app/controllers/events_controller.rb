@@ -7,7 +7,6 @@ class EventsController < ApplicationController
     @q = Event.ransack(params[:q])
     @events = @q.result
 
-    @events = Event.all
     @event = Event.first
     @schedule_blocks = @event.get_schedule_blocks
   end
@@ -57,8 +56,8 @@ class EventsController < ApplicationController
 
   def update
     stripped_params = event_params.except(:new_location, :new_activity)
+    
     # The location_id is the only attribute that needs to be updated on a Schedule Block, everything else regarding the Event is only on the Event model
-    loc
 
     puts "Stripped event params = #{stripped_params}"
 
@@ -78,13 +77,6 @@ class EventsController < ApplicationController
 
     if @event.update(stripped_params)
       # Update associated Schedule Blocks
-      if @schedule_blocks.each do |sb|
-          @event.update_schedule_block(sb['id'], schedule_block_params)
-        end
-      else
-        render :edit
-        flash[:notice] = "Event was updated, but associated Schedule Blocks were not."
-      end
       redirect_to @events
       flash[:notice] = "Event succesfully updated."
     else
