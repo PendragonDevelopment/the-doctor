@@ -10,6 +10,7 @@
 
 #create one user
 u = User.create(first_name: "John", last_name: "Johnson", password: 'password1234', username: "johnjohnson")
+u_rater = User.create(first_name: "Lara", last_name: "Tyler", password: 'thousandfeathers', username: "ornithologist")
 
 #set that user as a host
 u.host = Host.create
