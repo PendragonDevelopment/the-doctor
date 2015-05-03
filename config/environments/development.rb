@@ -27,8 +27,6 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-<<<<<<< HEAD
-=======
   config.action_mailer.smtp_settings = {
     address: "smtp.mandrillapp.com",
     port: 587,
@@ -38,6 +36,7 @@ Rails.application.configure do
     user_name: Rails.application.secrets.email_provider_username,
     password: Rails.application.secrets.email_provider_apikey
   }
+  
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
@@ -45,8 +44,6 @@ Rails.application.configure do
   # Send email in development mode?
   config.action_mailer.perform_deliveries = true
 
-
->>>>>>> cd82f584c46c6979ac6f77f1cf339e1ed1c442ff
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.

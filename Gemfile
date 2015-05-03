@@ -50,6 +50,7 @@ group :production do
 end
 
 group :test do
+  gem 'stripe-ruby-mock', '~> 2.1.1', :require => 'stripe_mock'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
