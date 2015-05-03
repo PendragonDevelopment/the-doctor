@@ -81,5 +81,8 @@ pickle-email-*.html
 # Ignore application configuration
 /config/application.yml
 
+# Ignore VCR cassettes
+/spec/support/fixtures/vcr_cassettes
+
 #Personal stuff
 Z-Notes.rb
