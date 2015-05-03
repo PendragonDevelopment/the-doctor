@@ -55,12 +55,12 @@ class Event < ActiveRecord::Base
 
 	def create_schedule_block(schedule_block_params)
 		token_check
-		@@token.post("/api/v1/schedule_blocks", schedule_block_params)
+		@@token.post("/api/v1/schedule_blocks", wrap_params(schedule_block_params))
 	end
 
 	def update_schedule_block(schedule_block_id, schedule_block_params)
 		token_check
-		@@token.put("/api/v1/schedule_blocks/#{schedule_block_id}", schedule_block_params)
+		@@token.put("/api/v1/schedule_blocks/#{schedule_block_id}", wrap_params(schedule_block_params))
 	end
 
 	def delete_schedule_block(schedule_block_id)
@@ -77,13 +77,14 @@ class Event < ActiveRecord::Base
 
 	def update_appointment(appointment_id, appointment_params)
 		token_check
-		@@token.put("/api/v1/appointments/#{appointment_id}", appointment_params)
+		@@token.put("/api/v1/appointments/#{appointment_id}", wrap_params(appointment_params))
 	end
 
 	def delete_appointment(appointment_id)
 		token_check
 		@@token.delete("/api/v1/appointments/#{appointment_id}")
 	end
+
 
 	private
 
@@ -92,5 +93,13 @@ class Event < ActiveRecord::Base
 				Event.generate_token
 			end
 		end
+
+		def wrap_params(basic_params)
+			result_hash = {
+				:params => basic_params
+			}
+		end
+
+
 
 end

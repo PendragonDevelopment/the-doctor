@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+RECIPES
+["analytics", "core", "deployment", "devise", "email", "extras", "frontend", "gems", "git", "init", "learn_rails", "locale", "omniauth", "pages", "rails_bootstrap", "rails_devise", "rails_devise_pundit", "rails_devise_roles", "rails_foundation", "rails_mailinglist_activejob", "rails_omniauth", "rails_signup_download", "rails_stripe_checkout", "rails_stripe_coupons", "railsapps", "readme", "roles", "setup", "tests"]
+PREFERENCES
+{:git=>true, :apps4=>"none", :announcements=>"none", :dev_webserver=>"unicorn", :prod_webserver=>"unicorn", :database=>"postgresql", :templates=>"erb", :tests=>"rspec", :continuous_testing=>"none", :frontend=>"bootstrap3", :email=>"mandrill", :authentication=>"devise", :devise_modules=>"invitable", :authorization=>"roles", :dashboard=>"none", :form_builder=>"simple_form", :pages=>"users"}
+=======
 The Doctor
 ================
 
@@ -61,3 +67,4 @@ option  Use 'pry' as console replacement during development and test?
 choose  Enter your selection: [true]
 option  Use or create a project-specific rvm gemset?
 choose  Enter your selection: [false]
+>>>>>>> cd82f584c46c6979ac6f77f1cf339e1ed1c442ff

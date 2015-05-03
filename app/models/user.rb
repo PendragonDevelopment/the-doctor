@@ -70,7 +70,7 @@ class User < ActiveRecord::Base
   def charge_stripe(amount, params)
     token = self.create_stripe_token(params)
 
-    unless self.customer_id
+    unless self.stripe_customer_id
       self.create_stripe_customer(params, token)
     end
 
@@ -87,8 +87,8 @@ class User < ActiveRecord::Base
     token = Stripe::Token.create(
       card: {
         number: params[:number],
-        exp_month: exp_month_year_to_month(params[:credit_card_expiry]),
-        exp_year: exp_month_year_to_year(params[:credit_card_expiry]),
+        exp_month: params[:credit_card_expiry_month],
+        exp_year: params[:credit_card_expiry_year],
         cvc: params[:cvc]
       }
     )

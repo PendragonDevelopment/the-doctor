@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+
 ruby '2.2.0'
 gem 'rails', '4.2.1'
 gem 'sass-rails', '~> 4.0.3'
@@ -26,11 +27,14 @@ gem 'faraday', '0.8.9' #need to specify this version because more recent version
 gem 'ransack'
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller'
+  gem 'binding_of_caller', :platforms=>[:mri_21]
   gem 'quiet_assets'
+  gem 'rails_apps_pages'
+  gem 'rails_apps_testing'
   gem 'rails_layout'
   gem 'spring-commands-rspec'
 end
+
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker'
@@ -40,10 +44,13 @@ group :development, :test do
   gem 'vcr'
   gem 'rubocop'
 end
+
 group :production do
   gem 'rails_12factor'
 end
+
 group :test do
+  gem 'stripe-ruby-mock', '~> 2.1.1', :require => 'stripe_mock'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'

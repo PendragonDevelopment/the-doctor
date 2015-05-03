@@ -1,0 +1,54 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://tardis-scheduler.herokuapp.com/oauth/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials
+    headers:
+      User-Agent:
+      - Faraday v0.8.9
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Authorization:
+      - Basic NTg5NmM5ZDkzYzVmMzJiMzQyYzNlZTI1ZDI4N2JkZDE0NWM2MjNmYzI0M2Y2OTJkMmFlNDcyNjY2ZjFmZTUzODpjNDMwNjk3NWE5NDQyOGM5NDc0YzZlNzY2ZTk3MTFhZWNmNjNkYjhmODMxMjc0YTBhYjJhYjFjMzllYmMwMTNk
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      server:
+      - Cowboy
+      connection:
+      - close
+      date:
+      - Sun, 03 May 2015 20:42:53 GMT
+      status:
+      - 200 OK
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      cache-control:
+      - no-store
+      pragma:
+      - no-cache
+      content-type:
+      - application/json; charset=utf-8
+      etag:
+      - W/"e77e9c6b9f659f5cfbf8ab587428e869"
+      x-request-id:
+      - 4d8647aa-4223-4c21-884c-6c70f10ab8ea
+      x-runtime:
+      - '0.091780'
+      via:
+      - 1.1 vegur
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"3ac5c9b41544c8730868e30db30877219529b08d5904ca54ece0b205322fb671","token_type":"bearer","created_at":1430685773}'
+    http_version: 
+  recorded_at: Sun, 03 May 2015 20:42:52 GMT
+recorded_with: VCR 2.9.3
