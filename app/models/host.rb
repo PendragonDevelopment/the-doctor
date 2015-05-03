@@ -21,5 +21,5 @@ class Host < ActiveRecord::Base
   belongs_to :user
   has_many :events
   has_many :activites, through: :events
-  ratyrate_rateable "quality" %>
+  ratyrate_rateable "quality"
 end

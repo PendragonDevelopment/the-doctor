@@ -9,8 +9,8 @@
 # See http://railsapps.github.io/rails-environment-variables.html
 
 #create one user
-u = User.create(first_name: "John", last_name: "Johnson", password: 'password1234', username: "johnjohnson", email: "user@email.com")
-u_rater = User.create(first_name: "Lara", last_name: "Tyler", password: 'thousandfeathers', username: "ornithologist", email: "lara@email.com")
+u = User.create(first_name: "John", last_name: "Johnson", password: "password1234", password_confirmation: "password1234", username: "johnjohnson", email: "user@email.com")
+u_rater = User.create(first_name: "Lara", last_name: "Tyler", password: "thousandfeathers", password_confirmation: "thousandfeathers", username: "ornithologist", email: "lara@email.com")
 
 #set that user as a host
 u.host = Host.create
@@ -30,15 +30,15 @@ nucis = Location.create(title: "Nuci's Space")
 fortywatt = Location.create(title: "40 Watt")
 
 
-event = u.host.events.create(activity_id: activity.id, location_id: location.id, rate: 500)
+event = u.host.events.create(activity_id: activity.id, location_id: location.id, event_rate: 500)
 
-u.host.events.create(activity_id: juggling.id, location_id: gatheater.id, rate: 3000)
-u.host.events.create(activity_id: mouserat.id, location_id: gatheater.id, rate: 5000)
-u.host.events.create(activity_id: mouserat.id, location_id: nucis.id, rate: 4000)
-u.host.events.create(activity_id: ratmouse.id, location_id: nucis.id, rate: 500)
-u.host.events.create(activity_id: ratmouse.id, location_id: fortywatt.id, rate: 4000)
-u.host.events.create(activity_id: juggling.id, location_id: fortywatt.id, rate: 6000)
-u.host.events.create(activity_id: mouserat.id, location_id: fortywatt.id, rate: 1000)
-u.host.events.create(activity_id: mouserat.id, location_id: fortywatt.id, rate: 1000)
+u.host.events.create(activity_id: juggling.id, location_id: gatheater.id, event_rate: 3000)
+u.host.events.create(activity_id: mouserat.id, location_id: gatheater.id, event_rate: 5000)
+u.host.events.create(activity_id: mouserat.id, location_id: nucis.id, event_rate: 4000)
+u.host.events.create(activity_id: ratmouse.id, location_id: nucis.id, event_rate: 500)
+u.host.events.create(activity_id: ratmouse.id, location_id: fortywatt.id, event_rate: 4000)
+u.host.events.create(activity_id: juggling.id, location_id: fortywatt.id, event_rate: 6000)
+u.host.events.create(activity_id: mouserat.id, location_id: fortywatt.id, event_rate: 1000)
+u.host.events.create(activity_id: mouserat.id, location_id: fortywatt.id, event_rate: 1000)
 
 
