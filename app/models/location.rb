@@ -13,5 +13,5 @@
 
 class Location < ActiveRecord::Base
   has_many :events
-  validates :title, presence: :true
+  validates :title, presence: :true, uniqueness: true
 end

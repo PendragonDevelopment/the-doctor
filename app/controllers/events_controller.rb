@@ -5,8 +5,10 @@ class EventsController < ApplicationController
     # from DEM branch
     @q = Event.ransack(params[:q])
     @events = @q.result
-    @event = Event.first
-    @schedule_blocks = @event.get_schedule_blocks
+    if Event.first then
+      @event = Event.first
+      @schedule_blocks = @event.get_schedule_blocks
+    end
   end
 
   def create
@@ -18,15 +20,27 @@ class EventsController < ApplicationController
     # Allows for creation and selection of a new Location through form
     new_location = event_params[:new_location][:new_location]
     unless new_location.empty?
-      new_location_record = @event.create_location(title: new_location)
-      @event.update_attributes(location_id: new_location_record.id )
+      if Location.where(title: new_location).empty?
+        new_location_record = @event.create_location(title: new_location)
+        @event.update_attributes(location_id: new_location_record.id )
+      else
+        redirect_to new_event_path
+        flash[:error] = "You cannot create a location that already exists!"
+        return
+      end
     end
     
     # Allows for creation and selection of a new Activity through form
     new_activity = event_params[:new_activity][:new_activity]
     unless new_activity.empty?
-      new_activity_record = @event.create_activity(title: new_activity)
-      @event.update_attributes(activity_id: new_activity_record.id)
+      if Activity.where(title: new_activity).empty?
+        new_activity_record = @event.create_activity(title: new_activity)
+        @event.update_attributes(activity_id: new_activity_record.id)
+      else
+        redirect_to new_event_path
+        flash[:error] = "You cannot create an activity that already exists!"
+        return
+      end
     end
 
     if @event.save
@@ -47,6 +61,7 @@ class EventsController < ApplicationController
   end
 
   def edit
+    @schedule_blocks = @event.get_schedule_blocks.select{|sb| sb['event_id'] == @event.id }
   end
 
   def show
@@ -57,6 +72,7 @@ class EventsController < ApplicationController
     stripped_params = event_params.except(:new_location, :new_activity)
   
     # Allows for creation and selection of a new Location through form
+    # However, this creates a location with only a title, we need to add fields for Location description, latitude and longitude 
     new_location = event_params[:new_location][:new_location]
     unless new_location.empty?
       new_location_record = @event.create_location(title: new_location)
