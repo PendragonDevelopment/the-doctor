@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, :hosts, :activities, :locations
   resources :events do 
-    resources :schedule_blocks do
-      member do
-        get 'confirm_delete'
-      end
-    end
     member do
       get 'confirm_delete'
+      get 'new_schedule_block'
+      post 'create_schedule_block'
+      get 'edit_schedule_block'
+      post 'update_schedule_block'
+      get 'cancel_schedule_block'
     end
   end
 

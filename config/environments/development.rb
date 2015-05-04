@@ -58,4 +58,7 @@ Rails.application.configure do
   # config.active_record.raise_in_transactional_callbacks = true
   # (called from <class:User> at /the-doctor/app/models/user.rb:33)
   config.active_record.raise_in_transactional_callbacks = true
+
+  # Added this line to help with debugging of non-RESTful controller actions (create_schedule_block, show_schedule_block, index_schedule_blocks). Without this line, changes to code here is not loaded properly and requires server restart.
+  config.reload_classes_only_on_change = false
 end
