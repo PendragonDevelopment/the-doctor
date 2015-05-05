@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, :only => [:edit, :show, :update, :confirm_delete, :destroy, :new_schedule_block, :create_schedule_block, :edit_schedule_block, :update_schedule_block, :cancel_schedule_block]
+  before_action :set_event, :only => [:edit, :show, :update, :confirm_delete, :destroy, :new_schedule_block, :create_schedule_block, :show_schedule_block, :edit_schedule_block, :update_schedule_block, :cancel_schedule_block]
 
   def index
     # from DEM branch
@@ -110,6 +110,11 @@ class EventsController < ApplicationController
   # Custom Schedule Block actions below...
   #========================================
 
+    def index_schedule_block
+      @event = Event.first
+      @schedule_blocks = @event.get_schedule_blocks
+    end
+
     def new_schedule_block
     end
 
@@ -123,6 +128,10 @@ class EventsController < ApplicationController
         render :create_schedule_block
         flash[:notice] = "Schedule block was not created."
       end
+    end
+
+    def show_schedule_block
+      @schedule_block = @event.get_schedule_block(params[:sb_id])
     end
 
     def edit_schedule_block

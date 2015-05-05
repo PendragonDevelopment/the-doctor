@@ -26,13 +26,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <%= link_to 'Edit Event', edit_event_path(@event.id), class: 'btn btn-primary' %>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <h2>Event Instances</h2>
+    <h2>Event Instance</h2>
     <table class="table table-hover table-bordered table-striped">
       <thead>
         <tr>
@@ -45,18 +39,16 @@
         </tr>
       </thead>
       <tbody>
-        <% @schedule_blocks.each do |sb| %>
         <tr>
-          <td><%= DateTime.parse(sb['start_time']).strftime("%a, %B %e, %Y") %></td>
-          <td><%= DateTime.parse(sb['start_time']).strftime("%l:%M")%>-<%= DateTime.parse(sb['end_time']).strftime("%l:%M %p") %></td>
+          <td><%= DateTime.parse(@schedule_block['start_time']).strftime("%a, %B %e, %Y") %></td>
+          <td><%= DateTime.parse(@schedule_block['start_time']).strftime("%l:%M")%>-<%= DateTime.parse(@schedule_block['end_time']).strftime("%l:%M %p") %></td>
           <td>NUMBER OF APPTS HERE</td>
-          <td><%= sb['reservation_min'] %></td>
-          <td><%= sb['reservation_max'] %></td>
-          <td><%= sb['status'] %></td>
-          <td><%= link_to 'Edit', edit_schedule_block_event_path(id: @event.id, sb_id: sb['id']) %></td>
-          <td><%= link_to 'Cancel', cancel_schedule_block_event_path(id: @event.id, sb_id: sb['id'])%></td>
+          <td><%= @schedule_block['reservation_min'] %></td>
+          <td><%= @schedule_block['reservation_max'] %></td>
+          <td><%= @schedule_block['status'] %></td>
+          <td><%= link_to 'Edit', edit_schedule_block_event_path(id: @event.id, sb_id: @schedule_block['id']) %></td>
+          <td><%= link_to 'Cancel', cancel_schedule_block_event_path(id: @event.id, sb_id: @schedule_block['id'])%></td>
         </tr>
-        <% end %>
       </tbody>
     </table>
   </div>
@@ -65,6 +57,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <%= link_to 'Create New Event Instance', new_schedule_block_event_path(@event.id), class: 'btn btn-primary' %>
+    <%= link_to 'All Event Instances for this Event', event_path(@event.id), class: 'btn btn-primary' %>
+    <%= link_to 'Index of All Event Instances', index_schedule_block_events_path, class: 'btn btn-default' %>
   </div>
 </div>

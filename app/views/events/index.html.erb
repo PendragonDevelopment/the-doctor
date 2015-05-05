@@ -22,7 +22,7 @@
 	<table class="table table-hover table-bordered">
 		<thead>
 			<tr>
-				<th>Title</th>
+				<th>Activity</th>
 				<th>Location</th>
         <th>Price</th>
         <th>Event Instances</th>
@@ -41,11 +41,13 @@
               <%= DateTime.parse(sb['start_time']).strftime('%a, %B %e, %Y') %>
               <%= DateTime.parse(sb['start_time']).strftime('%l:%M') %>
               <%= DateTime.parse(sb['end_time']).strftime('%l:%M %p') %>
-              </b></li>
+              </b>
+              <%= link_to 'View', show_schedule_block_event_path(id: @event.id, sb_id: sb['id']) %>
+              </li>
             <% end %>
           </ul>
           </td>
-          <td><%= link_to 'Create a new Event Instance', create_schedule_block_event_path(event.id), class: 'btn btn-default btn-sm btn-block' %><br/>
+          <td><%= link_to 'Create a new Event Instance', new_schedule_block_event_path(event.id), class: 'btn btn-default btn-sm btn-block' %><br/>
           <%= link_to 'Event Instance Details', event_path(event.id), class: 'btn btn-default btn-sm btn-block' %><br/>
           <%= link_to 'Edit Event', edit_event_path(event.id), class: 'btn btn-default btn-sm btn-block' %><br/>
           <%= link_to 'Delete Event', confirm_delete_event_path(event.id), class: 'btn btn-default btn-sm btn-block' %></td>

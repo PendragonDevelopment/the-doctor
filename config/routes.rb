@@ -8,9 +8,13 @@ Rails.application.routes.draw do
       get 'confirm_delete'
       get 'new_schedule_block'
       post 'create_schedule_block'
+      get 'show_schedule_block'
       get 'edit_schedule_block'
       post 'update_schedule_block'
       get 'cancel_schedule_block'
+    end
+    collection do
+      get 'index_schedule_block'
     end
   end
 

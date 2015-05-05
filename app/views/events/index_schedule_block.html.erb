@@ -1,8 +1,7 @@
-<h1><%= "#{@event.activity.title} at #{@event.location.title}" %></h1>
+<h1>All Event Instances</h1>
 
 <div class="row">
   <div class="col-md-12">
-    <h2>Event Details</h2>
     <table class="table table-hover table-bordered table-striped">
       <thead>
         <tr>
@@ -10,32 +9,6 @@
           <th>Rate</th>
           <th>Host</th>
           <th>Location</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= @event.activity.title %></td>
-          <td>$<%= @event.event_rate %></td>
-          <td><%= @event.host.user.first_name %></td>
-          <td><%= @event.location.title %></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <%= link_to 'Edit Event', edit_event_path(@event.id), class: 'btn btn-primary' %>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <h2>Event Instances</h2>
-    <table class="table table-hover table-bordered table-striped">
-      <thead>
-        <tr>
           <th>Date</th>
           <th>Time</th>
           <th>Attendees</th>
@@ -46,7 +19,12 @@
       </thead>
       <tbody>
         <% @schedule_blocks.each do |sb| %>
+          <% event = Event.find(sb['event_id']) %>
         <tr>
+          <td><%= event.activity.title %></td>
+          <td>$<%= event.event_rate %></td>
+          <td><%= event.host.user.first_name %></td>
+          <td><%= event.location.title %></td>
           <td><%= DateTime.parse(sb['start_time']).strftime("%a, %B %e, %Y") %></td>
           <td><%= DateTime.parse(sb['start_time']).strftime("%l:%M")%>-<%= DateTime.parse(sb['end_time']).strftime("%l:%M %p") %></td>
           <td>NUMBER OF APPTS HERE</td>
@@ -59,12 +37,5 @@
         <% end %>
       </tbody>
     </table>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="col-md-12">
-    <%= link_to 'Create New Event Instance', new_schedule_block_event_path(@event.id), class: 'btn btn-primary' %>
   </div>
 </div>
