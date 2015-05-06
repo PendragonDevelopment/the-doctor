@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       get 'show_schedule_block'
       get 'edit_schedule_block'
       post 'update_schedule_block'
-      get 'cancel_schedule_block'
+      get 'block_schedule_block'
     end
     collection do
       get 'index_schedule_block'

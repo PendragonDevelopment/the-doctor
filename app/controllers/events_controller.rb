@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, :only => [:edit, :show, :update, :confirm_delete, :destroy, :new_schedule_block, :create_schedule_block, :show_schedule_block, :edit_schedule_block, :update_schedule_block, :cancel_schedule_block]
+  before_action :set_event, :only => [:edit, :show, :update, :confirm_delete, :destroy, :new_schedule_block, :create_schedule_block, :show_schedule_block, :edit_schedule_block, :update_schedule_block, :block_schedule_block]
 
   def index
     # from DEM branch
@@ -154,7 +154,7 @@ class EventsController < ApplicationController
 
     end
 
-    def cancel_schedule_block
+    def block_schedule_block
       @schedule_block = @event.get_schedule_block(params[:sb_id])
     end
 

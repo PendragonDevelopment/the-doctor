@@ -1,9 +1,13 @@
-<h1>Cancel Event Instance</h1>
+<h1>Block Event Instance</h1>
 
 <!-- If schedule_block has appointments, display message stating the Host cannot cancel appointment
 -->
 
-<h3>Are you sure you want to cancel this Event Instance?</h3>
+<% if @schedule_block['status'] == 'blocked' %>
+  <h3>Are you sure you want to <b><u>unblock</u></b> this Event Instance?</h3>
+<% else %>
+  <h3>Are you sure you want to <b><u>block</u></b> this Event Instance?</h3>
+<% end %>
 
 <div class="row">
   <div class="col-md-12">
@@ -34,6 +38,10 @@
 
 <div class="row">
   <div class="col-md-12">
-  <%= button_to 'Cancel Event Instance', update_schedule_block_event_path, params: {schedule_block_id: @schedule_block['id'], status: 'cancelled' }, class: 'btn btn-danger' %>
+    <% if @schedule_block['status'] == 'blocked' %>
+      <%= button_to 'Unblock Event Instance', update_schedule_block_event_path, params: {schedule_block_id: @schedule_block['id'], status: 'open' }, class: 'btn btn-danger' %>
+    <% else %>
+     <%= button_to 'Block Event Instance', update_schedule_block_event_path, params: {schedule_block_id: @schedule_block['id'], status: 'blocked' }, class: 'btn btn-danger' %>
+    <% end %>
   </div>
 </div>

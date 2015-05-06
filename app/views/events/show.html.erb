@@ -54,7 +54,11 @@
           <td><%= sb['reservation_max'] %></td>
           <td><%= sb['status'] %></td>
           <td><%= link_to 'Edit', edit_schedule_block_event_path(id: @event.id, sb_id: sb['id']) %></td>
-          <td><%= link_to 'Cancel', cancel_schedule_block_event_path(id: @event.id, sb_id: sb['id'])%></td>
+          <td><% if sb['status'] == 'blocked' %>
+                <%= link_to 'Unblock', block_schedule_block_event_path(id: @event.id, sb_id: sb['id'])%>
+              <% else %>
+                <%= link_to 'Block', block_schedule_block_event_path(id: @event.id, sb_id: sb['id'])%></td>
+              <% end %>
         </tr>
         <% end %>
       </tbody>
