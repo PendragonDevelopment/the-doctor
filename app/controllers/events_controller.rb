@@ -12,43 +12,29 @@ class EventsController < ApplicationController
   end
 
   def create
-    # To exclude new_location and new_activity params
     stripped_params = event_params.except(:new_location, :new_activity)
 
     @event = current_user.host.events.create(stripped_params)
     
-    # Allows for creation and selection of a new Location through form
-    new_location = event_params[:new_location][:title]
-    unless new_location.empty?
-      if Location.where(title: new_location).empty?
-        new_location_record = @event.create_location(title: new_location)
-        @event.update_attributes(location_id: new_location_record.id )
-      else
-        redirect_to new_event_path
-        flash[:error] = "You cannot create a location that already exists!"
-        return
-      end
+    if @event.new_location_from_event_form(event_params[:new_location]) == false
+      flash[:error] = "Location already exists"
+      render :new
+      return
     end
     
-    # Allows for creation and selection of a new Activity through form
-    new_activity = event_params[:new_activity][:title]
-    unless new_activity.empty?
-      if Activity.where(title: new_activity).empty?
-        new_activity_record = @event.create_activity(title: new_activity)
-        @event.update_attributes(activity_id: new_activity_record.id)
-      else
-        redirect_to new_event_path
-        flash[:error] = "You cannot create an activity that already exists!"
-        return
-      end
+    if @event.new_activity_from_event_form(event_params[:new_activity]) == false
+      flash[:error] = "Activity already exists"
+      render :new
+      return
     end
-
+    
     if @event.save
       redirect_to new_schedule_block_event_path(@event.id)
     else
       render :new
       flash[:notice] = "Event could not be created. Please try again."
     end
+
   end
 
   def new
@@ -71,19 +57,16 @@ class EventsController < ApplicationController
   def update
     stripped_params = event_params.except(:new_location, :new_activity)
   
-    # Allows for creation and selection of a new Location through form
-    # However, this creates a location with only a title, we need to add fields for Location description, latitude and longitude 
-    new_location = event_params[:new_location][:new_location]
-    unless new_location.empty?
-      new_location_record = @event.create_location(title: new_location)
-      @event.update_attributes(location_id: new_location_record.id )
+    if @event.new_location_from_event_form(event_params[:new_location]) == false
+      render :new
+      flash[:error] = "Location already exists"
+      return
     end
     
-    # Allows for creation and selection of a new Activity through form
-    new_activity = event_params[:new_activity][:new_activity]
-    unless new_activity.empty?
-      new_activity_record = @event.create_activity(title: new_activity)
-      @event.update_attributes(activity_id: new_activity_record.id)
+    if @event.new_activity_from_event_form(event_params[:new_activity]) == false
+      render :new
+      flash[:error] = "Activity already exists"
+      return
     end
 
     if @event.update(stripped_params)
