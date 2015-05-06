@@ -1,14 +1,16 @@
 require 'rails_helper'
 
+# Turned off VCR for Events controller because there is no communication with Tardis here...
+VCR.turn_off!(:ignore_cassettes => true)
+
 describe EventsController, type: :controller do
 	
 	describe 'GET #index' do
 		
-		it "populates an array of all events" do
-			highland_games = create(:event, rate: 700)
-			olympics = create(:event, rate: 600)
+		it "assigns @events" do
+			black_keys_concert = create(:event)
 			get :index
-			expect(assigns(:events)).to match_array([highland_games, olympics])
+			expect(assigns(:events)).to match_array([black_keys_concert])
 		end
 
 		it "renders the :index template" do
@@ -61,6 +63,10 @@ describe EventsController, type: :controller do
 	end
 
 	describe 'POST #create' do
+    before :each do
+      # This simulates an anonymous user
+      login_with create(:user_host)
+    end
 
 		context 'with valid attributes' do
 
@@ -142,9 +148,9 @@ describe EventsController, type: :controller do
 			}.to change(Event, :count).by(-1)
 		end
 
-		it "redirects to root path" do
+		it "redirects to Events index" do
 			delete :destroy, id: @event
-			expect(response).to redirect_to root_url
+			expect(response).to redirect_to events_path
 		end
 	end
 end
