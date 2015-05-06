@@ -18,7 +18,7 @@ class EventsController < ApplicationController
     @event = current_user.host.events.create(stripped_params)
     
     # Allows for creation and selection of a new Location through form
-    new_location = event_params[:new_location][:new_location]
+    new_location = event_params[:new_location][:title]
     unless new_location.empty?
       if Location.where(title: new_location).empty?
         new_location_record = @event.create_location(title: new_location)
@@ -31,7 +31,7 @@ class EventsController < ApplicationController
     end
     
     # Allows for creation and selection of a new Activity through form
-    new_activity = event_params[:new_activity][:new_activity]
+    new_activity = event_params[:new_activity][:title]
     unless new_activity.empty?
       if Activity.where(title: new_activity).empty?
         new_activity_record = @event.create_activity(title: new_activity)
@@ -165,7 +165,7 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:event_rate, :location_id, {new_location: [:new_location]}, :activity_id, {new_activity: [:new_activity]},:host_id, {params: [:host_id, :event_id, :location_id, :start_time, :end_time, :reservation_min, :reservation_max, :status]})
+      params.require(:event).permit(:event_rate, :location_id, {new_location: [:title]}, :activity_id, {new_activity: [:title]}, :host_id)
     end
 
   end
