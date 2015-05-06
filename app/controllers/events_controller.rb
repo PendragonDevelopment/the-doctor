@@ -31,8 +31,8 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to new_schedule_block_event_path(@event.id)
     else
-      render :new
       flash[:notice] = "Event could not be created. Please try again."
+      render :new
     end
 
   end
@@ -58,24 +58,24 @@ class EventsController < ApplicationController
     stripped_params = event_params.except(:new_location, :new_activity)
   
     if @event.new_location_from_event_form(event_params[:new_location]) == false
-      render :new
       flash[:error] = "Location already exists"
+      render :new
       return
     end
     
     if @event.new_activity_from_event_form(event_params[:new_activity]) == false
-      render :new
       flash[:error] = "Activity already exists"
+      render :new
       return
     end
 
     if @event.update(stripped_params)
       # Update associated Schedule Blocks
-      redirect_to @event
       flash[:notice] = "Event succesfully updated."
+      redirect_to @event
     else
-      render :edit
       flash[:notice] = "Event was not updated."
+      render :edit
     end
   end
 
@@ -84,9 +84,9 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    @event.destroy    
-    redirect_to events_path
+    @event.destroy  
     flash[:notice] = "Event succesfully deleted."
+    redirect_to events_path
   end
 
   #========================================
