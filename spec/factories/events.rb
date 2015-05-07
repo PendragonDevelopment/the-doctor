@@ -21,10 +21,6 @@ FactoryGirl.define do
     location
     event_rate 500
 
-    factory :event_alternate do 
-      association :activity, factory: :activity, title: 'T. Hardy Morris Concert'
-    end
-
     factory :invalid_event do
       rate nil
     end

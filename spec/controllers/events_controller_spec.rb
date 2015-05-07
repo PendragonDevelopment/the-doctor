@@ -8,9 +8,9 @@ describe EventsController, type: :controller do
 	describe 'GET #index' do
 		
 		it "assigns @events" do
-			black_keys_concert = create(:event)
+			event = create(:event)
 			get :index
-			expect(assigns(:events)).to match_array([black_keys_concert])
+			expect(assigns(:events)).to match_array([event])
 		end
 
 		it "renders the :index template" do

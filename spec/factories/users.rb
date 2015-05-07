@@ -40,15 +40,4 @@ FactoryGirl.define do
       role 2
     end
   end
-
-  factory :user_host, class: User do
-    first_name "Steve"
-    last_name "Harvey"
-    sequence(:username) {|n| "Test User #{n}"}
-    sequence(:email) {|n| "test-#{n}@example.com"}
-    password "please123"
-    role 0
-    host
-  end
-
 end
