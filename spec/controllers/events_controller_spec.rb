@@ -99,7 +99,7 @@ describe EventsController, type: :controller do
 
 	describe 'PATCH #update' do
 		before(:each) do
-			@event = create(:event, rate: 1)
+			@event = create(:event, event_rate: 1)
 		end
 		
 		context 'with valid attributes' do
