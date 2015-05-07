@@ -142,9 +142,9 @@ describe ActivitiesController, type: :controller do
 			}.to change(Activity, :count).by(-1)
 		end
 
-		it "redirects to root path" do
+		it "redirects to Activities index" do
 			delete :destroy, id: @activity
-			expect(response).to redirect_to root_url
+			expect(response).to redirect_to activities_path
 		end
 	end
 end
