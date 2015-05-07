@@ -14,15 +14,16 @@
 
 
 FactoryGirl.define do
+
   factory :event do
     activity
     host
     location
-    rate 500
+    event_rate 500
 
     factory :invalid_event do
-    	rate nil
+      rate nil
     end
   end
-
+  
 end

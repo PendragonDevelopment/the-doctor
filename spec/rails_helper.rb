@@ -25,6 +25,17 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+
+  # Added so that current_user would not return nil
+  # Code from this blog: https://medium.com/@mozhuuuuu/rspec-controllers-and-devise-4bb81e76d8ca
+  config.include ControllerHelpers, type: :controller
+
+  # Added per instructions here: http://willschenk.com/setting-up-testing/
+  # 3 of 3 additions
+  config.include FactoryGirl::Syntax::Methods
+  config.include Devise::TestHelpers, type: :controller
+  config.include Warden::Test::Helpers
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

@@ -39,6 +39,5 @@ FactoryGirl.define do
     trait :admin do
       role 2
     end
-
   end
 end
