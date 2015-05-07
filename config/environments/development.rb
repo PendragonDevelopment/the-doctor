@@ -51,4 +51,14 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Added because of prompt in Rails server:
+  # DEPRECATION WARNING: Currently, Active Record suppresses errors raised within `after_rollback`/`after_commit` callbacks and only print them to the logs. In the next version, these errors will no longer be suppressed. Instead, the errors will propagate normally just like in other Active Record callbacks.
+  # You can opt into the new behavior and remove this warning by setting:
+  # config.active_record.raise_in_transactional_callbacks = true
+  # (called from <class:User> at /the-doctor/app/models/user.rb:33)
+  config.active_record.raise_in_transactional_callbacks = true
+
+  # Added this line to help with debugging of non-RESTful controller actions (create_schedule_block, show_schedule_block, index_schedule_blocks). Without this line, changes to code here is not loaded properly and requires server restart.
+  config.reload_classes_only_on_change = false
 end

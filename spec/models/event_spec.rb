@@ -150,6 +150,7 @@ RSpec.describe Event, type: :model do
           }
         end
 
+
         before(:each) do
           VCR.use_cassette("create_schedule_block") do
             @response = event.create_schedule_block(schedule_block_params)

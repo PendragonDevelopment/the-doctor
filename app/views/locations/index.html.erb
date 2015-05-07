@@ -1,1 +1,37 @@
-<h1>Locations#index</h1>
+<div class="row">
+  <div class="col-md-3">
+    <h1>Locations</h1>
+  </div>
+  <div class="col-md-3 col-md-offset-6">
+    <br/>
+    <%= link_to 'Create New Location', new_location_path, class: 'btn btn-default pull-right' %>
+  </div>
+</div>
+
+<div class="row">
+  <table class="table table-hover table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @locations.each do |location| %>
+      <tr>
+        <td><%= location.title %></td>
+        <td><%= location.description %></td>
+        <td><%= location.latitude %></td>
+        <td><%= location.longitude %></td>
+        <td><%= link_to 'Edit', edit_location_path(location.id) %></td>
+        <td><%= link_to 'Delete', location_path(location.id), method: :delete %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to 'Create New Location', new_location_path, class: 'btn btn-default' %>

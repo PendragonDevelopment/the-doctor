@@ -142,9 +142,9 @@ describe LocationsController, type: :controller do
 			}.to change(Location, :count).by(-1)
 		end
 
-		it "redirects to root path" do
+		it "redirects to Locations index" do
 			delete :destroy, id: @location
-			expect(response).to redirect_to root_url
+			expect(response).to redirect_to locations_path
 		end
 	end
 end
