@@ -13,21 +13,10 @@ class EventsController < ApplicationController
 
   def create
     stripped_params = event_params.except(:new_location, :new_activity)
-
     @event = current_user.host.events.create(stripped_params)
-    
-    if @event.new_location_from_event_form(event_params[:new_location]) == false
-      flash[:error] = "Location already exists"
-      render :new
-      return
-    end
-    
-    if @event.new_activity_from_event_form(event_params[:new_activity]) == false
-      flash[:error] = "Activity already exists"
-      render :new
-      return
-    end
-    
+    @event.new_location_from_event_form(event_params[:new_location])
+    @event.new_activity_from_event_form(event_params[:new_activity])
+     
     if @event.save
       redirect_to new_schedule_block_event_path(@event.id)
     else

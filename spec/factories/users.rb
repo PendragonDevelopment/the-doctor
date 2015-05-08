@@ -36,6 +36,10 @@ FactoryGirl.define do
     password "please123"
     role 0
 
+    factory :user_host do
+      host
+    end
+
     trait :admin do
       role 2
     end
