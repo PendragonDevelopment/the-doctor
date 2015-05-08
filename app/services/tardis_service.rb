@@ -1,7 +1,5 @@
 class TardisService
 
-  after_create :
-
   attr_reader :token
 
   def initialize(params)
