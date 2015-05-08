@@ -20,15 +20,4 @@ class Event < ActiveRecord::Base
 
 	validates :event_rate, presence: true
 
-	@@token ||= nil
-
-	def self.generate_token
-		authorized_application = OAuth2::Client.new(CLIENT_ID, CLIENT_SECRET, :site => SITE_URL)
-		@@token = authorized_application.client_credentials.get_token
-	end
-
-	def token
-		@@token
-	end
-
 end
