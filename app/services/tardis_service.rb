@@ -26,6 +26,7 @@ class TardisService
     end
 
     def wrap_params(basic_params)
+      #this is here because the tardis expects all params to be wrapped in a params hash
       result_hash = {
         :params => basic_params
       }
