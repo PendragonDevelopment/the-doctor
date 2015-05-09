@@ -40,34 +40,4 @@ RSpec.describe Event, type: :model do
       expect(invalid_event).not_to be_valid
     end
   end
-
-  describe "Tardis methods" do
-
-    # Generate a token first before running these tests.  There is a spec that makes sure that this isn't nil -
-    # and if it doesn't work right then none of the other tests will work anyway
-
-    VCR.use_cassette("generate_token") do
-      Event.generate_token
-    end
-
-    describe "responds to its methods" do
-      subject {event}
-
-      it {is_expected.to respond_to(:get_schedule_blocks)}
-      it {is_expected.to respond_to(:get_schedule_block)}
-      it {is_expected.to respond_to(:get_appointments_on_schedule_block)}
-      it {is_expected.to respond_to(:get_appointment_on_schedule_block)}
-      it {is_expected.to respond_to(:create_schedule_block)}
-      it {is_expected.to respond_to(:update_schedule_block)}
-      it {is_expected.to respond_to(:delete_schedule_block)}
-      it {is_expected.to respond_to(:token)}
-
-      it "@@token is not nil" do
-        expect(event.token).not_to be_nil
-      end
-
-    end
-  end
-
-
 end

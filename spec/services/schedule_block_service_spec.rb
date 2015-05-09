@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-Rspec.describe ScheduleBlockService do
+RSpec.describe ScheduleBlockService do
 
   let(:sb_service) {ScheduleBlockService.new}
 
@@ -23,7 +23,7 @@ Rspec.describe ScheduleBlockService do
 
       describe "#get_schedule_block" do
 
-        let(:schedule_block_id) { 1 }
+        let(:schedule_block_id) { 80 }
 
         before(:each) do
           VCR.use_cassette("get_schedule_block") do
@@ -42,7 +42,7 @@ Rspec.describe ScheduleBlockService do
 
       describe "#get_appointments_on_schedule_block" do
 
-        let(:schedule_block_id) { 1 }
+        let(:schedule_block_id) { 80 }
 
         before(:each) do
           VCR.use_cassette("get_appointments_on_schedule_block") do
@@ -57,7 +57,7 @@ Rspec.describe ScheduleBlockService do
       end
 
       describe "#get_appointment_on_schedule_block" do
-        let(:schedule_block_id) { 1 }
+        let(:schedule_block_id) { 80 }
         let(:appointment_id) { 1 }
 
         before(:each) do
@@ -100,7 +100,13 @@ Rspec.describe ScheduleBlockService do
 
       describe "#update_schedule_block" do
 
-        let(:schedule_block_id) { 1 }
+        let(:schedule_block_id) { 80 }
+        let!(:host) {create(:host)}
+        let(:location) {create(:location)}
+        let(:activity) {create(:activity)}
+        let(:event) {
+          host.events.create(FactoryGirl.attributes_for(:event, :location_id => location.id, :activity_id => activity.id))
+        }
 
         let(:updated_schedule_block_params) do
           {

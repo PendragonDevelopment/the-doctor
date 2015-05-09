@@ -16,7 +16,7 @@ FactoryGirl.define do
     activity
     host
     location
-    rate 500
+    event_rate 500
 
     factory :invalid_event do
     	rate nil
