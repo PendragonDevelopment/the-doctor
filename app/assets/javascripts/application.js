@@ -17,3 +17,6 @@
 //= require_tree .
 //= require jquery.raty
 //= require ratyrate
+////= require moment
+//= require fullcalendar
+//= require fullcalendar/gcal 

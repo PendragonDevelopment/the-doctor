@@ -26,6 +26,8 @@ gem 'faraday', '0.8.9' #need to specify this version because more recent version
 gem 'ransack'
 gem 'ratyrate'
 gem 'geocoder'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 group :development do
   gem 'better_errors'

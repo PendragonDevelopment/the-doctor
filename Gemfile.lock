@@ -108,6 +108,9 @@ GEM
     ffi (1.9.8)
     figaro (1.1.0)
       thor (~> 0.14)
+    fullcalendar-rails (2.3.1.0)
+      jquery-rails (>= 3.1.1, < 5.0.0)
+      momentjs-rails (~> 2.8, >= 2.8.4)
     geocoder (1.2.8)
     globalid (0.3.3)
       activesupport (>= 4.1.0)
@@ -143,6 +146,8 @@ GEM
     mime-types (2.4.3)
     mini_portile (0.6.2)
     minitest (5.5.1)
+    momentjs-rails (2.10.2)
+      railties (>= 3.1)
     multi_json (1.11.0)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
@@ -339,11 +344,13 @@ DEPENDENCIES
   faker
   faraday (= 0.8.9)
   figaro (>= 1.0.0.rc1)
+  fullcalendar-rails
   geocoder
   high_voltage
   jbuilder (~> 2.0)
   jquery-rails
   launchy
+  momentjs-rails
   oauth2
   paperclip (~> 4.2)
   pg
