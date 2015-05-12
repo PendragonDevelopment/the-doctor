@@ -1,33 +1,22 @@
 class EventsController < ApplicationController
-  before_action :set_event, :only => [:edit, :show, :update, :confirm_delete, :destroy, :new_schedule_block, :create_schedule_block, :show_schedule_block, :edit_schedule_block, :update_schedule_block, :block_schedule_block]
+  before_action :set_event, only: [:edit, :show, :update, :confirm_delete, :destroy, :new_schedule_block, :create_schedule_block, :show_schedule_block, :edit_schedule_block, :update_schedule_block, :block_schedule_block]
+  before_action :set_one_schedule_block, only: [:block_schedule_block, :edit_schedule_block, :show_schedule_block]
+  before_action :set_all_schedule_blocks, only: [:edit, :show, :confirm_delete]
+  before_action :set_sb_service_object, only: [:create_schedule_block]
 
   def index
     # from DEM branch
     @q = Event.ransack(params[:q])
     @events = @q.result
-    if Event.first then
-      @event = Event.first
-      @schedule_blocks = @event.get_schedule_blocks
-    end
+    @schedule_blocks = ScheduleBlockService.new.get_schedule_blocks if @events
   end
 
-  def create
+  def create  
     stripped_params = event_params.except(:new_location, :new_activity)
-
     @event = current_user.host.events.create(stripped_params)
-    
-    if @event.new_location_from_event_form(event_params[:new_location]) == false
-      flash[:error] = "Location already exists"
-      render :new
-      return
-    end
-    
-    if @event.new_activity_from_event_form(event_params[:new_activity]) == false
-      flash[:error] = "Activity already exists"
-      render :new
-      return
-    end
-    
+    @event.new_location_from_event_form(event_params[:new_location])
+    @event.new_activity_from_event_form(event_params[:new_activity])
+   
     if @event.save
       redirect_to new_schedule_block_event_path(@event.id)
     else
@@ -47,11 +36,9 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @schedule_blocks = @event.get_schedule_blocks.select{|sb| sb['event_id'] == @event.id }
   end
 
   def show
-    @schedule_blocks = @event.get_schedule_blocks.select{|sb| sb['event_id'] == @event.id }
   end
 
   def update
@@ -80,7 +67,6 @@ class EventsController < ApplicationController
   end
 
   def confirm_delete
-    @schedule_blocks = @event.get_schedule_blocks.select{|sb| sb['event_id'] == @event.id }
   end
 
   def destroy
@@ -95,7 +81,7 @@ class EventsController < ApplicationController
 
     def index_schedule_block
       @event = Event.first
-      @schedule_blocks = @event.get_schedule_blocks
+      @schedule_blocks = ScheduleBlockService.new.get_schedule_blocks
     end
 
     def new_schedule_block
@@ -104,7 +90,7 @@ class EventsController < ApplicationController
     def create_schedule_block
       stripped_params = params.except(:utf8, :authenticity_token, :commit, :controller, :action, :id)
       puts "Params = #{stripped_params}"
-      if @event.create_schedule_block(stripped_params)
+      if @sb.create_schedule_block(stripped_params)
         redirect_to event_path(@event.id)
         flash[:notice] = "Schedule block succesfully created."
       else
@@ -114,11 +100,9 @@ class EventsController < ApplicationController
     end
 
     def show_schedule_block
-      @schedule_block = @event.get_schedule_block(params[:sb_id])
     end
 
     def edit_schedule_block
-      @schedule_block = @event.get_schedule_block(params[:sb_id])
     end
 
     def update_schedule_block
@@ -138,7 +122,6 @@ class EventsController < ApplicationController
     end
 
     def block_schedule_block
-      @schedule_block = @event.get_schedule_block(params[:sb_id])
     end
 
   private
@@ -151,4 +134,17 @@ class EventsController < ApplicationController
       params.require(:event).permit(:event_rate, :location_id, {new_location: [:title]}, :activity_id, {new_activity: [:title]}, :host_id)
     end
 
-  end
+    def set_one_schedule_block
+      @schedule_block = ScheduleBlockService.new.get_schedule_block(params[:sb_id])
+    end
+
+    def set_all_schedule_blocks
+      @schedule_blocks = ScheduleBlockService.new.get_schedule_blocks.select{|sb| sb['event_id'] == @event.id }
+    end
+
+    def set_sb_service_object
+      @sb = ScheduleBlockService.new
+    end
+
+
+end
