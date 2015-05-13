@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:edit, :show, :update, :confirm_delete, :destroy, :new_schedule_block, :create_schedule_block, :show_schedule_block, :edit_schedule_block, :update_schedule_block, :block_schedule_block]
   before_action :set_one_schedule_block, only: [:block_schedule_block, :edit_schedule_block, :show_schedule_block]
   before_action :set_all_schedule_blocks, only: [:edit, :show, :confirm_delete]
-  before_action :set_sb_service_object, only: [:create_schedule_block]
+  before_action :set_sb_service_object, only: [:create_schedule_block, :update_schedule_block]
 
   def index
     # from DEM branch
@@ -111,7 +111,7 @@ class EventsController < ApplicationController
       puts "Schedule block ID = #{schedule_block_id}"
       puts "Stripped params = #{stripped_params}"
 
-      if @event.update_schedule_block(schedule_block_id, stripped_params)
+      if @sb.update_schedule_block(schedule_block_id, stripped_params)
         redirect_to event_path(@event.id)
         flash[:notice] = "Schedule block was succesfully updated."
       else
