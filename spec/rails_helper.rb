@@ -38,6 +38,7 @@ RSpec.configure do |config|
 
   # Add LoginMacros to enable sign_in method
   config.include LoginMacros
+  config.include ScheduleBlockHelper
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

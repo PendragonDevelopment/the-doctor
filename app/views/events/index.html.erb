@@ -42,7 +42,7 @@
               <%= DateTime.parse(sb['start_time']).strftime('%l:%M') %>
               <%= DateTime.parse(sb['end_time']).strftime('%l:%M %p') %>
               </b>
-              <%= link_to 'View', show_schedule_block_event_path(id: @event.id, sb_id: sb['id']) %>
+              <%= link_to 'View', show_schedule_block_event_path(id: event.id, sb_id: sb['id']) %>
               </li>
             <% end %>
           </ul>

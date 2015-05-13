@@ -27,6 +27,7 @@
 <div class="row">
   <div class="col-md-12">
     <%= link_to 'Edit Event', edit_event_path(@event.id), class: 'btn btn-primary' %>
+    <%= link_to 'Delete Event', confirm_delete_event_path(@event.id), class: 'btn btn-danger' %>
   </div>
 </div>
 

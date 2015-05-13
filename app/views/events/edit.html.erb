@@ -37,11 +37,11 @@
   <%= bootstrap_form_for @event do |f| %>
     <%= f.collection_select :activity_id, Activity.all, :id, :title, prompt: "Select Activity" %>
     <%= f.fields_for :new_activity do |new_activity| %>
-        <%= new_activity.text_field :new_activity, label: 'or create a new activity: ', placeholder: 'Only use to create a new activity that is not listed above' %>
+        <%= new_activity.text_field :title, label: 'or create a new activity: ', placeholder: 'Only use to create a new activity that is not listed above' %>
     <% end %>
     <%= f.collection_select :location_id, Location.all, :id, :title, prompt: "Select Location" %>
     <%= f.fields_for :new_location do |new_location| %>
-        <%= new_location.text_field :new_location, label: 'or create a new location: ', placeholder: 'Only use to create a new location that is not listed above' %>
+        <%= new_location.text_field :title, label: 'or create a new location: ', placeholder: 'Only use to create a new location that is not listed above' %>
     <% end %>
     <%= f.number_field :event_rate, placeholder: 'Price in US dollars' %>
 

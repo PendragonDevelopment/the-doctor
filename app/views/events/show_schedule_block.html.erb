@@ -47,7 +47,7 @@
           <td><%= @schedule_block['reservation_max'] %></td>
           <td><%= @schedule_block['status'] %></td>
           <td><%= link_to 'Edit', edit_schedule_block_event_path(id: @event.id, sb_id: @schedule_block['id']) %></td>
-          <td><%= link_to 'Cancel', cancel_schedule_block_event_path(id: @event.id, sb_id: @schedule_block['id'])%></td>
+          <td><%= link_to 'Cancel', block_schedule_block_event_path(id: @event.id, sb_id: @schedule_block['id'])%></td>
         </tr>
       </tbody>
     </table>
