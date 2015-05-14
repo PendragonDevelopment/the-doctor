@@ -10,7 +10,7 @@
 
 FactoryGirl.define do
   factory :activity do
-    title "Juggling Competition"
+    title 'Black Keys Concert'
 
     factory :invalid_activity do
     	title nil

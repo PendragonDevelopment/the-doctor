@@ -1,1 +1,61 @@
-<h1>Events#edit</h1>
+<div class="col-md-10 col-md-offset-1">
+
+<div class="row">
+    <h1>Update Event</h1>
+</div>
+
+<div class="row">
+  <h4>Warning: Any changes you make to this event will affect all the following Event Instances</h4>
+  <table class="table table-hover table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Reservation Min</th>
+        <th>Reservation Max</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @schedule_blocks.each do |sb| %>
+      <tr>
+        <td><%= DateTime.parse(sb['start_time']).strftime("%A, %B %-d, %Y") %></td>
+        <td><%= DateTime.parse(sb['start_time']).strftime("%l:%M %P") %></td>
+        <td><%= DateTime.parse(sb['end_time']).strftime("%l:%M %P") %></td>
+        <td><%= sb['reservation_min'] %></td>
+        <td><%= sb['reservation_max'] %></td>
+        <td><%= sb['status'] %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+  <%= bootstrap_form_for @event do |f| %>
+    <%= f.collection_select :activity_id, Activity.all, :id, :title, prompt: "Select Activity" %>
+    <%= f.fields_for :new_activity do |new_activity| %>
+        <%= new_activity.text_field :title, label: 'or create a new activity: ', placeholder: 'Only use to create a new activity that is not listed above' %>
+    <% end %>
+    <%= f.collection_select :location_id, Location.all, :id, :title, prompt: "Select Location" %>
+    <%= f.fields_for :new_location do |new_location| %>
+        <%= new_location.text_field :title, label: 'or create a new location: ', placeholder: 'Only use to create a new location that is not listed above' %>
+    <% end %>
+    <%= f.number_field :event_rate, placeholder: 'Price in US dollars' %>
+
+    <%= hidden_field_tag :host, value = current_user.host %>
+    <%= hidden_field_tag :schedule_block_ID %>
+    <%= f.submit 'Update Event' %>
+  <% end %>
+</div>
+</div>
+
+<div class="row">
+  <br/>
+  <%= link_to 'All Events', events_path, class: 'btn btn-default' %>
+  <%= link_to 'Create New Event', new_event_path, class: 'btn btn-default' %>
+</div>
+
+</div>
