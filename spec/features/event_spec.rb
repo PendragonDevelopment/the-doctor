@@ -156,29 +156,7 @@ feature 'Host creates a Schedule Block for an Event' do
   end
 end
 
-feature 'Host edits a Schedule Block for an Event' do
-  background :each do 
-    host = create(:host)
-    sign_in host.user
-    @event = create(:event)
-    create_schedule_block
-  end
-
-  scenario 'Host edits start_time on an existing Schedule Block' do
-    first(:link, 'Edit').click
-    expect(page).to have_content 'Edit Schedule Block'
-  end
-
-  scenario 'Host edits end_time on an existing Schedule Block' do
-  end
-
-  scenario 'Host edits reservation_min on an existing Schedule Block' do
-  end
-
-  scenario 'Host edits reservation_max on an existing Schedule Block' do
-  end
-end
-
+# The rest of the tests for Schedule Blocks are in spec/requests/api/v1/schedule_blocks_specs.rb
 
 
 
