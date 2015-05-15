@@ -1,47 +1,6 @@
-<h1>Block Event Instance</h1>
-
-<!-- If schedule_block has appointments, display message stating the Host cannot cancel appointment
--->
-
-<% if @schedule_block['status'] == 'blocked' %>
-  <h3>Are you sure you want to <b><u>unblock</u></b> this Event Instance?</h3>
+<% if current_user.host? %>
+  <%= render 'events/host_views/block_schedule_block' %>
 <% else %>
-  <h3>Are you sure you want to <b><u>block</u></b> this Event Instance?</h3>
+  <%= render 'access_denied' %>
 <% end %>
 
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-hover table-bordered table-striped">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Attendees</th>
-          <th>Reservation Min</th>
-          <th>Reservation Max</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= DateTime.parse(@schedule_block['start_time']).strftime("%a, %B %e, %Y") %></td>
-          <td><%= DateTime.parse(@schedule_block['start_time']).strftime("%l:%M")%>-<%= DateTime.parse(@schedule_block['end_time']).strftime("%l:%M %p") %></td>
-          <td>NUMBER OF APPTS HERE</td>
-          <td><%= @schedule_block['reservation_min'] %></td>
-          <td><%= @schedule_block['reservation_max'] %></td>
-          <td><%= @schedule_block['status'] %></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <% if @schedule_block['status'] == 'blocked' %>
-      <%= button_to 'Unblock Event Instance', update_schedule_block_event_path, params: {schedule_block_id: @schedule_block['id'], status: 'open' }, class: 'btn btn-danger' %>
-    <% else %>
-     <%= button_to 'Block Event Instance', update_schedule_block_event_path, params: {schedule_block_id: @schedule_block['id'], status: 'blocked' }, class: 'btn btn-danger' %>
-    <% end %>
-  </div>
-</div>

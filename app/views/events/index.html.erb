@@ -1,58 +1,6 @@
-<div class="row">
-  <div class="col-md-3">
-    <h1>Events</h1>
-  </div>
-  <div class="col-md-3 col-md-offset-6">
-    <br/>
-    <%= link_to 'Create New Event', new_event_path, class: 'btn btn-primary pull-right' %>
-  </div>
-</div>
+<% if current_user.host? %>
+  <%= render 'events/host_views/index' %>
+<% else %>
+  <%= render 'events/customer_views/index' %>
+<% end %>
 
-<div class="row">
-  <%= search_form_for @q do |f| %>
-    <%= f.label :activity_title_cont %>
-    <%= f.search_field :activity_title_cont %>
-
-    <%= f.submit %>
-
-  <% end %>
-</div>
-
-<div class="row">
-	<table class="table table-hover table-bordered">
-		<thead>
-			<tr>
-				<th>Activity</th>
-				<th>Location</th>
-        <th>Price</th>
-        <th>Event Instances</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @events.each do |event| %>
-        <% schedule_block_array = @schedule_blocks.select{|sb| sb['event_id'] == event.id} %>
-				<tr>
-					<td><h4><%= link_to "#{event.activity.title}", event_path(event.id) %></h4></td>
-					<td><h4><%= event.location.title %></h4></td>
-          <td><h4><%= "$#{event.event_rate}" %></h4></td>
-          <td><ul>
-            <% schedule_block_array.each do |sb| %>
-              <li><b>
-              <%= DateTime.parse(sb['start_time']).strftime('%a, %B %e, %Y') %>
-              <%= DateTime.parse(sb['start_time']).strftime('%l:%M') %>
-              <%= DateTime.parse(sb['end_time']).strftime('%l:%M %p') %>
-              </b>
-              <%= link_to 'View', show_schedule_block_event_path(id: event.id, sb_id: sb['id']) %>
-              </li>
-            <% end %>
-          </ul>
-          </td>
-          <td><%= link_to 'Create a new Event Instance', new_schedule_block_event_path(event.id), class: 'btn btn-default btn-sm btn-block' %><br/>
-          <%= link_to 'Event Instance Details', event_path(event.id), class: 'btn btn-default btn-sm btn-block' %><br/>
-          <%= link_to 'Edit Event', edit_event_path(event.id), class: 'btn btn-default btn-sm btn-block' %><br/>
-          <%= link_to 'Delete Event', confirm_delete_event_path(event.id), class: 'btn btn-default btn-sm btn-block' %></td>
-				</tr>
-			<% end %>
-		</tbody>
-	</table>
-</div>

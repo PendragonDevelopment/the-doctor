@@ -156,7 +156,7 @@ feature 'Host creates a Schedule Block for an Event' do
   end
 end
 
-# The rest of the tests for Schedule Blocks are in spec/requests/api/v1/schedule_blocks_specs.rb
+# The rest of the tests for Schedule Blocks should go in spec/requests/api/v1/schedule_blocks_specs.rb
 
 
 

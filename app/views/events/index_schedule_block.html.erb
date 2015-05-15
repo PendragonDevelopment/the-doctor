@@ -1,41 +1,5 @@
-<h1>All Event Instances</h1>
-
-<div class="row">
-  <div class="col-md-12">
-    <table class="table table-hover table-bordered table-striped">
-      <thead>
-        <tr>
-          <th>Activity</th>
-          <th>Rate</th>
-          <th>Host</th>
-          <th>Location</th>
-          <th>Date</th>
-          <th>Time</th>
-          <th>Attendees</th>
-          <th>Reservation Min</th>
-          <th>Reservation Max</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @schedule_blocks.each do |sb| %>
-          <% event = Event.find(sb['event_id']) %>
-        <tr>
-          <td><%= event.activity.title %></td>
-          <td>$<%= event.event_rate %></td>
-          <td><%= event.host.user.first_name %></td>
-          <td><%= event.location.title %></td>
-          <td><%= DateTime.parse(sb['start_time']).strftime("%a, %B %e, %Y") %></td>
-          <td><%= DateTime.parse(sb['start_time']).strftime("%l:%M")%>-<%= DateTime.parse(sb['end_time']).strftime("%l:%M %p") %></td>
-          <td>NUMBER OF APPTS HERE</td>
-          <td><%= sb['reservation_min'] %></td>
-          <td><%= sb['reservation_max'] %></td>
-          <td><%= sb['status'] %></td>
-          <td><%= link_to 'Edit', edit_schedule_block_event_path(id: @event.id, sb_id: sb['id']) %></td>
-          <td><%= link_to 'Cancel', cancel_schedule_block_event_path(id: @event.id, sb_id: sb['id'])%></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-</div>
+<% if current_user.host? %>
+  <%= render 'events/host_views/index_schedule_block' %>
+<% else %>
+  <%= render 'access_denied' %>
+<% end %>
