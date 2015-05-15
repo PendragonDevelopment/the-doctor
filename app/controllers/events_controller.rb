@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:edit, :show, :update, :confirm_delete, :destroy, :new_schedule_block, :create_schedule_block, :show_schedule_block, :edit_schedule_block, :update_schedule_block, :block_schedule_block]
-  before_action :set_one_schedule_block, only: [:block_schedule_block, :edit_schedule_block, :show_schedule_block]
+  before_action :set_event, only: [:edit, :show, :update, :confirm_delete, :destroy, :new_schedule_block, :create_schedule_block, :show_schedule_block, :edit_schedule_block, :update_schedule_block, :block_schedule_block, :confirmation_page]
+  before_action :set_one_schedule_block, only: [:block_schedule_block, :edit_schedule_block, :show_schedule_block, :create_appointment]
   before_action :set_all_schedule_blocks, only: [:edit, :show, :confirm_delete]
   before_action :set_sb_service_object, only: [:create_schedule_block, :update_schedule_block]
 
@@ -109,6 +109,24 @@ class EventsController < ApplicationController
 
     def block_schedule_block
     end
+
+
+  #========================================
+  # Custom Appointment actions below...
+  #========================================
+
+  def create_appointment
+    sb_id = params['schedule_block_id']
+    appointment_params = params.except(:schedule_block_id, :authenticity_token, :controller, :action, :id)
+
+    if AppointmentService.new.create_appointment(sb_id, appointment_params)
+      redirect_to my_appointments_user_path
+      flash[:success] = 'Appointment was succesfully created!'
+    else
+      render :show_schedule_block
+      flash[:error] = 'Appointment was not created!'
+    end
+  end
 
   private
 

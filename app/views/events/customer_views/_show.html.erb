@@ -41,7 +41,7 @@
           <td><%= DateTime.parse(sb['start_time']).strftime("%a, %B %e, %Y") %></td>
           <td><%= DateTime.parse(sb['start_time']).strftime("%l:%M")%>-<%= DateTime.parse(sb['end_time']).strftime("%l:%M %p") %></td>
           <td><%= sb['status'] %></td>
-          <td><%= link_to 'Book this Event Instance', events_path, class: 'btn btn-success' %></td>
+          <td><%= link_to 'Book this Event Instance', show_schedule_block_event_path(id: @event.id, sb_id: sb['id']), class: 'btn btn-success' %></td>
         </tr>
         <% end %>
       </tbody>

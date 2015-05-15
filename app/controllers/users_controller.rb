@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :admin_only, :except => :show
+  before_filter :admin_only, except: [:show, :my_appointments]
 
   def index
     @users = User.all
@@ -28,6 +28,9 @@ class UsersController < ApplicationController
     user = User.find(params[:id])
     user.destroy
     redirect_to users_path, :notice => "User deleted."
+  end
+
+  def my_appointments
   end
 
   private
