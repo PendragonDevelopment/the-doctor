@@ -43,18 +43,9 @@ class EventsController < ApplicationController
 
   def update
     stripped_params = event_params.except(:new_location, :new_activity)
-  
-    if @event.new_location_from_event_form(event_params[:new_location]) == false
-      flash[:error] = "Location already exists"
-      render :new
-      return
-    end
-    
-    if @event.new_activity_from_event_form(event_params[:new_activity]) == false
-      flash[:error] = "Activity already exists"
-      render :new
-      return
-    end
+
+    @event.new_location_from_event_form(event_params[:new_location])
+    @event.new_activity_from_event_form(event_params[:new_activity])
 
     if @event.update(stripped_params)
       # Update associated Schedule Blocks
@@ -89,7 +80,6 @@ class EventsController < ApplicationController
 
     def create_schedule_block
       stripped_params = params.except(:utf8, :authenticity_token, :commit, :controller, :action, :id)
-      puts "Params = #{stripped_params}"
       if @sb.create_schedule_block(stripped_params)
         redirect_to event_path(@event.id)
         flash[:notice] = "Schedule block succesfully created."
@@ -108,8 +98,6 @@ class EventsController < ApplicationController
     def update_schedule_block
       stripped_params = params.except(:utf8, :authenticity_token, :commit, :controller, :action, :schedule_block_id, :id)
       schedule_block_id = params[:schedule_block_id]
-      puts "Schedule block ID = #{schedule_block_id}"
-      puts "Stripped params = #{stripped_params}"
 
       if @sb.update_schedule_block(schedule_block_id, stripped_params)
         redirect_to event_path(@event.id)
