@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-md-3">
+    <h1>Events</h1>
+  </div>
+</div>
+
+<div class="row">
+  <%= search_form_for @q do |f| %>
+    <%= f.label :activity_title_cont %>
+    <%= f.search_field :activity_title_cont %>
+
+    <%= f.submit %>
+
+  <% end %>
+</div>
+
+<div class="row">
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>Activity</th>
+        <th>Location</th>
+        <th>Host</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @events.each do |event| %>
+        <tr>
+          <td><h4><%= link_to "#{event.activity.title}", event_path(event.id) %></h4></td>
+          <td><h4><%= event.location.title %></h4></td>
+          <td><h4><%= event.host.user.first_name %></h4></td>
+          <td><h4><%= "$#{event.event_rate}" %></h4></td>
+          <td><%= link_to 'Sign Up', event_path(event.id), class: 'btn btn-primary' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

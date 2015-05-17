@@ -1,1 +1,5 @@
-<h1>Events#edit</h1>
+<% if current_user.host? %>
+  <%= render 'events/host_views/edit' %>
+<% else %>
+  <%= render 'access_denied' %>
+<% end %>

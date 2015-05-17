@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :admin_only, :except => :show
+  before_filter :admin_only, except: [:show, :my_appointments]
 
   def index
     @users = User.all
@@ -30,6 +30,9 @@ class UsersController < ApplicationController
     redirect_to users_path, :notice => "User deleted."
   end
 
+  def my_appointments
+  end
+
   private
 
   def admin_only
@@ -39,7 +42,7 @@ class UsersController < ApplicationController
   end
 
   def secure_params
-    params.require(:user).permit(:role)
+    params.require(:user).permit(:role, :username, :first_name, :last_name)
   end
 
 end

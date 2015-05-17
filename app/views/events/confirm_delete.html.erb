@@ -1,0 +1,5 @@
+<% if current_user.host? %>
+  <%= render 'events/host_views/confirm_delete' %>
+<% else %>
+  <%= render 'access_denied' %>
+<% end %>

@@ -1,0 +1,6 @@
+<% if current_user.host? %>
+  <%= render 'events/host_views/block_schedule_block' %>
+<% else %>
+  <%= render 'access_denied' %>
+<% end %>
+

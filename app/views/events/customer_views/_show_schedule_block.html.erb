@@ -1,0 +1,21 @@
+<h2>Make your appointment for the <%= "#{@event.activity.title} at #{@event.location.title}" %></h2>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h2>Event Instance Summary</h2>
+    <h4>Activity: <%= @event.activity.title %></h4>
+    <h4>Location: <%= @event.location.title %></h4>
+    <h4>Host: <%= @event.host.user.first_name %></h4>
+    <h4>Date: <%= DateTime.parse(@schedule_block['start_time']).strftime("%a, %B %e, %Y") %></h4>
+    <h4>Time: <%= DateTime.parse(@schedule_block['start_time']).strftime("%l:%M")%>-<%= DateTime.parse(@schedule_block['end_time']).strftime("%l:%M %p") %></h4>
+    <h4>Rate: $<%= @event.event_rate %></h4>
+    <h4>Status: <%= @schedule_block['status'] %></p>
+    <%= button_to 'Book my spot now!', create_appointment_event_path, params: {schedule_block_id: @schedule_block['id'], attendee: current_user.id, status: 'pending'}, class: 'btn btn-success btn-block' %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= link_to 'or see more event instances for this Event', event_path(@event.id) %>
+  </div>
+</div>
