@@ -1,3 +1,4 @@
 <h3>User</h3>
 <p>Name: <%= @user.username if @user.username %></p>
 <p>Email: <%= @user.email if @user.email %></p>
+<p>Rating: <%= rating_for_user @car, current_user, "user_rating", :star => 10 %>
