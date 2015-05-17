@@ -25,6 +25,10 @@ gem 'oauth2'
 gem 'faraday', '0.8.9' #need to specify this version because more recent versions break the vcr gem
 gem 'ransack'
 gem 'ratyrate'
+gem 'geocoder'
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller'

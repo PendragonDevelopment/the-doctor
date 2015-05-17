@@ -14,5 +14,8 @@
 class Location < ActiveRecord::Base
 	has_many :events
 
+	reverse_geocoded_by :latitude, :longitude
+	after_validation :reverse_geocode
+
 	validates :title, presence: true
 end
