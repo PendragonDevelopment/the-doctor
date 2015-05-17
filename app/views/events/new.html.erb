@@ -1,1 +1,5 @@
-<h1>Events#new</h1>
+<% if current_user.host? %>
+  <%= render 'events/host_views/new' %>
+<% else %>
+  <%= render 'access_denied' %>
+<% end %>

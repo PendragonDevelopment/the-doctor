@@ -12,6 +12,7 @@
 #
 
 FactoryGirl.define do
+
   factory :event do
     activity
     host
@@ -19,8 +20,8 @@ FactoryGirl.define do
     event_rate 500
 
     factory :invalid_event do
-    	rate nil
+      rate nil
     end
   end
-
+  
 end

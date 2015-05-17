@@ -22,7 +22,10 @@ gem "paperclip", "~> 4.2"
 gem 'acts-as-taggable-on'
 gem 'annotate', '~> 2.6.6'
 gem 'oauth2'
-gem 'faraday', '0.8.9' #need to specify this version because more recent versions break the vcr gem
+gem 'faraday', '0.8.9' # need to specify this version because more recent versions break the vcr gem
+gem 'bootstrap_form'
+gem 'momentjs-rails', '>= 2.8.1'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 gem 'ransack'
 gem 'ratyrate'
 group :development do

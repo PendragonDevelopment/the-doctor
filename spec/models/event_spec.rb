@@ -40,4 +40,5 @@ RSpec.describe Event, type: :model do
       expect(invalid_event).not_to be_valid
     end
   end
+
 end

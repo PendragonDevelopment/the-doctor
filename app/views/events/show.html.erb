@@ -1,1 +1,5 @@
-<h1>Events#show</h1>
+<% if current_user.host? %>
+  <%= render 'events/host_views/show' %>
+<% else %>
+  <%= render 'events/customer_views/show' %>
+<% end %>
