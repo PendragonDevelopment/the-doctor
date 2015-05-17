@@ -46,10 +46,12 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :transactions
-  has_one :host
+  has_one :host, dependent: :destroy
+
+  def customer?
+    self.host_id.nil? ? true : false
+  end
   
-
-
   #Stripe methods
   def get_customer_from_stripe
     # Add customer id to User model
