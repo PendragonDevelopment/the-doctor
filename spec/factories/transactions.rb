@@ -18,7 +18,7 @@
 FactoryGirl.define do
   factory :transaction do
     title "The Doctor charge"
-    payment_amount 520
+    payment_amount Money.new(520)
 		payment_date "2015-04-06"
 		status 1
 		transaction_record "MyString"

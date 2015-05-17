@@ -24,6 +24,8 @@ class Transaction < ActiveRecord::Base
   validates :payment_amount, presence: true
   validates :payment_date, presence: true
 
+  monetize :payment_amount
+
 =begin
   def get_customer_from_stripe
     # Add customer id to User model

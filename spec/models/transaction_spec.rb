@@ -22,11 +22,15 @@ RSpec.describe Transaction, type: :model do
   let(:transaction) {FactoryGirl.create(:transaction)}
 
   describe "Model attributes set up" do
+
+    include MoneyRails::TestHelpers
+
   	subject {transaction}
 
   	it {is_expected.to respond_to(:id)}
   	it {is_expected.to respond_to(:title)}
   	it {is_expected.to respond_to(:payment_amount)}
+    it {is_expected.to monetize(:payment_amount)}
   	it {is_expected.to respond_to(:payment_date)}
   	it {is_expected.to respond_to(:status)}
   	it {is_expected.to respond_to(:transaction_record)}
@@ -43,7 +47,7 @@ RSpec.describe Transaction, type: :model do
     it "is valid with a title, payment_amount, and payment_date" do
       transaction = Transaction.new(
         title: "New transaction",
-        payment_amount: 50,
+        payment_amount: Money.new(50)
         payment_date: "2015-04-15")
       expect(transaction).to be_valid
     end
